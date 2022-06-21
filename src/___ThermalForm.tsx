@@ -268,6 +268,7 @@ const ThermalForm = () => {
                 }) => (
                     <form onSubmit={handleSubmit} autoComplete="off" noValidate>
                         <DebugButton data={values} />
+
                         <TariffFormFields />
                         <ThermalFormFields />
                         <HeatDemandFields />

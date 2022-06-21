@@ -57,16 +57,19 @@ const ThermalFormFields = () => {
 
 
                 <Grid item xs={12} sm={12} md={12}>
+                    <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "space-between" }}>
+                        <span>Tank/Store Mass</span>
+                        <span>{values.tankMass}</span>
 
 
-                    Tank/Store Mass
+                        <span>  kg</span>
+
+                    </div>
 
 
-                    {values.tankMass}
 
 
 
-                    kg
 
 
                 </Grid>
@@ -182,45 +185,65 @@ const ThermalFormFields = () => {
                         </Field>
                     </Grid>
                     <Grid item xs={12} sm={12} md={12}>
+                        <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "space-between" }}>
+                            <span> Useful Tank Energy (Joules)
+                            </span>
+                            <span>{values.tankEnergyAmbient}</span>
+                            <span>MJ</span>
+
+                        </div>
 
 
-                        Useful Tank Energy (Joules)
 
-                        {values.tankEnergyAmbient}
 
-                        MJ
+
+
+                    </Grid>
+                    <Grid item xs={12} sm={12} md={12}>
+                        <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "space-between" }}>
+                            <span>Useful Tank Energy (Joules)</span>
+                            <span>{values.tankEnergyJoules}</span>
+                            <span>MJ  - Energy required t heat from min. useful to max</span>
+
+                        </div>
+
+
+
+
+
+
+
+
 
                     </Grid>
                     <Grid item xs={12} sm={12} md={12}>
 
+                        <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "space-between" }}>
+                            <span>Useful Tank Energy</span>
+                            <span> {values.tankEnergy}</span>
+                            <span>kWh</span>
 
-                        Useful Tank Energy (Joules)
-
-                        {values.tankEnergyJoules}
-
-                        MJ
-
-
-                        - Energy required t heat from min. useful to max
-                    </Grid>
-                    <Grid item xs={12} sm={12} md={12}>
+                        </div>
 
 
-                        Useful Tank Energy
 
-                        {values.tankEnergy}
 
-                        kWh
+
                     </Grid>
 
                     <Grid item xs={12} sm={12} md={12}>
+                        <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "space-between" }}>
+                            <span>Useful Tank Energy after N hours cooling</span>
+                            <span>  {values.tankAfterNHoursCooling}</span>
+                            <span>kWh
 
-                        Useful Tank Energy after N hours cooling
-                        {values.tankAfterNHoursCooling}
+                                - Maximum energy available at max. temp.</span>
 
-                        kWh
+                        </div>
 
-                        - Maximum energy available at max. temp.
+
+
+
                     </Grid>
                 </Grid>
 

@@ -1,4 +1,4 @@
-import { Divider, Grid, Typography } from "@mui/material";
+import { Box, Divider, Grid, Typography } from "@mui/material";
 import { FormSpy } from "react-final-form";
 import { IThermalForm } from "./interfaces/thermal";
 
@@ -30,15 +30,13 @@ const ThermalStorageFields = () => {
             >
 
                 <Grid item xs={12} sm={12} md={12}>
+                    <Box sx={{ justifyContent: 'space-between' }}>
+                        <div>Daily cost @ ToU Low Rate (inc. loss)</div>
 
-                    Daily cost @ ToU Low Rate (inc. loss)
+                        <div>{values.thermalStorageDailyCost}</div>
 
-
-                    {values.thermalStorageDailyCost}
-
-
-
-                    Ample output
+                        <div>Ample output</div>
+                    </Box>
                 </Grid>
 
 
