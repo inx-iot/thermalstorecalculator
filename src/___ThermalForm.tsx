@@ -69,7 +69,7 @@ const ThermalForm = () => {
                 }}
                 decorators={[
                     createDecorator({
-                        field: ['standardRateEnergyCost', 'lowRateEnergyCost', '', 'timeShiftHoursN', 'tankMass', 'tankSpecificHeatCapacity', 'tankMaxTemperature', 'tankMinTemperature', 'tankEnergyLossCoeficient'], // when the value of foo changes...
+                        field: ['heatPumpHeatEfficiency', 'standardRateEnergyCost', 'lowRateEnergyCost', '', 'timeShiftHoursN', 'tankMass', 'tankSpecificHeatCapacity', 'tankMaxTemperature', 'tankMinTemperature', 'tankEnergyLossCoeficient'], // when the value of foo changes...
                         updates: {
                             // .=B5*B4*(B6-B8)/1000000
                             tankEnergyAmbient: (fooValue, allValues: any) => {
@@ -124,17 +124,17 @@ const ThermalForm = () => {
                                 console.log("heatProportionOfCentralHeating")
                                 if (allValues) {
                                     const values: IThermalForm = allValues;
-                                    return values.tankAfterNHoursCooling / (values.heatDailyEnergyRequired + 0.0001)
+                                    return values.timeEnergyLossNoHeatAndDraw / (values.heatDailyEnergyRequired + 0.0001)
                                 }
                             },
-
 
                             // =B8+(B6-B8)*EXP(-1*B9/(B4*B5)*3600*B18)
                             timeEnergyLossNoHeatAndDraw: (fooValue, allValues: any) => {
                                 console.log("timeEnergyLossNoHeatAndDraw")
                                 if (allValues) {
                                     const values: IThermalForm = allValues;
-                                    return values.tankEnergyLossCoeficient + (values.tankMaxTemperature - values.tankEnergyLossCoeficient) * Math.exp(-1 * values.tankEnergyLossCoeficient / (values.tankSpecificHeatCapacity * values.tankMass) * 3600 * values.timeShiftHoursN)
+                                    const ddd = values.tankEnergyLossCoeficient + (values.tankMaxTemperature - values.tankEnergyLossCoeficient) * Math.exp(-1 * values.tankEnergyLossCoeficient / (values.tankSpecificHeatCapacity * values.tankMass) * 3600 * values.timeShiftHoursN)
+                                    return ddd;
                                 }
                             },
 
@@ -146,17 +146,27 @@ const ThermalForm = () => {
                                 console.log("timeTempDropOverHours")
                                 if (allValues) {
                                     const values: IThermalForm = allValues;
-                                    return values.tankMaxTemperature - values.timeEnergyLossNoHeatAndDraw
+                                    const ddd = values.tankMaxTemperature - values.timeEnergyLossNoHeatAndDraw
+                                    return ddd;
                                 }
                             },
 
+
+                            //=(B22*B4*B5/1000)/3600
+                            timeShiftEnergyLost: (fooValue, allValues: any) => {
+                                console.log("timeShiftEnergyLost")
+                                if (allValues) {
+                                    const values: IThermalForm = allValues;
+                                    return (values.timeEnergyLossNoHeatAndDraw * values.tankSpecificHeatCapacity * values.tankMass / 1000) / 3600
+                                }
+                            },
 
                             //=B16*B1/100
                             instantaneousHeatingCostFlatRate: (fooValue, allValues: any) => {
                                 console.log("instantaneousHeatingCostFlatRate")
                                 if (allValues) {
                                     const values: IThermalForm = allValues;
-                                    return values.heatDailyEnergyRequired * values.timeEnergyLossNoHeatAndDraw / 100
+                                    return values.heatDailyEnergyRequired * values.standardRateEnergyCost / 100
                                 }
                             },
 
@@ -166,33 +176,88 @@ const ThermalForm = () => {
                                 console.log("instantaneousHeatingCostPeakRate")
                                 if (allValues) {
                                     const values: IThermalForm = allValues;
-                                    return values.heatDailyEnergyRequired * values.timeEnergyLossNoHeatAndDraw / 100
+                                    return values.heatDailyEnergyRequired * values.highRateEnergyCost / 100
+                                }
+                            },
+                            //=B23/B25
+                            heatPumpCostFlatRate: (fooValue, allValues: any) => {
+                                console.log("heatPumpCostFlatRate")
+                                if (allValues) {
+                                    const values: IThermalForm = allValues;
+                                    return values.instantaneousHeatingCostFlatRate * values.heatPumpHeatEfficiency;
+                                }
+                            },
+                            // =B24/B25
+                            heatPumpCostPeakRate: (fooValue, allValues: any) => {
+                                console.log("heatPumpCostPeakRate")
+                                if (allValues) {
+                                    const values: IThermalForm = allValues;
+                                    return values.instantaneousHeatingCostPeakRate * values.heatPumpHeatEfficiency;
                                 }
                             },
 
-                        }
-                    }, {
-                        field: ['tankEnergyJoules'], // when the value of foo changes...
-                        updates: {
-                            // =B11*1000/3600
-                            tankEnergy: (fooValue, allValues: any) => {
-                                //    console.log("tankEnergyJoules")
+
+
+                            //=B12*B2/100
+                            thermalStorageDailyCost: (fooValue, allValues: any) => {
+                                console.log("thermalStorageDailyCost")
                                 if (allValues) {
                                     const values: IThermalForm = allValues;
-                                    return values.tankEnergyJoules * 1000 / 3600
+                                    return values.tankEnergy * values.standardRateEnergyCost / 100;
+                                }
+                            },
+
+                            //=B29/B23
+                            thermalStorageVsGridPercent: (fooValue, allValues: any) => {
+                                console.log("thermalStorageVsGridPercent")
+                                if (allValues) {
+                                    const values: IThermalForm = allValues;
+                                    return values.thermalStorageDailyCost * values.instantaneousHeatingCostFlatRate
+                                }
+                            },
+
+                            //=B29/B26
+                            thermalStorageVsHeatPumpFlatRate: (fooValue, allValues: any) => {
+                                console.log("thermalStorageVsHeatPumpFlatRate")
+                                if (allValues) {
+                                    const values: IThermalForm = allValues;
+                                    return values.thermalStorageDailyCost * values.heatPumpCostFlatRate
+                                }
+                            },
+                            //=B29/B27
+                            thermalStorageVsHeatPumpPeakRate: (fooValue, allValues: any) => {
+                                console.log("thermalStorageVsHeatPumpPeakRate")
+                                if (allValues) {
+                                    const values: IThermalForm = allValues;
+                                    return values.thermalStorageDailyCost * values.heatPumpCostPeakRate
                                 }
                             },
 
 
-                            //=B5*B4*(B6-B7)/1000000
-                            tankEnergyJoules: (fooValue, allValues: any) => {
+                            //=B19*B2/100 
+                            thermalStoragePotentialWastedExpense: (fooValue, allValues: any) => {
+                                console.log("thermalStoragePotentialWastedExpense")
                                 if (allValues) {
                                     const values: IThermalForm = allValues;
-                                    return values.tankMass * values.tankSpecificHeatCapacity * (values.tankMaxTemperature - values.tankMinTemperature) / 1000000
+                                    return values.timeShiftEnergyLost * values.lowRateEnergyCost / 100
                                 }
-                            }
+                            },
+
+
+
+
+                            //=(B2*B13/100+B33)/B25
+                            thermalStorageHighTempRateCost: (fooValue, allValues: any) => {
+                                console.log("thermalStoragePotentialWastedExpense")
+                                if (allValues) {
+                                    const values: IThermalForm = allValues;
+                                    return (values.lowRateEnergyCost * values.tankAfterNHoursCooling / 100 + values.thermalStoragePotentialWastedExpense) / values.heatPumpHeatEfficiency
+                                }
+                            },
+
+
                         }
-                    }),
+                    })
                 ]}
                 render={({
                     handleSubmit,
