@@ -1,4 +1,4 @@
-import { Divider, Grid, Typography } from "@mui/material";
+import { Grid } from "@mui/material";
 import { FormSpy } from "react-final-form";
 import { IThermalForm } from "./interfaces/thermal";
 
@@ -13,14 +13,6 @@ const InstantaneousCostsFields = () => {
         }}
     >
         {({ values, dirtySinceLastSubmit, submitting }) => (<div>
-            <Grid container spacing={3} justifyContent="center">
-                <Grid item xs={12}>
-                    <Typography component="h2" variant="h5">
-                        Instantaneous Costs
-                    </Typography>
-                    <Divider />
-                </Grid>
-            </Grid>
 
             <Grid item xs={12} sm={12} md={12}>
 

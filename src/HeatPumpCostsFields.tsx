@@ -1,4 +1,4 @@
-import { Divider, Grid, TextField, Typography } from "@mui/material";
+import { Grid, TextField } from "@mui/material";
 import { Field, FormSpy } from "react-final-form";
 import { IThermalForm } from "./interfaces/thermal";
 import { formParseInt } from "./util/formParse";
@@ -14,15 +14,6 @@ const HeatPumpCostsFields = () => {
         }}
     >
         {({ values, dirtySinceLastSubmit, submitting }) => (<div>
-            <Grid container spacing={3} justifyContent="center">
-                <Grid item xs={12}>
-                    <Typography component="h2" variant="h5">
-                        Heat Pump Costs
-                    </Typography>
-                    <Divider />
-                </Grid>
-            </Grid>
-
             <Grid
                 container
                 spacing={3}

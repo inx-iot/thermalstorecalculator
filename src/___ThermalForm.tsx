@@ -1,5 +1,14 @@
+import ArrowForwardIosSharpIcon from '@mui/icons-material/ArrowForwardIosSharp';
 import { Card, CardContent, Grid } from "@mui/material";
+import MuiAccordion, { AccordionProps } from '@mui/material/Accordion';
+import MuiAccordionDetails from '@mui/material/AccordionDetails';
+import MuiAccordionSummary, {
+    AccordionSummaryProps
+} from '@mui/material/AccordionSummary';
+import { styled } from '@mui/material/styles';
+import Typography from '@mui/material/Typography';
 import createDecorator from 'final-form-calculate';
+import * as React from 'react';
 import { Form } from "react-final-form";
 import Chart from "./Chart";
 import HeatDemandFields from "./HeatDemandFields";
@@ -14,7 +23,51 @@ import DebugButton from "./util/DebugButton";
 
 
 
+const Accordion = styled((props: AccordionProps) => (
+    <MuiAccordion disableGutters elevation={0} square {...props} />
+))(({ theme }) => ({
+    border: `1px solid ${theme.palette.divider}`,
+    '&:not(:last-child)': {
+        borderBottom: 0,
+    },
+    '&:before': {
+        display: 'none',
+    },
+}));
+
+const AccordionSummary = styled((props: AccordionSummaryProps) => (
+    <MuiAccordionSummary
+        expandIcon={<ArrowForwardIosSharpIcon sx={{ fontSize: '0.9rem' }} />}
+        {...props}
+    />
+))(({ theme }) => ({
+    backgroundColor:
+        theme.palette.mode === 'dark'
+            ? 'rgba(255, 255, 255, .05)'
+            : 'rgba(0, 0, 0, .03)',
+    flexDirection: 'row-reverse',
+    '& .MuiAccordionSummary-expandIconWrapper.Mui-expanded': {
+        transform: 'rotate(90deg)',
+    },
+    '& .MuiAccordionSummary-content': {
+        marginLeft: theme.spacing(1),
+    },
+}));
+
+const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
+    padding: theme.spacing(2),
+    borderTop: '1px solid rgba(0, 0, 0, .125)',
+}));
+
+
+
 const ThermalForm = () => {
+    const [expanded, setExpanded] = React.useState<string | false>('panel1');
+
+    const handleChange =
+        (panel: string) => (event: React.SyntheticEvent, newExpanded: boolean) => {
+            setExpanded(newExpanded ? panel : false);
+        };
 
 
     return <Card>
@@ -288,16 +341,74 @@ const ThermalForm = () => {
                     values,
                 }) => (
                     <form onSubmit={handleSubmit} autoComplete="off" noValidate>
-                        <DebugButton data={values} /><Grid container spacing={2}>
-                            <Grid item xs={12} sm={8} md={8}>
-                                <TariffFormFields />
-                                <ThermalFormFields />
-                                <HeatDemandFields />
-                                <TimeFormFields />
-                                <InstantaneousCostsFields />
-                                <HeatPumpCostsFields />
-                                <ThermalStorageFields />
+                        <DebugButton data={values} />
 
+                        <Grid container spacing={2}>
+                            <Grid item xs={12} sm={8} md={8}>
+
+
+
+
+
+
+                                <Accordion expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
+                                    <AccordionSummary aria-controls="panel1d-content" id="panel1d-header">
+                                        <Typography>Tariff Costs
+                                        </Typography>
+                                    </AccordionSummary>
+                                    <AccordionDetails>
+                                        <TariffFormFields />
+                                    </AccordionDetails>
+                                </Accordion>
+                                <Accordion expanded={expanded === 'panel2'} onChange={handleChange('panel2')}>
+                                    <AccordionSummary aria-controls="panel2d-content" id="panel2d-header">
+                                        <Typography>Thermal Storage</Typography>
+                                    </AccordionSummary>
+                                    <AccordionDetails>
+                                        <ThermalFormFields />
+                                    </AccordionDetails>
+                                </Accordion>
+                                <Accordion expanded={expanded === 'panel3'} onChange={handleChange('panel3')}>
+                                    <AccordionSummary aria-controls="panel3d-content" id="panel3d-header">
+                                        <Typography>Heat Demand Profile</Typography>
+                                    </AccordionSummary>
+                                    <AccordionDetails>
+                                        <HeatDemandFields />
+                                    </AccordionDetails>
+                                </Accordion>
+                                <Accordion expanded={expanded === 'panel4'} onChange={handleChange('panel4')}>
+                                    <AccordionSummary aria-controls="panel4d-content" id="panel4d-header">
+                                        <Typography>Storage Parameters</Typography>
+                                    </AccordionSummary>
+                                    <AccordionDetails>
+                                        <TimeFormFields />
+                                    </AccordionDetails>
+                                </Accordion>
+                                <Accordion expanded={expanded === 'panel5'} onChange={handleChange('panel5')}>
+                                    <AccordionSummary aria-controls="panel5d-content" id="panel5d-header">
+                                        <Typography>Instantaneous Costs</Typography>
+                                    </AccordionSummary>
+                                    <AccordionDetails>
+                                        <InstantaneousCostsFields />
+                                    </AccordionDetails>
+                                </Accordion>
+                                <Accordion expanded={expanded === 'panel6'} onChange={handleChange('panel6')}>
+                                    <AccordionSummary aria-controls="panel6d-content" id="panel6d-header">
+                                        <Typography>Heat Pump Costs</Typography>
+                                    </AccordionSummary>
+                                    <AccordionDetails>
+                                        <HeatPumpCostsFields />
+                                    </AccordionDetails>
+                                </Accordion>
+                                <Accordion expanded={expanded === 'panel7'} onChange={handleChange('panel7')}>
+                                    <AccordionSummary aria-controls="panel7d-content" id="panel7d-header">
+                                        <Typography>Thermal Storage Costs Comparisons</Typography>
+                                    </AccordionSummary>
+                                    <AccordionDetails>
+
+                                        <ThermalStorageFields />
+                                    </AccordionDetails>
+                                </Accordion>
                             </Grid>
                             <Grid item xs={12} sm={4} md={4}>
                                 {values.timeEnergyLostFinalfterN !== undefined && <Chart labels={['Useful Tank Energy after N hours cooling', 'Energy lost over N hours cooling during time-shift']} data={[values.timeEnergyLostFinalfterN, (100 - values.timeEnergyLostFinalfterN)]} />}
