@@ -46,15 +46,15 @@ const ThermalFormFields = () => {
 
 
 
-                <InfoThing textA="Useful Tank Energy (Joules) ----------- " textB="MJ" value={values.tankEnergyAmbient} />
+                <InfoThing textA="Tank Energy (Ambient)" textB="MJ" value={values.tankEnergyAmbient} />
 
 
-                <InfoThing textA="Useful Tank Energy (Joules)" textB="MJ  - Energy required t heat from min. useful to max" value={values.tankEnergyJoules} />
+                <InfoThing textA="Tank Energy (Useful) [Energy required t heat from min. useful to max]" textB="MJ" value={values.tankEnergyJoules} />
 
 
                 <InfoThing textA="Useful Tank Energy" textB="kWh" value={values.tankEnergy} />
 
-                <InfoThing textA={`Useful Tank Energy after ${values.timeShiftHoursN} hours cooling`} textB="kWh - Maximum energy available at max. temp." value={values.tankAfterNHoursCooling} />
+                <InfoThing textA={`Remaining Energy after ${values.timeShiftHoursN} hours cooling`} textB="kWh" value={values.tankAfterNHoursCooling} />
 
 
             </Grid>

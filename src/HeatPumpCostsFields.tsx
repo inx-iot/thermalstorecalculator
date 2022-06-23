@@ -21,12 +21,11 @@ const HeatPumpCostsFields = () => {
                 justifyContent="left"
                 style={{ marginTop: "15px" }}
             >
-                <NumberField name="heatPumpHeatEfficiency" label="Direct Heat or Heat Pump efficiency (COP)" longText="" helpText="Winter efficiency" type="int" />
+                <NumberField name="heatPumpHeatEfficiency" label="Heat Pump efficiency (COP)" longText="" helpText="SCOP or winter efficiency can be used for high winter heating duties" type="int" />
 
-                <InfoThing textA="Heat Pump cost/day @ flat rate" textB="e.g. no night EV charging savings" value={values.heatPumpCostFlatRate} />
+                <InfoThing textA="Heat Pump cost/day @ flat rate [for those without ToU]" textB="£/EU/$" value={values.heatPumpCostFlatRate} />
 
-                <InfoThing textA="Heat Pump cost/day @ peak rate" textB="e.g. no night EV charging savings" value={values.heatPumpCostPeakRate} />
-
+                <InfoThing textA="Heat Pump cost/day @ peak rate [for those with YoU (e.g. EV charging)" textB="£/EU/$" value={values.heatPumpCostPeakRate} />
 
             </Grid>
         </div>)

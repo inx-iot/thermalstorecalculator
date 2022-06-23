@@ -13,8 +13,8 @@ const InstantaneousCostsFields = () => {
         }}
     >
         {({ values, dirtySinceLastSubmit, submitting }) => (<div>
-            <InfoThing textA="Daily heating cost / day (Direct heating @ flat rate)" textB="(Theoretical reference only)" value={values.instantaneousHeatingCostFlatRate} preValue="£" />
-            <InfoThing textA="Daily heating cost / day (Direct heating @ peak rate)" textB="(Direct heating is usually at peak times if ToU Tariffs are used)" value={values.instantaneousHeatingCostPeakRate} preValue="£" />
+            <InfoThing textA="Daily heating cost @ flat rate)" textB="£/EU/$" value={values.instantaneousHeatingCostFlatRate} preValue="£" />
+            <InfoThing textA="Daily heating cost @ peak rate)" textB="£/EU/$" value={values.instantaneousHeatingCostPeakRate} preValue="£" />
         </div>)
         }
     </FormSpy >
