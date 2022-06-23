@@ -289,7 +289,7 @@ const ThermalForm = () => {
                 }) => (
                     <form onSubmit={handleSubmit} autoComplete="off" noValidate>
                         <DebugButton data={values} /><Grid container spacing={2}>
-                            <Grid item xs={12} sm={6} md={6}>
+                            <Grid item xs={12} sm={8} md={8}>
                                 <TariffFormFields />
                                 <ThermalFormFields />
                                 <HeatDemandFields />
@@ -299,7 +299,7 @@ const ThermalForm = () => {
                                 <ThermalStorageFields />
 
                             </Grid>
-                            <Grid item xs={12} sm={6} md={6}>
+                            <Grid item xs={12} sm={4} md={4}>
                                 {values.timeEnergyLostFinalfterN !== undefined && <Chart labels={['Useful Tank Energy after N hours cooling', 'Energy lost over N hours cooling during time-shift']} data={[values.timeEnergyLostFinalfterN, (100 - values.timeEnergyLostFinalfterN)]} />}
 
                                 {values.thermalStorageVsHeatPumpFlatRate !== undefined && values.heatPumpCostFlatRate && <Chart labels={['Heat Pump cost/day @ flat rate)', 'Daily cost @ ToU Low Rate (inc. loss)']} data={[values.heatPumpCostFlatRate, values.thermalStorageVsHeatPumpFlatRate]} />}
