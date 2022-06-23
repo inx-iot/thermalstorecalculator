@@ -1,7 +1,9 @@
-import { Divider, Grid, TextField, Typography } from "@mui/material";
-import { Field, FormSpy } from "react-final-form";
+import { Divider, Grid, Typography } from "@mui/material";
+import { FormSpy } from "react-final-form";
 import { IThermalForm } from "./interfaces/thermal";
-import { formParseInt } from "./util/formParse";
+import NumberField from "./util/numberField";
+
+
 
 
 
@@ -29,78 +31,16 @@ const TariffFormFields = () => {
                 justifyContent="left"
                 style={{ marginTop: "15px" }}
             >
+                <NumberField name="standardRateEnergyCost" label="Standard Rate Energy cost" longText="" helpText='"(penc/hWh)"' type="int" />
 
-                <Grid item xs={12} sm={6} md={6}>
-                    <Field name="standardRateEnergyCost"
-                        parse={formParseInt}
-                        format={formParseInt}>
+                <NumberField name="lowRateEnergyCost" label="ToU Low rate cost (pence)" longText="" helpText='"(penc/hWh)"' type="int" />
 
-                        {({ input, meta }) => (
-                            <TextField
-                                {...input}
-                                type="number"
-                                label="Standard Rate Energy cost"
-                                fullWidth
-                                required
-                                InputProps={{ inputProps: { min: 0 } }}
-                                variant="outlined"
-                                error={meta.error && meta.touched}
-                                helperText={meta.error && meta.touched ? meta.error : "(penc/hWh)"}
-                            >
-                            </TextField>
-                        )}
-                    </Field>
-                </Grid>
+                <NumberField name="highRateEnergyCost" label="ToU High rate cost (pence)" longText="" helpText='"(penc/hWh)"' type="int" />
 
 
 
 
 
-                <Grid item xs={12} sm={6} md={6}>
-                    <Field name="lowRateEnergyCost"
-                        parse={formParseInt}
-                        format={formParseInt}>
-
-                        {({ input, meta }) => (
-                            <TextField
-                                {...input}
-                                type="number"
-                                label="ToU Low rate cost (pence)"
-                                fullWidth
-                                required
-                                InputProps={{ inputProps: { min: 0 } }}
-                                variant="outlined"
-                                error={meta.error && meta.touched}
-                                helperText={meta.error && meta.touched ? meta.error : "(penc/hWh)"}
-                            >
-                            </TextField>
-                        )}
-                    </Field>
-                </Grid>
-
-
-
-                <Grid item xs={12} sm={6} md={6}>
-                    <Field name="highRateEnergyCost"
-                        parse={formParseInt}
-                        format={formParseInt}>
-
-                        {({ input, meta }) => (
-                            <TextField
-                                {...input}
-                                type="number"
-                                label="ToU High rate cost (pence)"
-                                fullWidth
-                                required
-                                InputProps={{ inputProps: { min: 0 } }}
-                                variant="outlined"
-                                error={meta.error && meta.touched}
-                                helperText={meta.error && meta.touched ? meta.error : "(penc/hWh)"}
-                            >
-                            </TextField>
-                        )}
-                    </Field>
-                </Grid>
 
 
 
