@@ -28,6 +28,10 @@ export interface IThermalForm {
     timeEnergyLossMaxTemp: number;
     timeEnergyLossNoHeatAndDraw: number;
     timeTempDropOverHours: number;
+    timeEnergyLostFinalfterN: number;
+    timeEnergyLostInNMaxTemp: number;
+
+
 
     instantaneousHeatingCostFlatRate: number;
     instantaneousHeatingCostPeakRate: number;

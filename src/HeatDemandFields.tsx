@@ -1,7 +1,8 @@
-import { Divider, Grid, TextField, Typography } from "@mui/material";
-import { Field, FormSpy } from "react-final-form";
+import { Grid } from "@mui/material";
+import { FormSpy } from "react-final-form";
 import { IThermalForm } from "./interfaces/thermal";
-import { formParseInt } from "./util/formParse";
+import InfoThing from "./util/infoThing";
+import NumberField from "./util/numberField";
 
 
 const HeatDemandFields = () => {
@@ -14,14 +15,7 @@ const HeatDemandFields = () => {
         }}
     >
         {({ values, dirtySinceLastSubmit, submitting }) => (<div>
-            <Grid container spacing={3} justifyContent="center">
-                <Grid item xs={12}>
-                    <Typography component="h2" variant="h5">
-                        Heat Demand Profile
-                    </Typography>
-                    <Divider />
-                </Grid>
-            </Grid>
+
 
             <Grid
                 container
@@ -29,84 +23,14 @@ const HeatDemandFields = () => {
                 justifyContent="left"
                 style={{ marginTop: "15px" }}
             >
+                <NumberField name="heatEnergyDwellingYear" label="Heating Energy /dwelling/year" longText="" helpText="kWh/dw" type="int" />
 
-                <Grid item xs={12} sm={6} md={6}>
-                    <Field name="heatEnergyDwellingYear"
-                        parse={formParseInt}
-                        format={formParseInt}>
+                <NumberField name="timeShiftHoursN" label="Time Shift Hours (N)" longText="" helpText="Hours" type="int" />
 
-                        {({ input, meta }) => (
-                            <TextField
-                                {...input}
-                                type="number"
-                                label="Heating Energy /dwelling/year"
-                                fullWidth
-                                required
-                                InputProps={{ inputProps: { min: 0 } }}
-                                variant="outlined"
-                                error={meta.error && meta.touched}
-                                helperText={meta.error && meta.touched ? meta.error : "kWh/dw"}
-                            >
-                            </TextField>
-                        )}
-                    </Field>
-                </Grid>
+                <InfoThing textA="Daily heating energy required" textB="kWh" value={values.heatDailyEnergyRequired} />
 
+                <InfoThing textA="Proportion of central heating" textB="kWh" value={values.heatProportionOfCentralHeating} />
 
-
-
-
-                <Grid item xs={12} sm={6} md={6}>
-                    <Field name="timeShiftHoursN"
-                        parse={formParseInt}
-                        format={formParseInt}>
-
-                        {({ input, meta }) => (
-                            <TextField
-                                {...input}
-                                type="number"
-                                label="Time Shift Hours (N)"
-                                fullWidth
-                                required
-                                InputProps={{ inputProps: { min: 0 } }}
-                                variant="outlined"
-                                error={meta.error && meta.touched}
-                                helperText={meta.error && meta.touched ? meta.error : "Hours"}
-                            >
-                            </TextField>
-                        )}
-                    </Field>
-                </Grid>
-
-
-
-
-
-                <Grid item xs={12} sm={12} md={12}>
-
-
-                    Daily heating energy required
-
-
-                    {values.heatDailyEnergyRequired}
-
-
-
-                    kWh
-                </Grid>
-
-                <Grid item xs={12} sm={12} md={12}>
-
-
-                    Proportion of central heating
-
-
-                    {values.heatProportionOfCentralHeating}
-
-
-
-                    kWh
-                </Grid>
 
 
 
