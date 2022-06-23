@@ -1,6 +1,7 @@
-import { Card, CardContent } from "@mui/material";
+import { Card, CardContent, Grid } from "@mui/material";
 import createDecorator from 'final-form-calculate';
 import { Form } from "react-final-form";
+import Chart from "./Chart";
 import HeatDemandFields from "./HeatDemandFields";
 import HeatPumpCostsFields from "./HeatPumpCostsFields";
 import InstantaneousCostsFields from "./InstantaneousCostsFields";
@@ -12,13 +13,14 @@ import TimeFormFields from "./TimeFormFields";
 import DebugButton from "./util/DebugButton";
 
 
+
 const ThermalForm = () => {
 
 
     return <Card>
         <CardContent>
 
-            <Form
+            <Form <any>
                 onSubmit={values => {
                     console.log("onSubmit", values)
                     //   if (!response.data) return response;
@@ -161,6 +163,25 @@ const ThermalForm = () => {
                                 }
                             },
 
+
+                            //=B19/B12
+                            timeEnergyLostFinalfterN: (fooValue, allValues: any) => {
+                                console.log("timeEnergyLostFinalfterN")
+                                if (allValues) {
+                                    const values: IThermalForm = allValues;
+                                    return values.timeShiftEnergyLost / values.tankEnergy
+                                }
+                            },
+
+                            //=B20/B12
+                            timeEnergyLostInNMaxTemp: (fooValue, allValues: any) => {
+                                console.log("timeEnergyLostInNMaxTemp")
+                                if (allValues) {
+                                    const values: IThermalForm = allValues;
+                                    return values.timeEnergyLossMaxTemp / values.tankEnergy
+                                }
+                            },
+
                             //=B16*B1/100
                             instantaneousHeatingCostFlatRate: (fooValue, allValues: any) => {
                                 console.log("instantaneousHeatingCostFlatRate")
@@ -267,15 +288,23 @@ const ThermalForm = () => {
                     values,
                 }) => (
                     <form onSubmit={handleSubmit} autoComplete="off" noValidate>
-                        <DebugButton data={values} />
+                        <DebugButton data={values} /><Grid container spacing={2}>
+                            <Grid item xs={12} sm={6} md={6}>
+                                <TariffFormFields />
+                                <ThermalFormFields />
+                                <HeatDemandFields />
+                                <TimeFormFields />
+                                <InstantaneousCostsFields />
+                                <HeatPumpCostsFields />
+                                <ThermalStorageFields />
 
-                        <TariffFormFields />
-                        <ThermalFormFields />
-                        <HeatDemandFields />
-                        <TimeFormFields />
-                        <InstantaneousCostsFields />
-                        <HeatPumpCostsFields />
-                        <ThermalStorageFields />
+                            </Grid>
+                            <Grid item xs={12} sm={6} md={6}>
+                                {values.timeEnergyLostFinalfterN !== undefined && <Chart labels={['Useful Tank Energy after N hours cooling', 'Energy lost over N hours cooling during time-shift']} data={[values.timeEnergyLostFinalfterN, (100 - values.timeEnergyLostFinalfterN)]} />}
+
+                                {values.thermalStorageVsHeatPumpFlatRate !== undefined && values.heatPumpCostFlatRate && <Chart labels={['Heat Pump cost/day @ flat rate)', 'Daily cost @ ToU Low Rate (inc. loss)']} data={[values.heatPumpCostFlatRate, values.thermalStorageVsHeatPumpFlatRate]} />}
+                            </Grid>
+                        </Grid>
                         {/* <Grid container spacing={3} justifyContent="center">
                             <Grid item xs={12}>
                             </Grid>

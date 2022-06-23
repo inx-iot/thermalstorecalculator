@@ -92,7 +92,7 @@ const ThermalStorageFields = () => {
                 <Grid item xs={12} sm={12} md={12}>
 
                     Stored high temp. Heat Pump @ ToU Low Rate Cost
-                    {values.thermalStorageHighTempRateCost}
+                    {values.thermalStorageVsHeatPumpFlatRate}
                     of cost of non-shiftet (@peak) Heat Pump consumption
                 </Grid>
 
