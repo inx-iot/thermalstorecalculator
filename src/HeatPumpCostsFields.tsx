@@ -1,7 +1,8 @@
-import { Grid, TextField } from "@mui/material";
-import { Field, FormSpy } from "react-final-form";
+import { Grid } from "@mui/material";
+import { FormSpy } from "react-final-form";
 import { IThermalForm } from "./interfaces/thermal";
-import { formParseInt } from "./util/formParse";
+import InfoThing from "./util/infoThing";
+import NumberField from "./util/numberField";
 
 
 
@@ -20,59 +21,11 @@ const HeatPumpCostsFields = () => {
                 justifyContent="left"
                 style={{ marginTop: "15px" }}
             >
+                <NumberField name="heatPumpHeatEfficiency" label="Direct Heat or Heat Pump efficiency (COP)" longText="" helpText="Winter efficiency" type="int" />
 
-                <Grid item xs={12} sm={6} md={6}>
-                    <Field name="heatPumpHeatEfficiency"
-                        parse={formParseInt}
-                        format={formParseInt}>
+                <InfoThing textA="Heat Pump cost/day @ flat rate" textB="e.g. no night EV charging savings" value={values.heatPumpCostFlatRate} />
 
-                        {({ input, meta }) => (
-                            <TextField
-                                {...input}
-                                type="number"
-                                label="Direct Heat or Heat Pump efficiency (COP)"
-                                fullWidth
-                                required
-                                InputProps={{ inputProps: { min: 0 } }}
-                                variant="outlined"
-                                error={meta.error && meta.touched}
-                                helperText={meta.error && meta.touched ? meta.error : "Winter efficiency"}
-                            >
-                            </TextField>
-                        )}
-                    </Field>
-                </Grid>
-
-
-
-
-
-                <Grid item xs={12} sm={12} md={12}>
-
-
-                    Heat Pump cost/day @ flat rate)
-
-
-                    {values.heatPumpCostFlatRate}
-
-
-
-                    e.g. no night EV charging savings
-                </Grid>
-
-
-                <Grid item xs={12} sm={12} md={12}>
-
-                    Heat Pump cost/day @ peak rate)
-
-
-                    {values.heatPumpCostPeakRate}
-
-
-
-                    e.g. with night EV charging savings
-                </Grid>
-
+                <InfoThing textA="Heat Pump cost/day @ peak rate" textB="e.g. no night EV charging savings" value={values.heatPumpCostPeakRate} />
 
 
             </Grid>

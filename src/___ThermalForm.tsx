@@ -346,11 +346,6 @@ const ThermalForm = () => {
                         <Grid container spacing={2}>
                             <Grid item xs={12} sm={8} md={8}>
 
-
-
-
-
-
                                 <Accordion expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
                                     <AccordionSummary aria-controls="panel1d-content" id="panel1d-header">
                                         <Typography>Tariff Costs

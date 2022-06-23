@@ -1,6 +1,7 @@
 import { Divider, Grid, Typography } from "@mui/material";
 import { FormSpy } from "react-final-form";
 import { IThermalForm } from "./interfaces/thermal";
+import InfoThing from "./util/infoThing";
 import NumberField from "./util/numberField";
 
 
@@ -31,16 +32,7 @@ const ThermalFormFields = () => {
             >
                 <NumberField name="tankSpecificHeatCapacity" label="Store specific heat capacity" longText="" helpText="(J/kg/Celsius)" type="int" />
 
-                <Grid item xs={12} sm={12} md={12}>
-                    <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "space-between" }}>
-                        <span>Tank/Store Mass</span>
-                        <span>{values.tankMass}</span>
-
-
-                        <span>  kg</span>
-
-                    </div>
-                </Grid>
+                <InfoThing textA={`Tank/Store Mass`} textB="kg." value={values.tankMass} />
 
                 <NumberField name="tankMassOverride" label="Tank/Store Mass Override" longText="" helpText="(J/kg/Celsius)" type="int" />
 
@@ -52,46 +44,19 @@ const ThermalFormFields = () => {
 
                 <NumberField name="tankEnergyLossCoeficient" label="Storage Energy Loss Coeficient" longText="" helpText="W/Celsius" type="int" />
 
-                <Grid item xs={12} sm={12} md={12}>
-                    <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "space-between" }}>
-                        <span> Useful Tank Energy (Joules)
-                        </span>
-                        <span>{values.tankEnergyAmbient}</span>
-                        <span>MJ</span>
-
-                    </div>
-                </Grid>
-
-                <Grid item xs={12} sm={12} md={12}>
-                    <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "space-between" }}>
-                        <span>Useful Tank Energy (Joules)</span>
-                        <span>{values.tankEnergyJoules}</span>
-                        <span>MJ  - Energy required t heat from min. useful to max</span>
-                    </div>
-                </Grid>
-                <Grid item xs={12} sm={12} md={12}>
-
-                    <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "space-between" }}>
-                        <span>Useful Tank Energy</span>
-                        <span> {values.tankEnergy}</span>
-                        <span>kWh</span>
-                    </div>
-                </Grid>
-
-                <Grid item xs={12} sm={12} md={12}>
-                    <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "space-between" }}>
-                        <span>Useful Tank Energy after N hours cooling</span>
-                        <span>  {values.tankAfterNHoursCooling}</span>
-                        <span>kWh
-
-                            - Maximum energy available at max. temp.</span>
-
-                    </div>
 
 
+                <InfoThing textA="Useful Tank Energy (Joules) ----------- " textB="MJ" value={values.tankEnergyAmbient} />
 
 
-                </Grid>
+                <InfoThing textA="Useful Tank Energy (Joules)" textB="MJ  - Energy required t heat from min. useful to max" value={values.tankEnergyJoules} />
+
+
+                <InfoThing textA="Useful Tank Energy" textB="kWh" value={values.tankEnergy} />
+
+                <InfoThing textA={`Useful Tank Energy after ${values.timeShiftHoursN} hours cooling`} textB="kWh - Maximum energy available at max. temp." value={values.tankAfterNHoursCooling} />
+
+
             </Grid>
 
 

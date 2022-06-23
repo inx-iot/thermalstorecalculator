@@ -1,6 +1,7 @@
-import { Box, Divider, Grid, Typography } from "@mui/material";
+import { Divider, Grid, Typography } from "@mui/material";
 import { FormSpy } from "react-final-form";
 import { IThermalForm } from "./interfaces/thermal";
+import InfoThing from "./util/infoThing";
 
 
 
@@ -29,72 +30,19 @@ const ThermalStorageFields = () => {
                 style={{ marginTop: "15px" }}
             >
 
-                <Grid item xs={12} sm={12} md={12}>
-                    <Box sx={{ justifyContent: 'space-between' }}>
-                        <div>Daily cost @ ToU Low Rate (inc. loss)</div>
-
-                        <div>{values.thermalStorageDailyCost}</div>
-
-                        <div>Ample output</div>
-                    </Box>
-                </Grid>
+                <InfoThing textA="Daily cost @ ToU Low Rate (inc. loss)" textB="Ample output" value={values.thermalStorageDailyCost} />
 
 
 
-                <Grid item xs={12} sm={12} md={12}>
+                <InfoThing textA="Cost vs.instantaneous Grid consumption" textB="Compared to flat rate" value={values.thermalStorageVsGridPercent} />
 
-                    Cost vs.instantaneous Grid consumption
+                <InfoThing textA="Cost vs. Heat Pump (flat rate)" textB="Compared to flat rate" value={values.thermalStorageVsHeatPumpFlatRate} />
 
+                <InfoThing textA="Cost vs. Heat Pump (peak rate)" textB="Compared to peak rate" value={values.thermalStorageVsHeatPumpPeakRate} />
 
-                    {values.thermalStorageVsGridPercent}
+                <InfoThing textA="Potential wasted expense over N hours storage" textB="of energy cost @ cheap rate that is wasted Compared to peak rate" value={values.thermalStoragePotentialWastedExpense} />
 
-
-                    Compared to flat rate
-                </Grid>
-
-
-                <Grid item xs={12} sm={12} md={12}>
-
-                    Cost vs. Heat Pump (flat rate)
-
-
-                    {values.thermalStorageVsHeatPumpFlatRate}
-
-
-                    Compared to flat rate
-                </Grid>
-
-
-                <Grid item xs={12} sm={12} md={12}>
-
-                    Cost vs. Heat Pump (peak rate)
-
-
-                    {values.thermalStorageVsHeatPumpPeakRate}
-
-
-                    Compared to peak rate
-                </Grid>
-
-
-
-
-                <Grid item xs={12} sm={12} md={12}>
-
-                    Potential wasted expense over N hours storage
-
-                    {values.thermalStoragePotentialWastedExpense}
-
-                    of energy cost @ cheap rate that is wasted   Compared to peak rate
-                </Grid>
-
-
-                <Grid item xs={12} sm={12} md={12}>
-
-                    Stored high temp. Heat Pump @ ToU Low Rate Cost
-                    {values.thermalStorageVsHeatPumpFlatRate}
-                    of cost of non-shiftet (@peak) Heat Pump consumption
-                </Grid>
+                <InfoThing textA="Stored high temp. Heat Pump @ ToU Low Rate Cost" textB="of cost of non-shiftet (@peak) Heat Pump consumption" value={values.thermalStorageVsHeatPumpFlatRate} />
 
             </Grid>
         </div>)

@@ -1,6 +1,6 @@
-import { Grid } from "@mui/material";
 import { FormSpy } from "react-final-form";
 import { IThermalForm } from "./interfaces/thermal";
+import InfoThing from "./util/infoThing";
 
 
 const InstantaneousCostsFields = () => {
@@ -13,34 +13,8 @@ const InstantaneousCostsFields = () => {
         }}
     >
         {({ values, dirtySinceLastSubmit, submitting }) => (<div>
-
-            <Grid item xs={12} sm={12} md={12}>
-
-
-                Daily heating cost / day (Direct heating @ flat rate)
-
-
-                £ {values.instantaneousHeatingCostFlatRate}
-
-
-
-                (Theoretical reference only)
-            </Grid>
-
-            <Grid item xs={12} sm={12} md={12}>
-
-
-                Daily heating cost / day (Direct heating @ peak rate)
-
-
-                £ {values.instantaneousHeatingCostPeakRate}
-
-
-
-                (Direct heating is usually at peak times if ToU Tariffs are used)
-            </Grid>
-
-
+            <InfoThing textA="Daily heating cost / day (Direct heating @ flat rate)" textB="(Theoretical reference only)" value={values.instantaneousHeatingCostFlatRate} preValue="£" />
+            <InfoThing textA="Daily heating cost / day (Direct heating @ peak rate)" textB="(Direct heating is usually at peak times if ToU Tariffs are used)" value={values.instantaneousHeatingCostPeakRate} preValue="£" />
         </div>)
         }
     </FormSpy >
