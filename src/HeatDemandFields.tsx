@@ -25,8 +25,6 @@ const HeatDemandFields = () => {
             >
                 <NumberField name="heatEnergyDwellingYear" label="Heating Energy /dwelling/year" longText="" helpText="kWh/dw" type="int" />
 
-                <NumberField name="timeShiftHoursN" label="Time Shift Hours (N)" longText="" helpText="Hours" type="int" />
-
                 <InfoThing textA="Daily heating energy required" textB="kWh" value={values.heatDailyEnergyRequired} />
 
                 <InfoThing textA="Proportion of central heating" textB="kWh" value={values.heatProportionOfCentralHeating} />

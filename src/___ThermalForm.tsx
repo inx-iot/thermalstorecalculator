@@ -84,10 +84,10 @@ const ThermalForm = () => {
                     lowRateEnergyCost: 8,
                     highRateEnergyCost: 20,
 
-                    tankSpecificHeatCapacity: 4200,
-                    tankMass: 546.06,
+                    tankSpecificHeatCapacity: 4200, // asssume water 
+                    tankMass: 400, // this is one of the larger tanks
                     tankMassOverride: undefined,
-                    tankMaxTemperature: 80,
+                    tankMaxTemperature: 90,
                     tankMinTemperature: 35,
                     tankAmbientTemperature: 20,
                     tankEnergyLossCoeficient: 3,
@@ -102,7 +102,7 @@ const ThermalForm = () => {
                     heatDailyEnergyRequiredOverride: undefined,
                     heatProportionOfCentralHeating: undefined,
 
-                    timeShiftHoursN: 15,
+                    timeShiftHoursN: 12,
                     timeShiftEnergyLost: undefined,
                     timeEnergyLossMaxTemp: undefined,
                     timeEnergyLossNoHeatAndDraw: undefined,
@@ -111,7 +111,7 @@ const ThermalForm = () => {
                     instantaneousHeatingCostFlatRate: undefined,
                     instantaneousHeatingCostPeakRate: undefined,
 
-                    heatPumpHeatEfficiency: 200,
+                    heatPumpHeatEfficiency: 250,
                     heatPumpCostFlatRate: undefined,
                     heatPumpCostPeakRate: undefined,
 
@@ -165,6 +165,11 @@ const ThermalForm = () => {
                             },
 
 
+                            // This one will cause recursion - can leave it out for now.
+                            // I exxpect we need a function that is triggered by changes to the Daily heat required that does the following:
+                            // (1) if an tank override value is set it warns the user it will be over-written.
+                            // (2) runs a for loop 50 times that sets all the variables using the functions here.
+                            // (3) All done! 
                             // =if(D16>0,D16,E16)
                             // heatDailyEnergyRequired: (fooValue, allValues: any) => {
                             //     console.log("heatDailyEnergyRequired")
@@ -345,7 +350,22 @@ const ThermalForm = () => {
 
                         <Grid container spacing={2}>
                             <Grid item xs={12} sm={8} md={8}>
-
+                                <Accordion expanded={expanded === 'panel4'} onChange={handleChange('panel4')}>
+                                    <AccordionSummary aria-controls="panel4d-content" id="panel4d-header">
+                                        <Typography>Energy Time Shifting Requirements</Typography>
+                                    </AccordionSummary>
+                                    <AccordionDetails>
+                                        <TimeFormFields />
+                                    </AccordionDetails>
+                                </Accordion> 
+                                <Accordion expanded={expanded === 'panel3'} onChange={handleChange('panel3')}>
+                                    <AccordionSummary aria-controls="panel3d-content" id="panel3d-header">
+                                        <Typography>Storage Capacity Calculator</Typography>
+                                    </AccordionSummary>
+                                    <AccordionDetails>
+                                        <HeatDemandFields />
+                                    </AccordionDetails>
+                                </Accordion>
                                 <Accordion expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
                                     <AccordionSummary aria-controls="panel1d-content" id="panel1d-header">
                                         <Typography>Tariff Costs
@@ -357,31 +377,15 @@ const ThermalForm = () => {
                                 </Accordion>
                                 <Accordion expanded={expanded === 'panel2'} onChange={handleChange('panel2')}>
                                     <AccordionSummary aria-controls="panel2d-content" id="panel2d-header">
-                                        <Typography>Thermal Storage</Typography>
+                                        <Typography>Thermal Store Paramaters</Typography>
                                     </AccordionSummary>
                                     <AccordionDetails>
                                         <ThermalFormFields />
                                     </AccordionDetails>
                                 </Accordion>
-                                <Accordion expanded={expanded === 'panel3'} onChange={handleChange('panel3')}>
-                                    <AccordionSummary aria-controls="panel3d-content" id="panel3d-header">
-                                        <Typography>Heat Demand Profile</Typography>
-                                    </AccordionSummary>
-                                    <AccordionDetails>
-                                        <HeatDemandFields />
-                                    </AccordionDetails>
-                                </Accordion>
-                                <Accordion expanded={expanded === 'panel4'} onChange={handleChange('panel4')}>
-                                    <AccordionSummary aria-controls="panel4d-content" id="panel4d-header">
-                                        <Typography>Storage Parameters</Typography>
-                                    </AccordionSummary>
-                                    <AccordionDetails>
-                                        <TimeFormFields />
-                                    </AccordionDetails>
-                                </Accordion>
                                 <Accordion expanded={expanded === 'panel5'} onChange={handleChange('panel5')}>
                                     <AccordionSummary aria-controls="panel5d-content" id="panel5d-header">
-                                        <Typography>Instantaneous Costs</Typography>
+                                        <Typography>Instantaneous Heating Cost Calculator</Typography>
                                     </AccordionSummary>
                                     <AccordionDetails>
                                         <InstantaneousCostsFields />
@@ -389,7 +393,7 @@ const ThermalForm = () => {
                                 </Accordion>
                                 <Accordion expanded={expanded === 'panel6'} onChange={handleChange('panel6')}>
                                     <AccordionSummary aria-controls="panel6d-content" id="panel6d-header">
-                                        <Typography>Heat Pump Costs</Typography>
+                                        <Typography>Heat Pump Cost Calculator</Typography>
                                     </AccordionSummary>
                                     <AccordionDetails>
                                         <HeatPumpCostsFields />
@@ -397,7 +401,7 @@ const ThermalForm = () => {
                                 </Accordion>
                                 <Accordion expanded={expanded === 'panel7'} onChange={handleChange('panel7')}>
                                     <AccordionSummary aria-controls="panel7d-content" id="panel7d-header">
-                                        <Typography>Thermal Storage Costs Comparisons</Typography>
+                                        <Typography>Costs Comparisons</Typography>
                                     </AccordionSummary>
                                     <AccordionDetails>
 

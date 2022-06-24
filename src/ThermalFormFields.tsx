@@ -1,4 +1,4 @@
-import { Divider, Grid, Typography } from "@mui/material";
+import { Grid } from "@mui/material";
 import { FormSpy } from "react-final-form";
 import { IThermalForm } from "./interfaces/thermal";
 import InfoThing from "./util/infoThing";
@@ -15,14 +15,7 @@ const ThermalFormFields = () => {
         }}
     >
         {({ values, dirtySinceLastSubmit, submitting }) => (<div>
-            <Grid container spacing={3} justifyContent="center">
-                <Grid item xs={12}>
-                    <Typography component="h2" variant="h5">
-                        Thermal Storage
-                    </Typography>
-                    <Divider />
-                </Grid>
-            </Grid>
+
 
             <Grid
                 container
@@ -46,15 +39,15 @@ const ThermalFormFields = () => {
 
 
 
-                <InfoThing textA="Useful Tank Energy (Joules) ----------- " textB="MJ" value={values.tankEnergyAmbient} />
+                <InfoThing textA="Tank Energy (Ambient)" textB="MJ" value={values.tankEnergyAmbient} />
 
 
-                <InfoThing textA="Useful Tank Energy (Joules)" textB="MJ  - Energy required t heat from min. useful to max" value={values.tankEnergyJoules} />
+                <InfoThing textA="Tank Energy (Useful) [Energy required t heat from min. useful to max]" textB="MJ" value={values.tankEnergyJoules} />
 
 
                 <InfoThing textA="Useful Tank Energy" textB="kWh" value={values.tankEnergy} />
 
-                <InfoThing textA={`Useful Tank Energy after ${values.timeShiftHoursN} hours cooling`} textB="kWh - Maximum energy available at max. temp." value={values.tankAfterNHoursCooling} />
+                <InfoThing textA={`Remaining Energy after ${values.timeShiftHoursN} hours cooling`} textB="kWh" value={values.tankAfterNHoursCooling} />
 
 
             </Grid>
