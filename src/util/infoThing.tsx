@@ -1,5 +1,5 @@
 import InfoIcon from '@mui/icons-material/Info';
-import { Box, Button, Grid, Popover, Typography } from "@mui/material";
+import { Button, Grid, Popover, Typography } from "@mui/material";
 import { useState } from "react";
 interface IThing {
     textA: string;
@@ -37,7 +37,7 @@ const InfoThing = ({ textA, value, textB, preValue, description, valueDecimalPla
 
         >
 
-            <Grid item xs={12} sm={12} md={5}>
+            <Grid item xs={12} sm={12} md={6}>
                 <Typography>
                     {textA}
                 </Typography>
@@ -45,8 +45,8 @@ const InfoThing = ({ textA, value, textB, preValue, description, valueDecimalPla
 
             </Grid>
 
-            <Grid item xs={12} sm={12} md={3}>
-                <Typography>
+            <Grid item xs={12} sm={12} md={2}>
+                <Typography textAlign="right">
                     {preValue && preValue} {value && value.toFixed(valueDecimalPlace)}
                 </Typography>
 
@@ -55,42 +55,32 @@ const InfoThing = ({ textA, value, textB, preValue, description, valueDecimalPla
 
 
             <Grid item xs={12} sm={12} md={4}>
-                <Typography>
-                    {textB}
-                </Typography>
 
-
-                {description !== undefined && <> <Box
-                    m={1}
-                    //margin
-                    display="flex"
-                    justifyContent="flex-end"
-                    alignItems="flex-end"
-
-                > <Button aria-describedby={id} onClick={handleClick} variant="outlined">
+                <Typography textAlign="right">
+                    {textB} {description !== undefined && <><Button sx={{ minHeight: 0, minWidth: 0, padding: 0 }} aria-describedby={id} onClick={handleClick}>
                         <InfoIcon />
                     </Button>
 
 
-                    <Popover
-                        id={id}
-                        open={open}
-                        anchorEl={anchorEl}
-                        onClose={handleClose}
-                        anchorOrigin={{
-                            vertical: 'bottom',
-                            horizontal: 'left',
-                        }}
-                    >
-                        <Typography sx={{ p: 2 }}>{description}</Typography>
-                    </Popover>
+                        <Popover
+                            id={id}
+                            open={open}
+                            anchorEl={anchorEl}
+                            onClose={handleClose}
+                            anchorOrigin={{
+                                vertical: 'bottom',
+                                horizontal: 'left',
+                            }}
+                        >
+                            <Typography sx={{ p: 2 }}>{description}</Typography>
+                        </Popover></>}
+                </Typography>
 
-                </Box>
-                </>}
+
             </Grid>
         </Grid>
 
-    </Grid>
+    </Grid >
 }
 
 
