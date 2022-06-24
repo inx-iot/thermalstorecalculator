@@ -125,16 +125,17 @@ const ThermalForm = () => {
                                 console.log("update")
                                 if (allValues) {
                                     const values: IThermalForm = allValues;
-
+                                    //for (let index = 0; index < 50; index++) {
                                     //heatEnergyDwellingYear
-                                    const heatDailyEnergyRequired = (values.heatDailyEnergyRequiredOverride ? values.heatDailyEnergyRequiredOverride : values.heatDailyEnergyRequired)
+                                    
+                                    var heatDailyEnergyRequired = (values.heatDailyEnergyRequiredOverride ? values.heatDailyEnergyRequiredOverride : values.heatDailyEnergyRequired)
 
                                     values.timeEnergyLossNoHeatAndDraw = values.tankEnergyLossCoeficient + (values.tankMaxTemperature - values.tankEnergyLossCoeficient) * Math.exp(-1 * values.tankEnergyLossCoeficient / (values.tankSpecificHeatCapacity * values.tankMass) * 3600 * values.timeShiftHoursN)
 
                                     values.heatProportionOfCentralHeating = values.timeEnergyLossNoHeatAndDraw / (heatDailyEnergyRequired + 0.0001)
                                     ///=if(D5>0,D5,(B5+0.001)/(B17+0.001))           
 
-                                    const tankMass = (values.tankMassOverride !== null && values.tankMassOverride ? values.tankMassOverride : 1444)
+                                    var tankMass = (values.tankMassOverride !== null && values.tankMassOverride ? values.tankMassOverride : 300)
 
                                     values.tankMass = tankMass;
 
@@ -144,13 +145,20 @@ const ThermalForm = () => {
                                     values.tankEnergyJoules = tankMass * values.tankSpecificHeatCapacity * (values.tankMaxTemperature - values.tankMinTemperature) / 1000000
                                     values.tankEnergyAmbient = tankMass * values.tankSpecificHeatCapacity * (values.tankMaxTemperature - values.tankEnergyLossCoeficient) / 1000000
                                     values.tankEnergy = values.tankEnergyJoules * 1000 / 3600
-                                    values.tankAfterNHoursCooling = values.tankEnergyJoules * 1000 / 3600 - values.timeShiftHoursN
-
+                                    // Temperature Drop after N hours=B6-B21 =  Tank max. temperature - Temperature after N hours of no heat and no draw
                                     values.timeTempDropOverHours = values.tankMaxTemperature - values.timeEnergyLossNoHeatAndDraw
-                                    values.timeShiftEnergyLost = (values.timeEnergyLossNoHeatAndDraw * values.tankSpecificHeatCapacity * tankMass / 1000) / 3600
+                                    // Energy lost over N hours cooling during time-shift =(B22*B4*B5/1000)/3600  = (Temperature_Drop_after_N_hours * Store_specific_heat_capacity * Tank_Store_Mass/1000)/3600
+                                    values.timeShiftEnergyLost = (values.timeTempDropOverHours * values.tankSpecificHeatCapacity * tankMass / 1000) / 3600
+
+
                                     values.timeEnergyLostFinalfterN = (values.timeEnergyLossNoHeatAndDraw * values.tankSpecificHeatCapacity * tankMass / 1000) / 3600
                                     values.timeEnergyLossMaxTemp = values.tankEnergyLossCoeficient * (values.tankMaxTemperature - values.tankAmbientTemperature) * values.timeShiftHoursN / 1000
                                     values.timeEnergyLostInNMaxTemp = values.timeEnergyLossMaxTemp / values.tankEnergy
+
+                                    //Energy lost over N hours cooling during time-shift=(B22*B4*B5/1000)/3600
+                                    values.tankAfterNHoursCooling = values.tankEnergyJoules * 1000 / 3600 - values.timeTempDropOverHours
+
+                                    
                                     values.instantaneousHeatingCostFlatRate = heatDailyEnergyRequired * values.standardRateEnergyCost / 100
                                     values.instantaneousHeatingCostPeakRate = heatDailyEnergyRequired * values.highRateEnergyCost / 100
                                     values.heatPumpCostFlatRate = values.instantaneousHeatingCostFlatRate * values.heatPumpHeatEfficiency;
@@ -161,6 +169,7 @@ const ThermalForm = () => {
                                     values.thermalStorageVsHeatPumpPeakRate = values.thermalStorageDailyCost * values.heatPumpCostPeakRate;
                                     values.thermalStoragePotentialWastedExpense = values.timeShiftEnergyLost * values.lowRateEnergyCost / 100;
                                     values.thermalStorageHighTempRateCost = (values.lowRateEnergyCost * values.tankAfterNHoursCooling / 100 + values.thermalStoragePotentialWastedExpense) / values.heatPumpHeatEfficiency
+                                    //}
 
                                     return {
                                         "tankEnergyJoules": values.tankEnergyJoules,
