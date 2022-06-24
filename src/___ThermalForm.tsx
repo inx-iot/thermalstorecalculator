@@ -350,15 +350,15 @@ const ThermalForm = () => {
 
                         <Grid container spacing={2}>
                             <Grid item xs={12} sm={8} md={8}>
-                                <Accordion expanded={expanded === 'panel4'} onChange={handleChange('panel4')}>
+                                <Accordion expanded={true} onChange={handleChange('panel4')}>
                                     <AccordionSummary aria-controls="panel4d-content" id="panel4d-header">
                                         <Typography>Energy Time Shifting Requirements</Typography>
                                     </AccordionSummary>
                                     <AccordionDetails>
                                         <TimeFormFields />
                                     </AccordionDetails>
-                                </Accordion> 
-                                <Accordion expanded={expanded === 'panel3'} onChange={handleChange('panel3')}>
+                                </Accordion>
+                                <Accordion expanded={true} onChange={handleChange('panel3')}>
                                     <AccordionSummary aria-controls="panel3d-content" id="panel3d-header">
                                         <Typography>Storage Capacity Calculator</Typography>
                                     </AccordionSummary>
@@ -366,7 +366,7 @@ const ThermalForm = () => {
                                         <HeatDemandFields />
                                     </AccordionDetails>
                                 </Accordion>
-                                <Accordion expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
+                                <Accordion expanded={true} onChange={handleChange('panel1')}>
                                     <AccordionSummary aria-controls="panel1d-content" id="panel1d-header">
                                         <Typography>Tariff Costs
                                         </Typography>
@@ -415,11 +415,7 @@ const ThermalForm = () => {
                                 {values.thermalStorageVsHeatPumpFlatRate !== undefined && values.heatPumpCostFlatRate && <Chart labels={['Heat Pump cost/day @ flat rate)', 'Daily cost @ ToU Low Rate (inc. loss)']} data={[values.heatPumpCostFlatRate, values.thermalStorageVsHeatPumpFlatRate]} />}
                             </Grid>
                         </Grid>
-                        {/* <Grid container spacing={3} justifyContent="center">
-                            <Grid item xs={12}>
-                            </Grid>
-                        </Grid> */}
-                        {/* <pre>{JSON.stringify(values, null, 2)}</pre> */}
+
                     </form>
                 )}
             />
