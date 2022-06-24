@@ -119,7 +119,7 @@ const ThermalForm = () => {
 
                     createDecorator(
                         {
-                            field: ['heatPumpHeatEfficiency', 'standardRateEnergyCost', 'lowRateEnergyCost', 'tankMassOverride', 'heatDailyEnergyRequiredOverride', 'timeShiftHoursN', 'tankMass', 'tankSpecificHeatCapacity', 'tankMaxTemperature', 'tankMinTemperature', 'tankEnergyLossCoeficient'], // when the value of foo changes...
+                            field: ['heatPumpHeatEfficiency', 'heatEnergyDwellingYear', 'highRateEnergyCost', 'tankAmbientTemperature', 'standardRateEnergyCost', 'lowRateEnergyCost', 'tankMassOverride', 'heatDailyEnergyRequiredOverride', 'timeShiftHoursN', 'tankMass', 'tankSpecificHeatCapacity', 'tankMaxTemperature', 'tankMinTemperature', 'tankEnergyLossCoeficient'], // when the value of foo changes...
                             updates: {
 
 

@@ -1,7 +1,6 @@
 import { Grid, Typography } from "@mui/material";
 import { FormSpy } from "react-final-form";
 import { IThermalForm } from "./interfaces/thermal";
-import { thermalStoragePotentialWastedExpense } from "./util/calcs";
 import InfoThing from "./util/infoThing";
 
 
@@ -32,7 +31,7 @@ const ThermalStorageFields = () => {
 
                 <InfoThing textA="vs. Heat Pump @ peak rate" textB="%" value={values.thermalStorageVsHeatPumpPeakRate} />
 
-                <InfoThing textA="vs Cost of lost time shifted heat" textB="%" value={thermalStoragePotentialWastedExpense(values)} />
+                <InfoThing textA="vs Cost of lost time shifted heat" textB="%" value={values.thermalStoragePotentialWastedExpense} />
 
                 <InfoThing textA="High temp HP vs Low temp HP" textB="%" value={values.thermalStorageVsHeatPumpFlatRate} description={`may not include this. High-temp @ ToU low rate, Low temp @ flat rate`} />
             </Grid>
