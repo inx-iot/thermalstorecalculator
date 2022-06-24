@@ -14,14 +14,22 @@ interface IField {
     xs?: number;
     sm?: number;
     md?: number;
+    max?: number;
     type: 'int' | 'float';
     children?: React.ReactNode
 }
 
 
-const NumberField = ({ name, label, helpText, children, type, xs = 12, sm = 6, md = 6 }: IField) => {
+const NumberField = ({ name, label, helpText, children, type, max, xs = 12, sm = 6, md = 6 }: IField) => {
 
 
+
+    const inputProps: any = {
+        min: 1
+    }
+    if (max) {
+        inputProps.max = max;
+    }
     return <Grid item xs={xs} sm={sm} md={md}>
         <Field name={`${name}`}
             parse={(value, name) => {
@@ -44,7 +52,7 @@ const NumberField = ({ name, label, helpText, children, type, xs = 12, sm = 6, m
                     label={label}
                     fullWidth
                     required
-                    InputProps={{ inputProps: { min: 1 }, endAdornment: (children && <InputAdornment position="end">{children}</InputAdornment>), }}
+                    InputProps={{ inputProps, endAdornment: (children && <InputAdornment position="end">{children}</InputAdornment>), }}
                     variant="standard"
                     error={meta.error && meta.touched}
                     helperText={meta.error && meta.touched ? meta.error : helpText}

@@ -23,7 +23,7 @@ const TimeFormFields = () => {
                 justifyContent="left"
                 style={{ marginTop: "15px" }}
             >
-                <NumberField name="timeShiftHoursN" label={`Time Shift Hours (N)`} longText="" helpText="(penc/hWh)" type="int" />
+                <NumberField name="timeShiftHoursN" label={`Time Shift Hours (N)`} longText="" helpText="(penc/hWh)" type="int" max={24} />
 
                 <InfoThing textA={`Energy lost`} textB="kWh" value={values.timeShiftEnergyLost} description={`over ${values.timeShiftHoursN} hours cooling during time-shift`} />
                 <InfoThing textA={`Loss @ max temperature`} textB="kWh" value={values.timeEnergyLossMaxTemp} description={`will probably remove or move this`} />
