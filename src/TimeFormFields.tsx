@@ -28,7 +28,7 @@ const TimeFormFields = () => {
                 <InfoThing textA={`Energy lost`} textB="kWh" value={values.timeShiftEnergyLost} description={`over ${values.timeShiftHoursN} hours cooling during time-shift`} />
                 <InfoThing textA={`Loss @ max temperature`} textB="kWh" value={values.timeEnergyLossMaxTemp} description={`will probably remove or move this`} />
 
-                <InfoThing textA={`Temperature drop`} textB={`Celcius - temperature expected after cooling for ${values.timeShiftHoursN} hours`} value={values.timeEnergyLossNoHeatAndDraw} description={`after ${values.timeShiftHoursN}  hours of no heat and no draw`} />
+                <InfoThing textA={`Temperature drop`} textB={`Celcius`} value={values.timeEnergyLossNoHeatAndDraw} description={`temperature expected after cooling for ${values.timeShiftHoursN} hours of no heat and no draw`} />
 
                 <InfoThing textA={`Temperature Drop`} textB="Celcius" value={values.timeTempDropOverHours} description={`after ${values.timeShiftHoursN}  hours temperature expected after cooling for ${values.timeShiftHoursN} hours`} />
 
