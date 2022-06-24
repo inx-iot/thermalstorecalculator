@@ -22,6 +22,8 @@ const HeatDemandFields = () => {
                 style={{ marginTop: "15px" }}
             >
                 <NumberField name="heatEnergyDwellingYear" label="Heating Energy /dwelling/year" longText="" helpText="kWh/dw" type="int" />
+                {/* <NumberField name="heatUsedDaysPerYear" label="Heating Energy Days used Per year" longText="" helpText="days" type="int" /> */}
+
                 <InfoThing textA="Daily heating energy required" textB="kWh" value={(values.heatDailyEnergyRequiredOverride ? values.heatDailyEnergyRequiredOverride : values.heatDailyEnergyRequired)}>
                     <NumberField sm={12} md={12} name="heatDailyEnergyRequiredOverride" label="Daily Energy Required Override" longText="" helpText="(J/kg/Celsius)" type="int">
                         <Button sx={{ minHeight: 0, minWidth: 0, padding: 0 }} onClick={() => {
