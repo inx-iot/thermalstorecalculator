@@ -15,7 +15,7 @@ const ThermalFormFields = () => {
         }}
     >
         {({ values, form }) => (<div>
-            <Typography variant="h5">Thermal Store Paramaters</Typography>
+            <Typography variant="h5">Thermal Store Parameters</Typography>
 
             <Grid
                 container
