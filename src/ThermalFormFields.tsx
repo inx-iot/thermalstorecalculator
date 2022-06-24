@@ -1,5 +1,5 @@
 import CancelIcon from '@mui/icons-material/Cancel';
-import { Button, Grid, Typography } from "@mui/material";
+import { Button, Divider, Grid, Typography } from "@mui/material";
 import { FormSpy } from "react-final-form";
 import { IThermalForm } from "./interfaces/thermal";
 import InfoThing from "./util/infoThing";
@@ -15,7 +15,7 @@ const ThermalFormFields = () => {
         }}
     >
         {({ values, form }) => (<div>
-            <Typography variant="h5">Thermal Store Parameters</Typography>
+            <Typography variant="h5">Thermal Store Parameters     <Divider component="hr" /></Typography>
 
             <Grid
                 container
@@ -55,6 +55,7 @@ const ThermalFormFields = () => {
 
                 <NumberField name="tankEnergyLossCoeficient" label="Storage Energy Loss Coeficient" longText="" helpText="W/Celsius" type="int" />
 
+                <InfoThing textA="Energy Watts Total" textB="MJ" value={values.tankEnergyWattsTotal} />
 
 
                 <InfoThing textA="Tank Energy (Ambient)" textB="MJ" value={values.tankEnergyAmbient} />

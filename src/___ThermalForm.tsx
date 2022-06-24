@@ -74,6 +74,7 @@ const ThermalForm = () => {
         tankEnergy: 28.67,
         tankAfterNHoursCooling: 26.06,
         tankEnergyAmbient: 137.61,
+        tankEnergyWattsTotal: undefined,
 
         heatEnergyDwellingYear: 6000,
         heatUsedDaysPerYear: 230,
@@ -127,7 +128,7 @@ const ThermalForm = () => {
                                     const values: IThermalForm = allValues;
                                     //for (let index = 0; index < 50; index++) {
                                     //heatEnergyDwellingYear
-                                    
+
                                     var heatDailyEnergyRequired = (values.heatDailyEnergyRequiredOverride ? values.heatDailyEnergyRequiredOverride : values.heatDailyEnergyRequired)
 
                                     values.timeEnergyLossNoHeatAndDraw = values.tankEnergyLossCoeficient + (values.tankMaxTemperature - values.tankEnergyLossCoeficient) * Math.exp(-1 * values.tankEnergyLossCoeficient / (values.tankSpecificHeatCapacity * values.tankMass) * 3600 * values.timeShiftHoursN)
@@ -149,8 +150,8 @@ const ThermalForm = () => {
                                     values.timeTempDropOverHours = values.tankMaxTemperature - values.timeEnergyLossNoHeatAndDraw
                                     // Energy lost over N hours cooling during time-shift =(B22*B4*B5/1000)/3600  = (Temperature_Drop_after_N_hours * Store_specific_heat_capacity * Tank_Store_Mass/1000)/3600
                                     values.timeShiftEnergyLost = (values.timeTempDropOverHours * values.tankSpecificHeatCapacity * tankMass / 1000) / 3600
-
-
+                                    //=B9*(B6-B8)
+                                    values.tankEnergyWattsTotal = values.tankEnergyLossCoeficient + (values.tankMaxTemperature - values.tankAmbientTemperature)
                                     values.timeEnergyLostFinalfterN = (values.timeEnergyLossNoHeatAndDraw * values.tankSpecificHeatCapacity * tankMass / 1000) / 3600
                                     values.timeEnergyLossMaxTemp = values.tankEnergyLossCoeficient * (values.tankMaxTemperature - values.tankAmbientTemperature) * values.timeShiftHoursN / 1000
                                     values.timeEnergyLostInNMaxTemp = values.timeEnergyLossMaxTemp / values.tankEnergy
@@ -158,7 +159,7 @@ const ThermalForm = () => {
                                     //Energy lost over N hours cooling during time-shift=(B22*B4*B5/1000)/3600
                                     values.tankAfterNHoursCooling = values.tankEnergyJoules * 1000 / 3600 - values.timeTempDropOverHours
 
-                                    
+
                                     values.instantaneousHeatingCostFlatRate = heatDailyEnergyRequired * values.standardRateEnergyCost / 100
                                     values.instantaneousHeatingCostPeakRate = heatDailyEnergyRequired * values.highRateEnergyCost / 100
                                     values.heatPumpCostFlatRate = values.instantaneousHeatingCostFlatRate * values.heatPumpHeatEfficiency;
@@ -180,6 +181,7 @@ const ThermalForm = () => {
                                         "heatProportionOfCentralHeating": values.heatProportionOfCentralHeating,
                                         "timeTempDropOverHours": values.timeTempDropOverHours,
                                         "timeShiftEnergyLost": values.timeShiftEnergyLost,
+                                        "tankEnergyWattsTotal": values.tankEnergyWattsTotal,
                                         "timeEnergyLostFinalfterN": values.timeEnergyLostFinalfterN,
                                         "timeEnergyLossMaxTemp": values.timeEnergyLossMaxTemp,
                                         "timeEnergyLostInNMaxTemp": values.timeEnergyLostInNMaxTemp,

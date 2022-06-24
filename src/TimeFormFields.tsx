@@ -1,4 +1,4 @@
-import { Grid, Typography } from "@mui/material";
+import { Divider, Grid, Typography } from "@mui/material";
 import { FormSpy } from "react-final-form";
 import { IThermalForm } from "./interfaces/thermal";
 import InfoThing from "./util/infoThing";
@@ -15,7 +15,9 @@ const TimeFormFields = () => {
         }}
     >
         {({ values, dirtySinceLastSubmit, submitting }) => (<div>
-            <Typography variant="h5">Energy Time Shifting Requirements</Typography>
+            <Typography variant="h5">Energy Time Shifting Requirements
+                <Divider component="hr" />
+            </Typography>
 
             <Grid
                 container

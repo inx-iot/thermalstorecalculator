@@ -1,3 +1,4 @@
+import { Card, CardContent } from '@mui/material';
 import { ArcElement, Chart as ChartJS, Legend, Tooltip } from 'chart.js';
 import { Pie } from 'react-chartjs-2';
 
@@ -22,8 +23,8 @@ const Chart = ({ labels, data }: IChart) => {
                 label: '# of Votes',
                 data: data,
                 backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 99, 132, 0.3)',
+                    'rgba(54, 162, 235, 0.3)',
 
                 ],
                 borderColor: [
@@ -38,7 +39,10 @@ const Chart = ({ labels, data }: IChart) => {
 
 
 
-    return <Pie data={chartData} />;
+    return <Card>
+        <CardContent>
+            <Pie data={chartData} />
+        </CardContent></Card>;
 }
 
 

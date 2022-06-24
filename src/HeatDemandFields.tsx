@@ -1,5 +1,5 @@
 import CancelIcon from '@mui/icons-material/Cancel';
-import { Button, Grid, Typography } from "@mui/material";
+import { Button, Divider, Grid, Typography } from "@mui/material";
 import { FormSpy } from "react-final-form";
 import { IThermalForm } from "./interfaces/thermal";
 import InfoThing from "./util/infoThing";
@@ -14,7 +14,7 @@ const HeatDemandFields = () => {
         }}
     >
         {({ values, form }) => (<div>
-            <Typography variant="h5">Storage Capacity Calculator</Typography>
+            <Typography variant="h5">Storage Capacity Calculator     <Divider component="hr" /></Typography>
             <Grid
                 container
                 spacing={3}

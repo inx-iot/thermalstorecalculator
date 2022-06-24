@@ -1,4 +1,4 @@
-import { Grid, Typography } from "@mui/material";
+import { Divider, Grid, Typography } from "@mui/material";
 import { FormSpy } from "react-final-form";
 import { IThermalForm } from "./interfaces/thermal";
 import NumberField from "./util/numberField";
@@ -17,6 +17,7 @@ const TariffFormFields = () => {
     >
         {({ values, dirtySinceLastSubmit, submitting }) => (<div>
             <Typography variant="h5">Tariff Costs
+                <Divider component="hr" />
             </Typography>
             <Grid
                 container

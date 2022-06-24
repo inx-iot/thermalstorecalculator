@@ -15,7 +15,7 @@ export interface IThermalForm {
     tankEnergyJoules?: number;
     tankEnergy?: number;
     tankAfterNHoursCooling?: number;
-
+    tankEnergyWattsTotal?: number;
 
     heatEnergyDwellingYear: number;
     heatUsedDaysPerYear: number;
