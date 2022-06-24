@@ -88,7 +88,11 @@ const InfoThing = ({ textA, value, textB, preValue, description, children, value
                             anchorEl={anchorEl}
                             onClose={handleClose}
                             anchorOrigin={{
-                                vertical: 'bottom',
+                                vertical: 'center',
+                                horizontal: 'left',
+                            }}
+                            transformOrigin={{
+                                vertical: 'top',
                                 horizontal: 'right',
                             }}
                         >
