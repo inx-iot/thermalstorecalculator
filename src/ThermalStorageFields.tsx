@@ -23,17 +23,17 @@ const ThermalStorageFields = () => {
                 style={{ marginTop: "15px" }}
             >
 
-                <InfoThing textA="Time shifted cost [@ low rate (inc. loss)]" textB="£/EU/$" value={values.thermalStorageDailyCost} />
+                <InfoThing textA="Time shifted cost" textB="£/EU/$" value={values.thermalStorageDailyCost} description={`@ low rate (inc. loss)`} />
 
-                <InfoThing textA="vs direct heating [instantaneous @flat rate]" textB="%" value={values.thermalStorageVsGridPercent} />
+                <InfoThing textA="vs direct heating" textB="%" value={values.thermalStorageVsGridPercent} description={`instantaneous @flat rate`} />
 
-                <InfoThing textA="vs Heat Pump [instantaneous @flat rate]" textB="%" value={values.thermalStorageVsHeatPumpFlatRate} />
+                <InfoThing textA="vs Heat Pump" textB="%" value={values.thermalStorageVsHeatPumpFlatRate} description={`instantaneous @flat rate`} />
 
                 <InfoThing textA="vs. Heat Pump @ peak rate" textB="%" value={values.thermalStorageVsHeatPumpPeakRate} />
 
-                <InfoThing textA="vs Cost of lost time shifted heat " textB="%" value={values.thermalStoragePotentialWastedExpense} />
+                <InfoThing textA="vs Cost of lost time shifted heat" textB="%" value={values.thermalStoragePotentialWastedExpense} />
 
-                <InfoThing textA="High temp HP vs Low temp HP [may not include this. High-temp @ ToU low rate, Low temp @ flat rate]" textB="%" value={values.thermalStorageVsHeatPumpFlatRate} />
+                <InfoThing textA="High temp HP vs Low temp HP" textB="%" value={values.thermalStorageVsHeatPumpFlatRate} description={`may not include this. High-temp @ ToU low rate, Low temp @ flat rate`} />
             </Grid>
         </div>)
         }
