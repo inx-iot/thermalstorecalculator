@@ -9,19 +9,23 @@ import theme from './theme';
 
 
 
+const target = document.getElementById('erw-root');
+if (target) {
+  const root = ReactDOM.createRoot(
+    document.getElementById('erw-root') as HTMLElement
+  );
+  root.render(
+    <React.StrictMode>
+      <ThemeProvider theme={theme}>
+        {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
+        <CssBaseline />
+        <App />
+      </ThemeProvider>,
+    </React.StrictMode>
+  );
+}
 
-const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
-);
-root.render(
-  <React.StrictMode>
-    <ThemeProvider theme={theme}>
-      {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
-      <CssBaseline />
-      <App />
-    </ThemeProvider>,
-  </React.StrictMode>
-);
+
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

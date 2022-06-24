@@ -1,6 +1,7 @@
 {
   "name": "thermal-calculator",
   "version": "0.1.0",
+  "homepage": "/wp-content/plugins/inxTime/widget/build",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.9.3",
