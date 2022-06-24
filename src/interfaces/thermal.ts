@@ -26,7 +26,7 @@ export interface IThermalForm {
     timeShiftHoursN: number;
     timeShiftEnergyLost?: number;
     timeEnergyLossMaxTemp?: number;
-    timeEnergyLossNoHeatAndDraw?: number;
+    timeTemperatureAfterNCoolingNoHeatAndDraw?: number;
     timeTempDropOverHours?: number;
     timeEnergyLostFinalfterN?: number;
     timeEnergyLostInNMaxTemp?: number;

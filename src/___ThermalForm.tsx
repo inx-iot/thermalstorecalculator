@@ -85,7 +85,7 @@ const ThermalForm = () => {
         timeShiftHoursN: 12,
         timeShiftEnergyLost: 2.61,
         timeEnergyLossMaxTemp: 2.7,
-        timeEnergyLossNoHeatAndDraw: 75.91,
+        timeTemperatureAfterNCoolingNoHeatAndDraw: 75.91,
         timeTempDropOverHours: 4.09,
         timeEnergyLostFinalfterN: 9.1,
         timeEnergyLostInNMaxTemp: 9.4,
@@ -131,9 +131,10 @@ const ThermalForm = () => {
 
                                     var heatDailyEnergyRequired = (values.heatDailyEnergyRequiredOverride ? values.heatDailyEnergyRequiredOverride : values.heatDailyEnergyRequired)
 
-                                    values.timeEnergyLossNoHeatAndDraw = values.tankEnergyLossCoeficient + (values.tankMaxTemperature - values.tankEnergyLossCoeficient) * Math.exp(-1 * values.tankEnergyLossCoeficient / (values.tankSpecificHeatCapacity * values.tankMass) * 3600 * values.timeShiftHoursN)
+                                    values.timeTemperatureAfterNCoolingNoHeatAndDraw = values.tankEnergyLossCoeficient + (values.tankMaxTemperature - values.tankEnergyLossCoeficient) *
+                                        Math.exp(-1 * values.tankEnergyLossCoeficient / (values.tankSpecificHeatCapacity * values.tankMass) * 3600 * values.timeShiftHoursN)
 
-                                    values.heatProportionOfCentralHeating = values.timeEnergyLossNoHeatAndDraw / (heatDailyEnergyRequired + 0.0001)
+                                    //values.heatProportionOfCentralHeating = values.timeEnergyLossNoHeatAndDraw / (heatDailyEnergyRequired + 0.0001)
                                     ///=if(D5>0,D5,(B5+0.001)/(B17+0.001))           
 
                                     var tankMass = (values.tankMassOverride !== null && values.tankMassOverride ? values.tankMassOverride : 300)
@@ -147,12 +148,12 @@ const ThermalForm = () => {
                                     values.tankEnergyAmbient = tankMass * values.tankSpecificHeatCapacity * (values.tankMaxTemperature - values.tankEnergyLossCoeficient) / 1000000
                                     values.tankEnergy = values.tankEnergyJoules * 1000 / 3600
                                     // Temperature Drop after N hours=B6-B21 =  Tank max. temperature - Temperature after N hours of no heat and no draw
-                                    values.timeTempDropOverHours = values.tankMaxTemperature - values.timeEnergyLossNoHeatAndDraw
+                                    values.timeTempDropOverHours = values.tankMaxTemperature - values.timeTemperatureAfterNCoolingNoHeatAndDraw
                                     // Energy lost over N hours cooling during time-shift =(B22*B4*B5/1000)/3600  = (Temperature_Drop_after_N_hours * Store_specific_heat_capacity * Tank_Store_Mass/1000)/3600
                                     values.timeShiftEnergyLost = (values.timeTempDropOverHours * values.tankSpecificHeatCapacity * tankMass / 1000) / 3600
-                                    //=B9*(B6-B8)
-                                    values.tankEnergyWattsTotal = values.tankEnergyLossCoeficient + (values.tankMaxTemperature - values.tankAmbientTemperature)
-                                    values.timeEnergyLostFinalfterN = (values.timeEnergyLossNoHeatAndDraw * values.tankSpecificHeatCapacity * tankMass / 1000) / 3600
+
+
+                                    //values.timeEnergyLostFinalfterN = (values.timeEnergyLossNoHeatAndDraw * values.tankSpecificHeatCapacity * tankMass / 1000) / 3600
                                     values.timeEnergyLossMaxTemp = values.tankEnergyLossCoeficient * (values.tankMaxTemperature - values.tankAmbientTemperature) * values.timeShiftHoursN / 1000
                                     values.timeEnergyLostInNMaxTemp = values.timeEnergyLossMaxTemp / values.tankEnergy
 
@@ -177,7 +178,7 @@ const ThermalForm = () => {
                                         "tankEnergyAmbient": values.tankEnergyAmbient,
                                         "tankEnergy": values.tankEnergy,
                                         "tankAfterNHoursCooling": values.tankAfterNHoursCooling,
-                                        "timeEnergyLossNoHeatAndDraw": values.timeEnergyLossNoHeatAndDraw,
+                                        "timeEnergyLossNoHeatAndDraw": values.timeTemperatureAfterNCoolingNoHeatAndDraw,
                                         "heatProportionOfCentralHeating": values.heatProportionOfCentralHeating,
                                         "timeTempDropOverHours": values.timeTempDropOverHours,
                                         "timeShiftEnergyLost": values.timeShiftEnergyLost,
