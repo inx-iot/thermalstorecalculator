@@ -134,7 +134,7 @@ const ThermalForm = () => {
                                     values.heatProportionOfCentralHeating = values.timeEnergyLossNoHeatAndDraw / (heatDailyEnergyRequired + 0.0001)
                                     ///=if(D5>0,D5,(B5+0.001)/(B17+0.001))           
 
-                                    const tankMass = 2999
+                                    const tankMass = (values.tankMassOverride !== null && values.tankMassOverride ? values.tankMassOverride : 1444)
 
                                     values.tankMass = tankMass;
 
