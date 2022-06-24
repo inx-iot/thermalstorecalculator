@@ -6,7 +6,6 @@ import MuiAccordionSummary, {
     AccordionSummaryProps
 } from '@mui/material/AccordionSummary';
 import { styled } from '@mui/material/styles';
-import Typography from '@mui/material/Typography';
 import createDecorator from 'final-form-calculate';
 import * as React from 'react';
 import { Form } from "react-final-form";
@@ -370,33 +369,11 @@ const ThermalForm = () => {
 
 
                                 <ThermalFormFields />
+                                <InstantaneousCostsFields />
+                                <HeatPumpCostsFields />
 
+                                <ThermalStorageFields />
 
-                                <Accordion expanded={expanded === 'panel5'} onChange={handleChange('panel5')}>
-                                    <AccordionSummary aria-controls="panel5d-content" id="panel5d-header">
-
-                                    </AccordionSummary>
-                                    <AccordionDetails>
-                                        <InstantaneousCostsFields />
-                                    </AccordionDetails>
-                                </Accordion>
-                                <Accordion expanded={expanded === 'panel6'} onChange={handleChange('panel6')}>
-                                    <AccordionSummary aria-controls="panel6d-content" id="panel6d-header">
-                                        <Typography>Heat Pump Cost Calculator</Typography>
-                                    </AccordionSummary>
-                                    <AccordionDetails>
-                                        <HeatPumpCostsFields />
-                                    </AccordionDetails>
-                                </Accordion>
-                                <Accordion expanded={expanded === 'panel7'} onChange={handleChange('panel7')}>
-                                    <AccordionSummary aria-controls="panel7d-content" id="panel7d-header">
-                                        <Typography>Costs Comparisons</Typography>
-                                    </AccordionSummary>
-                                    <AccordionDetails>
-
-                                        <ThermalStorageFields />
-                                    </AccordionDetails>
-                                </Accordion>
                             </Grid>
                             <Grid item xs={12} sm={4} md={4}>
                                 {values.timeEnergyLostFinalfterN !== undefined && <Chart labels={['Useful Tank Energy after N hours cooling', 'Energy lost over N hours cooling during time-shift']} data={[values.timeEnergyLostFinalfterN, (100 - values.timeEnergyLostFinalfterN)]} />}
