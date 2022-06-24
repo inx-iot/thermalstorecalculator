@@ -1,4 +1,4 @@
-import { Grid } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 import { FormSpy } from "react-final-form";
 import { IThermalForm } from "./interfaces/thermal";
 import InfoThing from "./util/infoThing";
@@ -15,8 +15,7 @@ const HeatDemandFields = () => {
         }}
     >
         {({ values, dirtySinceLastSubmit, submitting }) => (<div>
-
-
+            <Typography>Storage Capacity Calculator</Typography>
             <Grid
                 container
                 spacing={3}

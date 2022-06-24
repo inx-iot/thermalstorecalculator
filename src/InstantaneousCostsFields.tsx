@@ -1,4 +1,4 @@
-import { Grid } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 import { FormSpy } from "react-final-form";
 import { IThermalForm } from "./interfaces/thermal";
 import InfoThing from "./util/infoThing";
@@ -14,6 +14,8 @@ const InstantaneousCostsFields = () => {
         }}
     >
         {({ values, dirtySinceLastSubmit, submitting }) => (<div>
+
+            <Typography>Instantaneous Heating Cost Calculator</Typography>
             <Grid
                 container
                 spacing={3}

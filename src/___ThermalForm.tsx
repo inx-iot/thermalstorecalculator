@@ -362,42 +362,19 @@ const ThermalForm = () => {
 
                         <Grid container spacing={2}>
                             <Grid item xs={12} sm={8} md={8}>
-                                <Accordion expanded={panel4} onChange={handleChange('panel4')}>
-                                    <AccordionSummary aria-controls="panel4d-content" id="panel4d-header">
-                                        <Typography>Energy Time Shifting Requirements</Typography>
-                                    </AccordionSummary>
-                                    <AccordionDetails>
-                                        <TimeFormFields />
-                                    </AccordionDetails>
-                                </Accordion>
-                                <Accordion expanded={panel3} onChange={handleChange('panel3')}>
-                                    <AccordionSummary aria-controls="panel3d-content" id="panel3d-header">
-                                        <Typography>Storage Capacity Calculator</Typography>
-                                    </AccordionSummary>
-                                    <AccordionDetails>
-                                        <HeatDemandFields />
-                                    </AccordionDetails>
-                                </Accordion>
-                                <Accordion expanded={panel1} onChange={handleChange('panel1')}>
-                                    <AccordionSummary aria-controls="panel1d-content" id="panel1d-header">
-                                        <Typography>Tariff Costs
-                                        </Typography>
-                                    </AccordionSummary>
-                                    <AccordionDetails>
-                                        <TariffFormFields />
-                                    </AccordionDetails>
-                                </Accordion>
-                                <Accordion expanded={expanded === 'panel2'} onChange={handleChange('panel2')}>
-                                    <AccordionSummary aria-controls="panel2d-content" id="panel2d-header">
-                                        <Typography>Thermal Store Paramaters</Typography>
-                                    </AccordionSummary>
-                                    <AccordionDetails>
-                                        <ThermalFormFields />
-                                    </AccordionDetails>
-                                </Accordion>
+
+                                <TimeFormFields />
+                                <HeatDemandFields />
+
+                                <TariffFormFields />
+
+
+                                <ThermalFormFields />
+
+
                                 <Accordion expanded={expanded === 'panel5'} onChange={handleChange('panel5')}>
                                     <AccordionSummary aria-controls="panel5d-content" id="panel5d-header">
-                                        <Typography>Instantaneous Heating Cost Calculator</Typography>
+
                                     </AccordionSummary>
                                     <AccordionDetails>
                                         <InstantaneousCostsFields />

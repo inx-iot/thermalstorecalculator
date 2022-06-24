@@ -1,4 +1,4 @@
-import { Grid } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 import { FormSpy } from "react-final-form";
 import { IThermalForm } from "./interfaces/thermal";
 import InfoThing from "./util/infoThing";
@@ -15,7 +15,7 @@ const ThermalStorageFields = () => {
     >
         {({ values, dirtySinceLastSubmit, submitting }) => (<div>
 
-
+            <Typography>Costs Comparisons</Typography>
             <Grid
                 container
                 spacing={3}
