@@ -141,7 +141,14 @@ const ThermalForm = () => {
                                     values.timeEnergyLostInNMaxTemp = values.timeEnergyLossMaxTemp / values.tankEnergy
                                     values.instantaneousHeatingCostFlatRate = heatDailyEnergyRequired * values.standardRateEnergyCost / 100
                                     values.instantaneousHeatingCostPeakRate = heatDailyEnergyRequired * values.highRateEnergyCost / 100
-
+                                    values.heatPumpCostFlatRate = values.instantaneousHeatingCostFlatRate * values.heatPumpHeatEfficiency;
+                                    values.heatPumpCostPeakRate = values.instantaneousHeatingCostPeakRate * values.heatPumpHeatEfficiency;
+                                    values.thermalStorageDailyCost = values.tankEnergy * values.standardRateEnergyCost / 100;
+                                    values.thermalStorageVsGridPercent = values.thermalStorageDailyCost * values.instantaneousHeatingCostFlatRate;
+                                    values.thermalStorageVsHeatPumpFlatRate = values.thermalStorageDailyCost * values.heatPumpCostFlatRate;
+                                    values.thermalStorageVsHeatPumpPeakRate = values.thermalStorageDailyCost * values.heatPumpCostPeakRate;
+                                    values.thermalStoragePotentialWastedExpense = values.timeShiftEnergyLost * values.lowRateEnergyCost / 100;
+                                    values.thermalStorageHighTempRateCost = (values.lowRateEnergyCost * values.tankAfterNHoursCooling / 100 + values.thermalStoragePotentialWastedExpense) / values.heatPumpHeatEfficiency
 
                                     return {
                                         "tankEnergyJoules": values.tankEnergyJoules,
@@ -157,7 +164,14 @@ const ThermalForm = () => {
                                         "timeEnergyLostInNMaxTemp": values.timeEnergyLostInNMaxTemp,
                                         "instantaneousHeatingCostFlatRate": values.instantaneousHeatingCostFlatRate,
                                         "instantaneousHeatingCostPeakRate": values.instantaneousHeatingCostPeakRate,
-
+                                        "heatPumpCostFlatRate": values.heatPumpCostFlatRate,
+                                        "heatPumpCostPeakRate": values.heatPumpCostPeakRate,
+                                        "thermalStorageDailyCost": values.thermalStorageDailyCost,
+                                        "thermalStorageVsGridPercent": values.thermalStorageVsGridPercent,
+                                        "thermalStorageVsHeatPumpFlatRate": values.thermalStorageVsHeatPumpFlatRate,
+                                        "thermalStorageVsHeatPumpPeakRate": values.thermalStorageVsHeatPumpPeakRate,
+                                        "thermalStoragePotentialWastedExpense": values.thermalStoragePotentialWastedExpense,
+                                        "thermalStorageHighTempRateCost": values.thermalStorageHighTempRateCost,
 
                                     };
                                 } else {
@@ -448,7 +462,7 @@ const ThermalForm = () => {
 
                             </Grid>
                             <Grid item xs={12} sm={4} md={4}>
-                                {values.timeEnergyLostFinalfterN !== undefined && <Chart labels={['Useful Tank Energy after N hours cooling', 'Energy lost over N hours cooling during time-shift']} data={[values.timeEnergyLostFinalfterN, (100 - values.timeEnergyLostFinalfterN)]} />}
+                                {values.timeEnergyLostFinalfterN !== undefined && <Chart labels={[`Useful Tank Energy after ${values.timeShiftHoursN}  hours cooling`, `Energy lost over  ${values.timeShiftHoursN}  hours cooling during time-shift`]} data={[values.timeEnergyLostFinalfterN, (100 - values.timeEnergyLostFinalfterN)]} />}
 
                                 {values.thermalStorageVsHeatPumpFlatRate !== undefined && values.heatPumpCostFlatRate && <Chart labels={['Heat Pump cost/day @ flat rate)', 'Daily cost @ ToU Low Rate (inc. loss)']} data={[values.heatPumpCostFlatRate, values.thermalStorageVsHeatPumpFlatRate]} />}
                             </Grid>

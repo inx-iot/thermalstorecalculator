@@ -1,4 +1,4 @@
-import EditIcon from '@mui/icons-material/Edit';
+import BuildIcon from '@mui/icons-material/Build';
 import InfoIcon from '@mui/icons-material/Info';
 import { Button, Grid, Popover, Typography } from "@mui/material";
 import { useState } from "react";
@@ -73,7 +73,7 @@ const InfoThing = ({ textA, value, textB, preValue, description, children, value
                 <Typography textAlign="right">
                     {textB}
                     {children && <Button sx={{ minHeight: 0, minWidth: 0, padding: 0 }} aria-describedby={id} onClick={handleOverrideClick}>
-                        <EditIcon />
+                        <BuildIcon />
                     </Button>}
                     {description !== undefined && <><Button sx={{ minHeight: 0, minWidth: 0, padding: 0 }} aria-describedby={id} onClick={handleClick}>
                         <InfoIcon />

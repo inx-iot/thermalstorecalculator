@@ -23,7 +23,7 @@ const NumberField = ({ name, label, helpText, children, type, xs = 12, sm = 6, m
 
 
     return <Grid item xs={xs} sm={sm} md={md}>
-        <Field name={name}
+        <Field name={`${name}`}
             parse={(value, name) => {
                 //console.log("parse", value, name)
                 if (!isNaN(value) && value !== null)
@@ -44,7 +44,7 @@ const NumberField = ({ name, label, helpText, children, type, xs = 12, sm = 6, m
                     label={label}
                     fullWidth
                     required
-                    InputProps={{ inputProps: { min: 0 }, endAdornment: (children && <InputAdornment position="end">{children}</InputAdornment>), }}
+                    InputProps={{ inputProps: { min: 1 }, endAdornment: (children && <InputAdornment position="end">{children}</InputAdornment>), }}
                     variant="standard"
                     error={meta.error && meta.touched}
                     helperText={meta.error && meta.touched ? meta.error : helpText}
