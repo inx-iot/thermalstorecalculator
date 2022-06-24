@@ -1,11 +1,4 @@
-import ArrowForwardIosSharpIcon from '@mui/icons-material/ArrowForwardIosSharp';
 import { Card, CardContent, Grid } from "@mui/material";
-import MuiAccordion, { AccordionProps } from '@mui/material/Accordion';
-import MuiAccordionDetails from '@mui/material/AccordionDetails';
-import MuiAccordionSummary, {
-    AccordionSummaryProps
-} from '@mui/material/AccordionSummary';
-import { styled } from '@mui/material/styles';
 import createDecorator from 'final-form-calculate';
 import * as React from 'react';
 import { Form } from "react-final-form";
@@ -22,41 +15,41 @@ import DebugButton from "./util/DebugButton";
 
 
 
-const Accordion = styled((props: AccordionProps) => (
-    <MuiAccordion disableGutters elevation={0} square {...props} />
-))(({ theme }) => ({
-    border: `1px solid ${theme.palette.divider}`,
-    '&:not(:last-child)': {
-        borderBottom: 0,
-    },
-    '&:before': {
-        display: 'none',
-    },
-}));
+// const Accordion = styled((props: AccordionProps) => (
+//     <MuiAccordion disableGutters elevation={0} square {...props} />
+// ))(({ theme }) => ({
+//     border: `1px solid ${theme.palette.divider}`,
+//     '&:not(:last-child)': {
+//         borderBottom: 0,
+//     },
+//     '&:before': {
+//         display: 'none',
+//     },
+// }));
 
-const AccordionSummary = styled((props: AccordionSummaryProps) => (
-    <MuiAccordionSummary
-        expandIcon={<ArrowForwardIosSharpIcon sx={{ fontSize: '0.9rem' }} />}
-        {...props}
-    />
-))(({ theme }) => ({
-    backgroundColor:
-        theme.palette.mode === 'dark'
-            ? 'rgba(255, 255, 255, .05)'
-            : 'rgba(0, 0, 0, .03)',
-    flexDirection: 'row-reverse',
-    '& .MuiAccordionSummary-expandIconWrapper.Mui-expanded': {
-        transform: 'rotate(90deg)',
-    },
-    '& .MuiAccordionSummary-content': {
-        marginLeft: theme.spacing(1),
-    },
-}));
+// const AccordionSummary = styled((props: AccordionSummaryProps) => (
+//     <MuiAccordionSummary
+//         expandIcon={<ArrowForwardIosSharpIcon sx={{ fontSize: '0.9rem' }} />}
+//         {...props}
+//     />
+// ))(({ theme }) => ({
+//     backgroundColor:
+//         theme.palette.mode === 'dark'
+//             ? 'rgba(255, 255, 255, .05)'
+//             : 'rgba(0, 0, 0, .03)',
+//     flexDirection: 'row-reverse',
+//     '& .MuiAccordionSummary-expandIconWrapper.Mui-expanded': {
+//         transform: 'rotate(90deg)',
+//     },
+//     '& .MuiAccordionSummary-content': {
+//         marginLeft: theme.spacing(1),
+//     },
+// }));
 
-const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
-    padding: theme.spacing(2),
-    borderTop: '1px solid rgba(0, 0, 0, .125)',
-}));
+// const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
+//     padding: theme.spacing(2),
+//     borderTop: '1px solid rgba(0, 0, 0, .125)',
+// }));
 
 
 
@@ -77,32 +70,32 @@ const ThermalForm = () => {
         tankMinTemperature: 35,
         tankAmbientTemperature: 20,
         tankEnergyLossCoeficient: 3,
-        tankEnergyJoules: undefined,
-        tankEnergy: undefined,
-        tankAfterNHoursCooling: undefined,
-        tankEnergyAmbient: undefined,
+        tankEnergyJoules: 103.20,
+        tankEnergy: 28.67,
+        tankAfterNHoursCooling: 26.06,
+        tankEnergyAmbient: 137.61,
 
         heatEnergyDwellingYear: 6000,
         heatUsedDaysPerYear: 230,
         heatDailyEnergyRequired: 26.09,
         heatDailyEnergyRequiredOverride: undefined,
-        heatProportionOfCentralHeating: undefined,
+        heatProportionOfCentralHeating: 100,
 
         timeShiftHoursN: 12,
-        timeShiftEnergyLost: undefined,
-        timeEnergyLossMaxTemp: undefined,
-        timeEnergyLossNoHeatAndDraw: undefined,
-        timeTempDropOverHours: undefined,
-        timeEnergyLostFinalfterN: undefined,
-        timeEnergyLostInNMaxTemp: undefined,
+        timeShiftEnergyLost: 2.61,
+        timeEnergyLossMaxTemp: 2.7,
+        timeEnergyLossNoHeatAndDraw: 75.91,
+        timeTempDropOverHours: 4.09,
+        timeEnergyLostFinalfterN: 9.1,
+        timeEnergyLostInNMaxTemp: 9.4,
 
 
-        instantaneousHeatingCostFlatRate: undefined,
-        instantaneousHeatingCostPeakRate: undefined,
+        instantaneousHeatingCostFlatRate: 3.91,
+        instantaneousHeatingCostPeakRate: 9.13,
 
-        heatPumpHeatEfficiency: 250,
-        heatPumpCostFlatRate: undefined,
-        heatPumpCostPeakRate: undefined,
+        heatPumpHeatEfficiency: 200,
+        heatPumpCostFlatRate: 1.96,
+        heatPumpCostPeakRate: 4.57,
 
         thermalStorageDailyCost: undefined,
         thermalStorageVsGridPercent: undefined,
@@ -126,15 +119,13 @@ const ThermalForm = () => {
 
                     createDecorator(
 
+
                         {
-                            field: 'tankEnergyJoules', updates: {
-                                // .=B5*B4*(B6-B8)/1000000
-                                tankEnergy: (fooValue, allValues: any) => {
-                                    console.log("tankEnergyJoules2", fooValue)
+                            field: 'heatDailyEnergyRequiredOverride', updates: {
+                                heatDailyEnergyRequired: (fooValue, allValues: any) => {
+                                    console.log("heatDailyEnergyRequired", fooValue)
                                     return parseInt(fooValue);
                                 },
-
-
                             },
 
                         },
@@ -148,7 +139,9 @@ const ThermalForm = () => {
                                     console.log("tankEnergyJoules")
                                     if (allValues) {
                                         const values: IThermalForm = allValues;
-                                        const cal = values.tankMass * values.tankSpecificHeatCapacity * (values.tankMaxTemperature - values.tankMinTemperature) / 1000000
+                                        const tankMass = (values.tankMassOverride ? values.tankMassOverride : values.tankMass)
+
+                                        const cal = tankMass * values.tankSpecificHeatCapacity * (values.tankMaxTemperature - values.tankMinTemperature) / 1000000
                                         console.log("?", cal)
                                         return cal;
                                     }
@@ -159,7 +152,8 @@ const ThermalForm = () => {
                                     console.log("tankEnergyAmbient")
                                     if (allValues) {
                                         const values: IThermalForm = allValues;
-                                        return values.tankMass * values.tankSpecificHeatCapacity * (values.tankMaxTemperature - values.tankEnergyLossCoeficient) / 1000000
+                                        const tankMass = (values.tankMassOverride ? values.tankMassOverride : values.tankMass)
+                                        return tankMass * values.tankSpecificHeatCapacity * (values.tankMaxTemperature - values.tankEnergyLossCoeficient) / 1000000
                                     }
                                 },
 
@@ -213,7 +207,8 @@ const ThermalForm = () => {
                                     console.log("timeEnergyLossNoHeatAndDraw")
                                     if (allValues) {
                                         const values: IThermalForm = allValues;
-                                        const ddd = values.tankEnergyLossCoeficient + (values.tankMaxTemperature - values.tankEnergyLossCoeficient) * Math.exp(-1 * values.tankEnergyLossCoeficient / (values.tankSpecificHeatCapacity * values.tankMass) * 3600 * values.timeShiftHoursN)
+                                        const tankMass = (values.tankMassOverride ? values.tankMassOverride : values.tankMass)
+                                        const ddd = values.tankEnergyLossCoeficient + (values.tankMaxTemperature - values.tankEnergyLossCoeficient) * Math.exp(-1 * values.tankEnergyLossCoeficient / (values.tankSpecificHeatCapacity * tankMass) * 3600 * values.timeShiftHoursN)
                                         return ddd;
                                     }
                                 },
@@ -239,8 +234,10 @@ const ThermalForm = () => {
                                     console.log("timeShiftEnergyLost")
                                     if (allValues) {
                                         const values: IThermalForm = allValues;
+                                        const tankMass = (values.tankMassOverride ? values.tankMassOverride : values.tankMass)
                                         if (values.timeEnergyLossNoHeatAndDraw)
-                                            return (values.timeEnergyLossNoHeatAndDraw * values.tankSpecificHeatCapacity * values.tankMass / 1000) / 3600
+
+                                            return (values.timeEnergyLossNoHeatAndDraw * values.tankSpecificHeatCapacity * tankMass / 1000) / 3600
                                     }
                                 },
 

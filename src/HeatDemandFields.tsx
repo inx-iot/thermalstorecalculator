@@ -23,9 +23,10 @@ const HeatDemandFields = () => {
                 style={{ marginTop: "15px" }}
             >
                 <NumberField name="heatEnergyDwellingYear" label="Heating Energy /dwelling/year" longText="" helpText="kWh/dw" type="int" />
-
                 <InfoThing textA="Daily heating energy required" textB="kWh" value={values.heatDailyEnergyRequired} />
 
+
+                <NumberField name="heatDailyEnergyRequiredOverride" label="Daily Energy Required Override" longText="" helpText="(J/kg/Celsius)" type="int" />
                 <InfoThing textA="Proportion of central heating" textB="kWh" value={values.heatProportionOfCentralHeating} />
 
 
