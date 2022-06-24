@@ -35,7 +35,7 @@ const HeatDemandFields = () => {
 
                 </InfoThing>
 
-                <InfoThing textA="Proportion of central heating" textB="kWh" value={values.heatProportionOfCentralHeating} />
+                <InfoThing textA="Proportion of central heating" textB="%" value={values.heatProportionOfCentralHeating} />
 
 
 
