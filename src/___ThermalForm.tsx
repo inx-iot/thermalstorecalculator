@@ -138,6 +138,8 @@ const ThermalForm = () => {
 
                                     values.tankMass = tankMass;
 
+                                    //]
+                                    //values.heatDailyEnergyRequired =
 
                                     values.tankEnergyJoules = tankMass * values.tankSpecificHeatCapacity * (values.tankMaxTemperature - values.tankMinTemperature) / 1000000
                                     values.tankEnergyAmbient = tankMass * values.tankSpecificHeatCapacity * (values.tankMaxTemperature - values.tankEnergyLossCoeficient) / 1000000
