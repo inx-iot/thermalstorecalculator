@@ -66,9 +66,21 @@ const ThermalForm = () => {
 
     const handleChange =
         (panel: string) => (event: React.SyntheticEvent, newExpanded: boolean) => {
-            setExpanded(newExpanded ? panel : false);
+            if (panel === 'panel1') {
+                setPanel1(!panel1)
+            } else if (panel === 'panel3') {
+                setPanel3(!panel3)
+            } else if (panel === 'panel4') {
+                setPanel4(!panel4)
+            } else {
+                setExpanded(newExpanded ? panel : false);
+            }
+
         };
 
+    const [panel4, setPanel4] = React.useState(true);
+    const [panel3, setPanel3] = React.useState(true);
+    const [panel1, setPanel1] = React.useState(true);
 
     return <Card>
         <CardContent>
@@ -350,7 +362,7 @@ const ThermalForm = () => {
 
                         <Grid container spacing={2}>
                             <Grid item xs={12} sm={8} md={8}>
-                                <Accordion expanded={true} onChange={handleChange('panel4')}>
+                                <Accordion expanded={panel4} onChange={handleChange('panel4')}>
                                     <AccordionSummary aria-controls="panel4d-content" id="panel4d-header">
                                         <Typography>Energy Time Shifting Requirements</Typography>
                                     </AccordionSummary>
@@ -358,7 +370,7 @@ const ThermalForm = () => {
                                         <TimeFormFields />
                                     </AccordionDetails>
                                 </Accordion>
-                                <Accordion expanded={true} onChange={handleChange('panel3')}>
+                                <Accordion expanded={panel3} onChange={handleChange('panel3')}>
                                     <AccordionSummary aria-controls="panel3d-content" id="panel3d-header">
                                         <Typography>Storage Capacity Calculator</Typography>
                                     </AccordionSummary>
@@ -366,7 +378,7 @@ const ThermalForm = () => {
                                         <HeatDemandFields />
                                     </AccordionDetails>
                                 </Accordion>
-                                <Accordion expanded={true} onChange={handleChange('panel1')}>
+                                <Accordion expanded={panel1} onChange={handleChange('panel1')}>
                                     <AccordionSummary aria-controls="panel1d-content" id="panel1d-header">
                                         <Typography>Tariff Costs
                                         </Typography>
