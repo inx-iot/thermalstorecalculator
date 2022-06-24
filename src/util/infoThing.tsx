@@ -11,10 +11,12 @@ interface IThing {
     description?: string;
 
     children?: React.ReactNode
-
+    xs?: number;
+    sm?: number;
+    md?: number;
 }
 
-const InfoThing = ({ textA, value, textB, preValue, description, children, valueDecimalPlace = 2 }: IThing) => {
+const InfoThing = ({ textA, value, textB, preValue, description, children, valueDecimalPlace = 2, xs = 12, sm = 6, md = 6 }: IThing) => {
     const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
 
     const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -39,7 +41,7 @@ const InfoThing = ({ textA, value, textB, preValue, description, children, value
     const [overrideVisible, setOverrideVisible] = useState(false)
 
 
-    return <Grid item xs={12} sm={6} md={6}>
+    return <Grid item xs={xs} sm={sm} md={md}>
 
         <Grid
             container
@@ -87,7 +89,7 @@ const InfoThing = ({ textA, value, textB, preValue, description, children, value
                             onClose={handleClose}
                             anchorOrigin={{
                                 vertical: 'bottom',
-                                horizontal: 'left',
+                                horizontal: 'right',
                             }}
                         >
                             <Typography sx={{ p: 2 }}>{description}</Typography>

@@ -23,17 +23,17 @@ const ThermalStorageFields = () => {
                 style={{ marginTop: "15px" }}
             >
 
-                <InfoThing textA="Time shifted cost" textB="£/EU/$" value={values.thermalStorageDailyCost} description={`@ low rate (inc. loss)`} />
+                <InfoThing sm={12} md={12} xs={12} textA="Time shifted cost" textB="£/EU/$" value={values.thermalStorageDailyCost} description={`@ low rate (inc. loss)`} />
 
-                <InfoThing textA="vs direct heating" textB="%" value={values.thermalStorageVsGridPercent} description={`instantaneous @flat rate`} />
+                <InfoThing sm={12} md={12} xs={12} textA="vs direct heating" textB="%" value={values.thermalStorageVsGridPercent} description={`instantaneous @flat rate`} />
 
-                <InfoThing textA="vs Heat Pump" textB="%" value={values.thermalStorageVsHeatPumpFlatRate} description={`instantaneous @flat rate`} />
+                <InfoThing sm={12} md={12} xs={12} textA="vs Heat Pump" textB="%" value={values.thermalStorageVsHeatPumpFlatRate} description={`instantaneous @flat rate`} />
 
-                <InfoThing textA="vs. Heat Pump @ peak rate" textB="%" value={values.thermalStorageVsHeatPumpPeakRate} />
+                <InfoThing sm={12} md={12} xs={12} textA="vs. Heat Pump @ peak rate" textB="%" value={values.thermalStorageVsHeatPumpPeakRate} />
 
-                <InfoThing textA="vs Cost of lost time shifted heat" textB="%" value={values.thermalStoragePotentialWastedExpense} />
+                <InfoThing sm={12} md={12} xs={12} textA="vs Cost of lost time shifted heat" textB="%" value={values.thermalStoragePotentialWastedExpense} />
 
-                <InfoThing textA="High temp HP vs Low temp HP" textB="%" value={values.thermalStorageVsHeatPumpFlatRate} description={`may not include this. High-temp @ ToU low rate, Low temp @ flat rate`} />
+                <InfoThing sm={12} md={12} xs={12} textA="High temp HP vs Low temp HP" textB="%" value={values.thermalStorageVsHeatPumpFlatRate} description={`may not include this. High-temp @ ToU low rate, Low temp @ flat rate`} />
             </Grid>
         </div>)
         }
