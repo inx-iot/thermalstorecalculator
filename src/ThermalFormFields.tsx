@@ -1,9 +1,9 @@
-import { Grid, Typography } from "@mui/material";
+import CancelIcon from '@mui/icons-material/Cancel';
+import { Button, Grid, Typography } from "@mui/material";
 import { FormSpy } from "react-final-form";
 import { IThermalForm } from "./interfaces/thermal";
 import InfoThing from "./util/infoThing";
 import NumberField from "./util/numberField";
-
 
 
 const ThermalFormFields = () => {
@@ -14,7 +14,7 @@ const ThermalFormFields = () => {
             submitting: true,
         }}
     >
-        {({ values, dirtySinceLastSubmit, submitting }) => (<div>
+        {({ values, form }) => (<div>
             <Typography variant="h5">Thermal Store Paramaters</Typography>
 
             <Grid
@@ -25,9 +25,27 @@ const ThermalFormFields = () => {
             >
                 <NumberField name="tankSpecificHeatCapacity" label="Store specific heat capacity" longText="" helpText="(J/kg/Celsius)" type="int" />
 
-                <InfoThing textA={`Tank/Store Mass`} textB="kg." value={values.tankMass} />
+                <InfoThing textA={`Tank/Store Mass`} textB="kg" value={(values.tankMassOverride ? values.tankMassOverride : values.tankMass)}>
 
-                <NumberField name="tankMassOverride" label="Tank/Store Mass Override" longText="" helpText="(J/kg/Celsius)" type="int" />
+
+                    <NumberField name="tankMassOverride" sm={12} md={12} label="Tank/Store Mass Override" longText="" helpText="(J/kg/Celsius)" type="int">
+                        <Button sx={{ minHeight: 0, minWidth: 0, padding: 0 }} onClick={() => {
+                            form.change('tankMassOverride', null)
+                        }}>
+                            <CancelIcon />
+                        </Button>
+                    </NumberField>
+
+                </InfoThing>
+
+
+
+
+
+
+
+
+
 
                 <NumberField name="tankMaxTemperature" label="Tank max. temperature" longText="" helpText="Celsius" type="int" />
 

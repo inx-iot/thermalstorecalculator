@@ -1,3 +1,4 @@
+import EditIcon from '@mui/icons-material/Edit';
 import InfoIcon from '@mui/icons-material/Info';
 import { Button, Grid, Popover, Typography } from "@mui/material";
 import { useState } from "react";
@@ -8,9 +9,12 @@ interface IThing {
     valueDecimalPlace?: number
     preValue?: string;
     description?: string;
+
+    children?: React.ReactNode
+
 }
 
-const InfoThing = ({ textA, value, textB, preValue, description, valueDecimalPlace = 2 }: IThing) => {
+const InfoThing = ({ textA, value, textB, preValue, description, children, valueDecimalPlace = 2 }: IThing) => {
     const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
 
     const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -22,11 +26,17 @@ const InfoThing = ({ textA, value, textB, preValue, description, valueDecimalPla
     };
 
 
+    const handleOverrideClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+        setOverrideVisible(!overrideVisible);
+    };
+
 
 
     const open = Boolean(anchorEl);
     const id = open ? 'simple-popover' : undefined;
 
+
+    const [overrideVisible, setOverrideVisible] = useState(false)
 
 
     return <Grid item xs={12} sm={6} md={6}>
@@ -43,11 +53,15 @@ const InfoThing = ({ textA, value, textB, preValue, description, valueDecimalPla
                 </Typography>
 
 
+
             </Grid>
 
             <Grid item xs={3} sm={3} md={2}>
                 <Typography textAlign="right">
                     {preValue && preValue} {value && value.toFixed && value.toFixed(valueDecimalPlace)}
+
+
+
                 </Typography>
 
 
@@ -57,7 +71,11 @@ const InfoThing = ({ textA, value, textB, preValue, description, valueDecimalPla
             <Grid item xs={3} sm={3} md={4}>
 
                 <Typography textAlign="right">
-                    {textB} {description !== undefined && <><Button sx={{ minHeight: 0, minWidth: 0, padding: 0 }} aria-describedby={id} onClick={handleClick}>
+                    {textB}
+                    {children && <Button sx={{ minHeight: 0, minWidth: 0, padding: 0 }} aria-describedby={id} onClick={handleOverrideClick}>
+                        <EditIcon />
+                    </Button>}
+                    {description !== undefined && <><Button sx={{ minHeight: 0, minWidth: 0, padding: 0 }} aria-describedby={id} onClick={handleClick}>
                         <InfoIcon />
                     </Button>
 
@@ -79,6 +97,10 @@ const InfoThing = ({ textA, value, textB, preValue, description, valueDecimalPla
 
             </Grid>
         </Grid>
+
+
+        {overrideVisible === true && <>{children}</>
+        }
 
     </Grid >
 }

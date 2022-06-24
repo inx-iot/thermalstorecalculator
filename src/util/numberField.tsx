@@ -1,6 +1,6 @@
 import { Grid, TextField } from "@mui/material";
+import { Box } from "@mui/system";
 import { Field } from "react-final-form";
-import { formParseFloat, formParseInt } from "../util/formParse";
 
 
 
@@ -11,59 +11,58 @@ interface IField {
     label: string;
     helpText: string;
     longText: string;
+    xs?: number;
+    sm?: number;
+    md?: number;
     type: 'int' | 'float';
+    children?: React.ReactNode
 }
 
 
-const NumberField = ({ name, label, helpText, type }: IField) => {
+const NumberField = ({ name, label, helpText, children, type, xs = 12, sm = 6, md = 6 }: IField) => {
 
 
-    if (type === 'float') {
-        return <Grid item xs={12} sm={6} md={6}>
-            <Field name={name}
-                parse={formParseFloat}
-                format={formParseFloat}>
+    return <Grid item xs={xs} sm={sm} md={md}>
+        <Field name={name}
+            parse={(value, name) => {
+                //  console.log("parse", value, name)
+                if (!isNaN(value))
+                    return parseInt(value);
+            }}
+            format={(value, name) => {
+                //  console.log("format", value, name)
+                if (!isNaN(value))
+                    return parseInt(value);
+            }}>
 
-                {({ input, meta }) => (
-                    <TextField
-                        {...input}
-                        type="number"
-                        label={label}
-                        fullWidth
-                        required
-                        InputProps={{ inputProps: { min: 0 } }}
-                        variant="outlined"
-                        error={meta.error && meta.touched}
-                        helperText={meta.error && meta.touched ? meta.error : helpText}
-                    >
-                    </TextField>
-                )}
-            </Field>
-        </Grid>
+            {({ input, meta }) => (<>
+                <TextField
+                    {...input}
+                    type="number"
+                    label={label}
+                    fullWidth
+                    required
+                    InputProps={{ inputProps: { min: 0 } }}
+                    variant="standard"
+                    error={meta.error && meta.touched}
+                    helperText={meta.error && meta.touched ? meta.error : helpText}
+                >
+                </TextField>
+                {children && <Box
+                    m={1}
+                    //margin
+                    display="flex"
+                    justifyContent="flex-end"
+                    alignItems="flex-end"
 
-    } else {
-        return <Grid item xs={12} sm={6} md={6}>
-            <Field name={name}
-                parse={formParseInt}
-                format={formParseInt}>
+                >
+                    {children}
+                </Box>}
 
-                {({ input, meta }) => (
-                    <TextField
-                        {...input}
-                        type="number"
-                        label={label}
-                        fullWidth
-                        required
-                        InputProps={{ inputProps: { min: 0 } }}
-                        variant="outlined"
-                        error={meta.error && meta.touched}
-                        helperText={meta.error && meta.touched ? meta.error : helpText}
-                    >
-                    </TextField>
-                )}
-            </Field>
-        </Grid>
-    }
+            </>)}
+        </Field>
+    </Grid>
+
 }
 
 

@@ -6,7 +6,7 @@ export interface IThermalForm {
 
     tankSpecificHeatCapacity: number;
     tankMass: number;
-    tankMassOverride?: number;
+    tankMassOverride?: number | null;
     tankMaxTemperature: number;
     tankMinTemperature: number;
     tankAmbientTemperature: number;
@@ -20,7 +20,7 @@ export interface IThermalForm {
     heatEnergyDwellingYear: number;
     heatUsedDaysPerYear: number;
     heatDailyEnergyRequired: number;
-    heatDailyEnergyRequiredOverride?: number;
+    heatDailyEnergyRequiredOverride?: number | null;
     heatProportionOfCentralHeating?: number;
 
     timeShiftHoursN: number;

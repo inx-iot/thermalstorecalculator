@@ -65,7 +65,7 @@ const ThermalForm = () => {
 
         tankSpecificHeatCapacity: 4200, // asssume water 
         tankMass: 400, // this is one of the larger tanks
-        tankMassOverride: undefined,
+        tankMassOverride: null,
         tankMaxTemperature: 90,
         tankMinTemperature: 35,
         tankAmbientTemperature: 20,
@@ -78,7 +78,7 @@ const ThermalForm = () => {
         heatEnergyDwellingYear: 6000,
         heatUsedDaysPerYear: 230,
         heatDailyEnergyRequired: 26.09,
-        heatDailyEnergyRequiredOverride: undefined,
+        heatDailyEnergyRequiredOverride: null,
         heatProportionOfCentralHeating: 100,
 
         timeShiftHoursN: 12,
@@ -118,19 +118,8 @@ const ThermalForm = () => {
                 decorators={[
 
                     createDecorator(
-
-
                         {
-                            field: 'heatDailyEnergyRequiredOverride', updates: {
-                                heatDailyEnergyRequired: (fooValue, allValues: any) => {
-                                    console.log("heatDailyEnergyRequired", fooValue)
-                                    return parseInt(fooValue);
-                                },
-                            },
-
-                        },
-                        {
-                            field: ['heatPumpHeatEfficiency', 'standardRateEnergyCost', 'lowRateEnergyCost', '', 'timeShiftHoursN', 'tankMass', 'tankSpecificHeatCapacity', 'tankMaxTemperature', 'tankMinTemperature', 'tankEnergyLossCoeficient'], // when the value of foo changes...
+                            field: ['heatPumpHeatEfficiency', 'standardRateEnergyCost', 'lowRateEnergyCost', 'tankMassOverride', 'heatDailyEnergyRequiredOverride', 'timeShiftHoursN', 'tankMass', 'tankSpecificHeatCapacity', 'tankMaxTemperature', 'tankMinTemperature', 'tankEnergyLossCoeficient'], // when the value of foo changes...
                             updates: {
 
 
@@ -197,8 +186,12 @@ const ThermalForm = () => {
                                     console.log("heatProportionOfCentralHeating")
                                     if (allValues) {
                                         const values: IThermalForm = allValues;
+
+
+                                        const heatDailyEnergyRequired = (values.heatDailyEnergyRequiredOverride ? values.heatDailyEnergyRequiredOverride : values.heatDailyEnergyRequired)
+
                                         if (values.timeEnergyLossNoHeatAndDraw)
-                                            return values.timeEnergyLossNoHeatAndDraw / (values.heatDailyEnergyRequired + 0.0001)
+                                            return values.timeEnergyLossNoHeatAndDraw / (heatDailyEnergyRequired + 0.0001)
                                     }
                                 },
 
@@ -274,7 +267,9 @@ const ThermalForm = () => {
                                     console.log("instantaneousHeatingCostFlatRate")
                                     if (allValues) {
                                         const values: IThermalForm = allValues;
-                                        return values.heatDailyEnergyRequired * values.standardRateEnergyCost / 100
+                                        const heatDailyEnergyRequired = (values.heatDailyEnergyRequiredOverride ? values.heatDailyEnergyRequiredOverride : values.heatDailyEnergyRequired)
+
+                                        return heatDailyEnergyRequired * values.standardRateEnergyCost / 100
                                     }
                                 },
 
@@ -284,7 +279,9 @@ const ThermalForm = () => {
                                     console.log("instantaneousHeatingCostPeakRate")
                                     if (allValues) {
                                         const values: IThermalForm = allValues;
-                                        return values.heatDailyEnergyRequired * values.highRateEnergyCost / 100
+                                        const heatDailyEnergyRequired = (values.heatDailyEnergyRequiredOverride ? values.heatDailyEnergyRequiredOverride : values.heatDailyEnergyRequired)
+
+                                        return heatDailyEnergyRequired * values.highRateEnergyCost / 100
                                     }
                                 },
                                 //=B23/B25
@@ -364,7 +361,7 @@ const ThermalForm = () => {
 
                                 //=(B2*B13/100+B33)/B25
                                 thermalStorageHighTempRateCost: (fooValue, allValues: any) => {
-                                    console.log("thermalStoragePotentialWastedExpense")
+                                    console.log("thermalStorageHighTempRateCost")
                                     if (allValues) {
                                         const values: IThermalForm = allValues;
                                         if (values.tankAfterNHoursCooling && values.tankAfterNHoursCooling && values.thermalStoragePotentialWastedExpense)
