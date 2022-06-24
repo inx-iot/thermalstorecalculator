@@ -61,25 +61,7 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
 
 
 const ThermalForm = () => {
-    const [expanded, setExpanded] = React.useState<string | false>('panel1');
 
-    const handleChange =
-        (panel: string) => (event: React.SyntheticEvent, newExpanded: boolean) => {
-            if (panel === 'panel1') {
-                setPanel1(!panel1)
-            } else if (panel === 'panel3') {
-                setPanel3(!panel3)
-            } else if (panel === 'panel4') {
-                setPanel4(!panel4)
-            } else {
-                setExpanded(newExpanded ? panel : false);
-            }
-
-        };
-
-    const [panel4, setPanel4] = React.useState(true);
-    const [panel3, setPanel3] = React.useState(true);
-    const [panel1, setPanel1] = React.useState(true);
 
     return <Card>
         <CardContent>

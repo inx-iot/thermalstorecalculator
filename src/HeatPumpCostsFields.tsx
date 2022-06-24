@@ -15,7 +15,7 @@ const HeatPumpCostsFields = () => {
         }}
     >
         {({ values, dirtySinceLastSubmit, submitting }) => (<div>
-            <Typography>Heat Pump Cost Calculator</Typography>
+            <Typography variant="h5">Heat Pump Cost Calculator</Typography>
             <Grid
                 container
                 spacing={3}

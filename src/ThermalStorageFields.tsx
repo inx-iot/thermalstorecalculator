@@ -15,7 +15,7 @@ const ThermalStorageFields = () => {
     >
         {({ values, dirtySinceLastSubmit, submitting }) => (<div>
 
-            <Typography>Costs Comparisons</Typography>
+            <Typography variant="h5">Costs Comparisons</Typography>
             <Grid
                 container
                 spacing={3}

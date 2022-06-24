@@ -15,7 +15,7 @@ const ThermalFormFields = () => {
         }}
     >
         {({ values, dirtySinceLastSubmit, submitting }) => (<div>
-            <Typography>Thermal Store Paramaters</Typography>
+            <Typography variant="h5">Thermal Store Paramaters</Typography>
 
             <Grid
                 container

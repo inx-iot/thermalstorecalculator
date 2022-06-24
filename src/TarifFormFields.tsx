@@ -16,7 +16,7 @@ const TariffFormFields = () => {
         }}
     >
         {({ values, dirtySinceLastSubmit, submitting }) => (<div>
-            <Typography>Tariff Costs
+            <Typography variant="h5">Tariff Costs
             </Typography>
             <Grid
                 container
@@ -24,11 +24,11 @@ const TariffFormFields = () => {
                 justifyContent="left"
                 style={{ marginTop: "15px" }}
             >
-                <NumberField name="standardRateEnergyCost" label="Standard rate unit cost" longText="" helpText='"(pence/hWh)"' type="int" />
+                <NumberField name="standardRateEnergyCost" label="Standard rate unit cost" longText="" helpText='(pence/hWh)' type="int" />
 
-                <NumberField name="lowRateEnergyCost" label="ToU low rate unit cost" longText="" helpText='"(pence/hWh)"' type="int" />
+                <NumberField name="lowRateEnergyCost" label="ToU low rate unit cost" longText="" helpText='(pence/hWh)' type="int" />
 
-                <NumberField name="highRateEnergyCost" label="ToU High rate unit cost" longText="" helpText='"(pence/hWh)"' type="int" />
+                <NumberField name="highRateEnergyCost" label="ToU High rate unit cost" longText="" helpText='(pence/hWh)' type="int" />
 
             </Grid>
         </div>)

@@ -15,7 +15,7 @@ const HeatDemandFields = () => {
         }}
     >
         {({ values, dirtySinceLastSubmit, submitting }) => (<div>
-            <Typography>Storage Capacity Calculator</Typography>
+            <Typography variant="h5">Storage Capacity Calculator</Typography>
             <Grid
                 container
                 spacing={3}

@@ -15,7 +15,7 @@ const InstantaneousCostsFields = () => {
     >
         {({ values, dirtySinceLastSubmit, submitting }) => (<div>
 
-            <Typography>Instantaneous Heating Cost Calculator</Typography>
+            <Typography variant="h5">Instantaneous Heating Cost Calculator</Typography>
             <Grid
                 container
                 spacing={3}

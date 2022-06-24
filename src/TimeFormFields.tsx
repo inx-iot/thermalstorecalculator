@@ -15,7 +15,7 @@ const TimeFormFields = () => {
         }}
     >
         {({ values, dirtySinceLastSubmit, submitting }) => (<div>
-            <Typography>Energy Time Shifting Requirements</Typography>
+            <Typography variant="h5">Energy Time Shifting Requirements</Typography>
 
             <Grid
                 container
@@ -23,14 +23,14 @@ const TimeFormFields = () => {
                 justifyContent="left"
                 style={{ marginTop: "15px" }}
             >
-                <NumberField name="standardRateEnergyCost" label={`Time Shift Hours (N)`} longText="" helpText="(penc/hWh)" type="int" />
+                <NumberField name="timeShiftHoursN" label={`Time Shift Hours (N)`} longText="" helpText="(penc/hWh)" type="int" />
 
-                <InfoThing textA={`Energy lost [over N hours cooling during time-shift]`} textB="kWh" value={values.timeShiftEnergyLost} />
-                <InfoThing textA={`Loss @ max temperature [will probably remove or move this]`} textB="kWh" value={values.timeEnergyLossMaxTemp} />
+                <InfoThing textA={`Energy lost`} textB="kWh" value={values.timeShiftEnergyLost} description={`over ${values.timeShiftHoursN} hours cooling during time-shift`} />
+                <InfoThing textA={`Loss @ max temperature`} textB="kWh" value={values.timeEnergyLossMaxTemp} description={`will probably remove or move this`} />
 
-                <InfoThing textA={`Temperature drop [after N hours of no heat and no draw]`} textB="Celcius - temperature expected after cooling for N hours" value={values.timeEnergyLossNoHeatAndDraw} />
+                <InfoThing textA={`Temperature drop`} textB={`Celcius - temperature expected after cooling for ${values.timeShiftHoursN} hours`} value={values.timeEnergyLossNoHeatAndDraw} description={`after ${values.timeShiftHoursN}  hours of no heat and no draw`} />
 
-                <InfoThing textA={` Temperature Drop [after N hours temperature expected after cooling for N hours]`} textB="Celcius" value={values.timeTempDropOverHours} />
+                <InfoThing textA={`Temperature Drop`} textB="Celcius" value={values.timeTempDropOverHours} description={`after ${values.timeShiftHoursN}  hours temperature expected after cooling for ${values.timeShiftHoursN} hours`} />
 
 
 
