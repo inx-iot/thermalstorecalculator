@@ -23,15 +23,15 @@ const TimeFormFields = () => {
                 justifyContent="left"
                 style={{ marginTop: "15px" }}
             >
-                <NumberField name="timeShiftHoursN" label={`Time Shift Hours (N)`} longText="" helpText="(penc/hWh)" type="int" max={24} />
+                <NumberField name="timeShiftHoursN" label={`Time Shift Hours (N)`} longText="" helpText="(penc/hWh)" type="int" max={10000} min={0} />
 
                 <InfoThing textA={`Energy lost`} textB="kWh" value={values.timeShiftEnergyLost} description={`over ${values.timeShiftHoursN} hours cooling during time-shift`} />
+                
+                <InfoThing textA={`Final temperature`} textB={`Celcius`} value={values.timeTemperatureAfterNCoolingNoHeatAndDraw} description={`temperature expected after cooling for ${values.timeShiftHoursN} hours of no heat and no draw`} />
+
+                <InfoThing textA={`Temperature drop`} textB="Celcius" value={values.timeTempDropOverHours} description={`after ${values.timeShiftHoursN}  hours temperature expected after cooling for ${values.timeShiftHoursN} hours`} />
+
                 <InfoThing textA={`Loss @ max temperature`} textB="kWh" value={values.timeEnergyLossMaxTemp} description={`will probably remove or move this`} />
-
-                <InfoThing textA={`Temperature drop`} textB={`Celcius`} value={values.timeEnergyLossNoHeatAndDraw} description={`temperature expected after cooling for ${values.timeShiftHoursN} hours of no heat and no draw`} />
-
-                <InfoThing textA={`Temperature Drop`} textB="Celcius" value={values.timeTempDropOverHours} description={`after ${values.timeShiftHoursN}  hours temperature expected after cooling for ${values.timeShiftHoursN} hours`} />
-
 
 
             </Grid>

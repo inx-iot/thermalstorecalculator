@@ -15,17 +15,21 @@ interface IField {
     sm?: number;
     md?: number;
     max?: number;
+    min?: number;
     type: 'int' | 'float';
     children?: React.ReactNode
 }
 
 
-const NumberField = ({ name, label, helpText, children, type, max, xs = 12, sm = 6, md = 6 }: IField) => {
+const NumberField = ({ name, label, helpText, children, type, max, min, xs = 12, sm = 6, md = 6 }: IField) => {
 
 
 
     const inputProps: any = {
-        min: 1
+        min: 0
+    }
+    if (min) {
+        inputProps.min = min;
     }
     if (max) {
         inputProps.max = max;
