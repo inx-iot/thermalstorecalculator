@@ -5,7 +5,7 @@ import { useState } from "react";
 interface IThing {
     textA: string;
     value: number | undefined;
-    textB: string;
+    textB?: string;
     valueDecimalPlace?: number
     preValue?: string;
     description?: string;
@@ -49,7 +49,7 @@ const InfoThing = ({ textA, value, textB, preValue, description, children, value
 
         >
 
-            <Grid item xs={6} sm={6} md={6}>
+            <Grid item xs={6} sm={6} md={7}>
                 <Typography>
                     {textA}
                 </Typography>
@@ -58,7 +58,7 @@ const InfoThing = ({ textA, value, textB, preValue, description, children, value
 
             </Grid>
 
-            <Grid item xs={3} sm={3} md={2}>
+            <Grid item xs={2} sm={2} md={2}>
                 <Typography textAlign="right">
                     {preValue && preValue} {value && value.toFixed && value.toFixed(valueDecimalPlace)}
 
@@ -69,11 +69,13 @@ const InfoThing = ({ textA, value, textB, preValue, description, children, value
 
             </Grid>
 
-
-            <Grid item xs={3} sm={3} md={4}>
-
+            <Grid item xs={1} sm={1} md={1}>
+            <Typography textAlign="left" >
+                {textB && textB}
+            </Typography>
+            </Grid>
+            <Grid item xs={1} sm={1} md={1}>
                 <Typography textAlign="right">
-                    {textB}
                     {children && <Button sx={{ minHeight: 0, minWidth: 0, padding: 0 }} aria-describedby={id} onClick={handleOverrideClick}>
                         <BuildIcon />
                     </Button>}

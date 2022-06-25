@@ -21,11 +21,11 @@ const HeatDemandFields = () => {
                 justifyContent="left"
                 style={{ marginTop: "15px" }}
             >
-                <NumberField name="heatEnergyDwellingYear" label="Heating Energy /dwelling/year" longText="" helpText="kWh/dw" type="int" />
+                <NumberField name="heatEnergyDwellingYear" label="Heating Energy /dwelling/year" longText="" unitChar="kWh/dw" type="int" />
                 {/* <NumberField name="heatUsedDaysPerYear" label="Heating Energy Days used Per year" longText="" helpText="days" type="int" /> */}
 
-                <InfoThing textA="Daily heating energy required" textB="kWh" value={(values.heatDailyEnergyRequiredOverride ? values.heatDailyEnergyRequiredOverride : values.heatDailyEnergyRequired)}>
-                    <NumberField sm={12} md={12} name="heatDailyEnergyRequiredOverride" label="Daily Energy Required Override" longText="" helpText="(J/kg/Celsius)" type="int">
+                <InfoThing textA="Daily energy required" textB="kWh" value={(values.heatDailyEnergyRequiredOverride ? values.heatDailyEnergyRequiredOverride : values.heatDailyEnergyRequired)}>
+                    <NumberField sm={12} md={12} name="heatDailyEnergyRequiredOverride" label="Daily Energy Required Override" longText="" unitChar="kWh" type="int">
                         <Button sx={{ minHeight: 0, minWidth: 0, padding: 0 }} onClick={() => {
                             form.change('heatDailyEnergyRequiredOverride', null)
                         }}>
@@ -35,7 +35,7 @@ const HeatDemandFields = () => {
 
                 </InfoThing>
 
-                <InfoThing textA="Proportion of central heating" textB="%" value={values.heatProportionOfCentralHeating} />
+                <InfoThing textA="Heating requirement met:" textB="%" value={values.heatProportionOfCentralHeating} />
 
 
 

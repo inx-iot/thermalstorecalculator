@@ -20,10 +20,10 @@ const InstantaneousCostsFields = () => {
                 container
                 spacing={3}
                 justifyContent="left"
-                style={{ marginTop: "15px" }}
+                style={{ marginTop: "0px" }}
             >
-                <InfoThing textA="Daily heating cost / day (Direct heating @ flat rate)" textB="(Theoretical reference only)" value={values.instantaneousHeatingCostFlatRate} preValue="£" />
-                <InfoThing textA="Daily heating cost / day (Direct heating @ peak rate)" textB="(Direct heating is usually at peak times if ToU Tariffs are used)" value={values.instantaneousHeatingCostPeakRate} preValue="£" />
+                <InfoThing textA="Direct heating @ flat rate" description="Daily cost of instantaneous direct heating @ flat rate)" value={values.instantaneousHeatingCostFlatRate} preValue="£" />
+                <InfoThing textA="Direct heating @ peak rate" description="Daily cost of instantaneous direct heating @ peak rate" value={values.instantaneousHeatingCostPeakRate} preValue="£" />
             </Grid>
         </div>)
         }

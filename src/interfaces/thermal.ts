@@ -36,7 +36,7 @@ export interface IThermalForm {
     instantaneousHeatingCostFlatRate?: number;
     instantaneousHeatingCostPeakRate?: number;
 
-    heatPumpHeatEfficiency: number;
+    heatPumpHeatEfficiency?: number;
     heatPumpCostFlatRate?: number;
     heatPumpCostPeakRate?: number;
 

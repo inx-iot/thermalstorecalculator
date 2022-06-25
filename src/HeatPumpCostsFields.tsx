@@ -15,20 +15,20 @@ const HeatPumpCostsFields = () => {
         }}
     >
         {({ values, dirtySinceLastSubmit, submitting }) => (<div>
-            <Typography variant="h5">Heat Pump Cost Calculator
+            <Typography variant="h5">Heat Pump (HP) Cost Calculator
                 <Divider component="hr" />
             </Typography>
             <Grid
                 container
                 spacing={3}
                 justifyContent="left"
-                style={{ marginTop: "15px" }}
+                style={{ marginTop: "15px" }} 
             >
-                <NumberField name="heatPumpHeatEfficiency" label="Heat Pump efficiency (COP)" longText="" helpText="SCOP or winter efficiency can be used for high winter heating duties" type="int" />
+                <NumberField name="heatPumpHeatEfficiency" label="COP/SCOP" unitChar="%" longText="SCOP or winter COP can be used for high winter heating duties" type="int" />
 
-                <InfoThing textA="Heat Pump cost/day @ flat rate [for those without ToU]" textB="£/EU/$" value={values.heatPumpCostFlatRate} />
+                <InfoThing textA="HP cost @ flat rate" preValue="£" value={values.heatPumpCostFlatRate} description="For those using falt rate tariff"/>
 
-                <InfoThing textA="Heat Pump cost/day @ peak rate [for those with YoU (e.g. EV charging)" textB="£/EU/$" value={values.heatPumpCostPeakRate} />
+                <InfoThing textA="HP cost @ peak rate" preValue="£" value={values.heatPumpCostPeakRate} description="For those with ToU tariff (e.g. EV charging)"/>
 
             </Grid>
         </div>)

@@ -25,11 +25,11 @@ const TariffFormFields = () => {
                 justifyContent="left"
                 style={{ marginTop: "15px" }}
             >
-                <NumberField name="standardRateEnergyCost" label="Standard rate unit cost" longText="" helpText='(pence/hWh)' type="int" />
+                <NumberField name="standardRateEnergyCost" label="Standard rate unit cost" longText="" unitChar='(p/kWh)' type="int" />
 
-                <NumberField name="lowRateEnergyCost" label="ToU low rate unit cost" longText="" helpText='(pence/hWh)' type="int" />
+                <NumberField name="lowRateEnergyCost" label="ToU low rate unit cost" longText="" unitChar='(p/kWh)' type="int" />
 
-                <NumberField name="highRateEnergyCost" label="ToU High rate unit cost" longText="" helpText='(pence/hWh)' type="int" />
+                <NumberField name="highRateEnergyCost" label="ToU High rate unit cost" longText="" unitChar='(p/kWh)' type="int" />
 
             </Grid>
         </div>)
