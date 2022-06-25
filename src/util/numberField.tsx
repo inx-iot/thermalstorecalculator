@@ -77,25 +77,25 @@ const NumberField = ({ name, label, helpText, children, unitChar, type, longText
             }}>
 
             {({ input, meta }) => (
-            <Box>
+          
                 <TextField
                     {...input}
                     type="number"
                     label={label}
                     fullWidth
                     required
-                    size="small"
+                   
                     variant="filled"
                     InputProps={{ inputProps, endAdornment: (unitChar && <InputAdornment position="end">{unitChar}</InputAdornment>), }}
                     error={meta.error && meta.touched}
                     helperText={meta.error && meta.touched ? meta.error : helpText}
                 >
                 </TextField>
-            </Box>)}
+            )
+            }
         </Field>
 
-        </Grid>
-        <Grid item xs={1} sm={1} md={1}>
+        
                 <Typography textAlign="right">
                     {children && <Button sx={{ minHeight: 0, minWidth: 0, padding: 0 }} aria-describedby={id} onClick={handleOverrideClick}>
                         <BuildIcon />

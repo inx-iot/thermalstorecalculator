@@ -16,7 +16,7 @@ interface IThing {
     md?: number;
 }
 
-const InfoThing = ({ textA, value, textB, preValue, description, children, valueDecimalPlace = 2, xs = 12, sm = 6, md = 6 }: IThing) => {
+const InfoThing = ({ textA, value, textB, preValue, description, children, valueDecimalPlace = 2, xs = 8, sm = 5, md = 5 }: IThing) => {
     const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
 
     const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -45,11 +45,13 @@ const InfoThing = ({ textA, value, textB, preValue, description, children, value
 
         <Grid
             container
-            spacing={2}
-
+            spacing={0}
+           // grid-template-rows= "auto auto 1fr 1fr 1fr auto auto;"
+           //  grid-gap="10px;"
+           // height = "25px"
         >
 
-            <Grid item xs={6} sm={6} md={7}>
+            <Grid item xs={6} sm={6} md={6}>
                 <Typography>
                     {textA}
                 </Typography>
@@ -58,7 +60,7 @@ const InfoThing = ({ textA, value, textB, preValue, description, children, value
 
             </Grid>
 
-            <Grid item xs={2} sm={2} md={2}>
+            <Grid item xs={2} sm={2} md={3}>
                 <Typography textAlign="right">
                     {preValue && preValue} {value && value.toFixed && value.toFixed(valueDecimalPlace)}
 
@@ -69,7 +71,7 @@ const InfoThing = ({ textA, value, textB, preValue, description, children, value
 
             </Grid>
 
-            <Grid item xs={1} sm={1} md={1}>
+            <Grid item xs={1} sm={1} md={2}>
             <Typography textAlign="left" >
                 {textB && textB}
             </Typography>

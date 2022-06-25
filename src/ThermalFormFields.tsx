@@ -25,7 +25,7 @@ const ThermalFormFields = () => {
             >
                 <NumberField name="tankSpecificHeatCapacity" label="Store specific heat capacity" longText="" unitChar="J/kg/&#8451;" type="int" />
 
-                <InfoThing textA={`Tank/Store Mass`} textB="kg" value={(values.tankMassOverride ? values.tankMassOverride : values.tankMass)}>
+                <InfoThing textA={`Store Mass`} textB="kg" value={(values.tankMassOverride ? values.tankMassOverride : values.tankMass)} description="A required store mass is calculated for the rquired energy (above), or it can be set to a fixed size">
                     <NumberField name="tankMassOverride" sm={12} md={12} label="Store Mass Override" longText="" unitChar="kg" type="int">
                         <Button sx={{ minHeight: 0, minWidth: 0, padding: 0 }} onClick={() => {
                             form.change('tankMassOverride', null)
