@@ -28,7 +28,7 @@ const TimeFormFields = () => {
                 <NumberField name="timeShiftHoursN" label={`Time Shift`} unitChar="hours" type="int" max={10000} min={0} 
              longText="This is the duration of the time shifted energy needed. It is usually the inerval between peak tarif start and the time heat energy is required" />
 
-                <InfoThing textA={`Energy lost (accurate)`} textB="kWh" value={values.timeShiftEnergyLost} description={`over ${values.timeShiftHoursN} hours cooling during time-shift`} />
+                <InfoThing textA={`Energy lost`} textB="kWh" value={values.timeShiftEnergyLost} description={`over ${values.timeShiftHoursN} hours cooling during time-shift`} />
                 
                 <InfoThing textA={`Final temperature`} textB="&#8451;" value={values.timeTemperatureAfterNCoolingNoHeatAndDraw} description={`temperature expected after cooling for ${values.timeShiftHoursN} hours of no heat and no draw`} />
 
