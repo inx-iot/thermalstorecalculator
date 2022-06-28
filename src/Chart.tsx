@@ -1,4 +1,4 @@
-import { Card, CardContent } from '@mui/material';
+import { Grid } from '@mui/material';
 import { ArcElement, Chart as ChartJS, Legend, Tooltip } from 'chart.js';
 import { Pie } from 'react-chartjs-2';
 
@@ -39,10 +39,9 @@ const Chart = ({ labels, data }: IChart) => {
 
 
 
-    return <Card>
-        <CardContent>
-            <Pie data={chartData} />
-        </CardContent></Card>;
+    return <Grid item xs={12} sm={12} md={12} data-testid="graph_container" className='killPadding'>
+        <Pie data={chartData} />
+    </Grid>;
 }
 
 

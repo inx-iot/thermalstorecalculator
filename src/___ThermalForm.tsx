@@ -225,7 +225,7 @@ const ThermalForm = () => {
 
 
                             </Grid>
-                            <Grid item xs={12} sm={4} md={3}>
+                            <Grid item xs={12} sm={4} md={4}>
                                 {values.timeEnergyLostFinalfterN !== undefined && <Chart labels={[`Useful Tank Energy after ${values.timeShiftHoursN} hours cooling`, `Energy lost over  ${values.timeShiftHoursN} hours cooling during time-shift`]} data={[values.timeEnergyLostFinalfterN, (100 - values.timeEnergyLostFinalfterN)]} />}
 
                                 {values.thermalStorageVsHeatPumpFlatRate !== undefined && values.heatPumpCostFlatRate && <Chart labels={['Heat Pump cost/day @ flat rate)', 'Daily cost @ ToU Low Rate (inc. loss)']} data={[values.heatPumpCostFlatRate, values.thermalStorageVsHeatPumpFlatRate]} />}
