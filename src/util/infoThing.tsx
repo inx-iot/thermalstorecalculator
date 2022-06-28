@@ -41,75 +41,64 @@ const InfoThing = ({ textA, value, textB, preValue, description, children, value
     const [overrideVisible, setOverrideVisible] = useState(false)
 
 
-    return <Grid item xs={xs} sm={sm} md={md}>
-
-        <Grid
-            container
-            spacing={0}
-           // grid-template-rows= "auto auto 1fr 1fr 1fr auto auto;"
-           //  grid-gap="10px;"
-           // height = "25px"
-        >
-
-            <Grid item xs={6} sm={6} md={6}>
-                <Typography>
-                    {textA}
-                </Typography>
+    return <Grid item container xs={xs} sm={sm} md={md} pt={0} pb={0} mt={0} mb={0} data-testid="item_container" className='killPadding'>
 
 
 
-            </Grid>
-
-            <Grid item xs={2} sm={2} md={3}>
-                <Typography textAlign="right">
-                    {preValue && preValue} {value && value.toFixed && value.toFixed(valueDecimalPlace)}
-
+        <Grid item xs={6} sm={6} md={6}>
+            <Typography>
+                {textA}
+            </Typography>
 
 
-                </Typography>
 
+        </Grid>
 
-            </Grid>
+        <Grid item xs={2} sm={2} md={3}>
+            <Typography textAlign="right">
+                {preValue && preValue} {value && value.toFixed && value.toFixed(valueDecimalPlace)}
+            </Typography>
+        </Grid>
 
-            <Grid item xs={1} sm={1} md={2}>
+        <Grid item xs={1} sm={1} md={2}>
             <Typography textAlign="left" >
                 {textB && textB}
             </Typography>
-            </Grid>
-            <Grid item xs={1} sm={1} md={1}>
-                <Typography textAlign="right">
-                    {children && <Button sx={{ minHeight: 0, minWidth: 0, padding: 0 }} aria-describedby={id} onClick={handleOverrideClick}>
-                        <BuildIcon />
-                    </Button>}
-                    {description !== undefined && <><Button sx={{ minHeight: 0, minWidth: 0, padding: 0 }} aria-describedby={id} onClick={handleClick}>
-                        <InfoIcon />
-                    </Button>
+        </Grid>
+        <Grid item xs={1} sm={1} md={1}>
+            <Typography textAlign="right">
+                {children && <Button sx={{ minHeight: 0, minWidth: 0, padding: 0 }} aria-describedby={id} onClick={handleOverrideClick}>
+                    <BuildIcon />
+                </Button>}
+                {description !== undefined && <><Button sx={{ minHeight: 0, minWidth: 0, padding: 0 }} aria-describedby={id} onClick={handleClick}>
+                    <InfoIcon />
+                </Button>
 
 
-                        <Popover
-                            id={id}
-                            open={open}
-                            anchorEl={anchorEl}
-                            onClose={handleClose}
-                            anchorOrigin={{
-                                vertical: 'center',
-                                horizontal: 'left',
-                            }}
-                            transformOrigin={{
-                                vertical: 'top',
-                                horizontal: 'right',
-                            }}
-                        >
-                            <Typography sx={{ p: 2 }}>{description}</Typography>
-                        </Popover></>}
-                </Typography>
+                    <Popover
+                        id={id}
+                        open={open}
+                        anchorEl={anchorEl}
+                        onClose={handleClose}
+                        anchorOrigin={{
+                            vertical: 'center',
+                            horizontal: 'left',
+                        }}
+                        transformOrigin={{
+                            vertical: 'top',
+                            horizontal: 'right',
+                        }}
+                    >
+                        <Typography sx={{ p: 2 }}>{description}</Typography>
+                    </Popover></>}
+            </Typography>
 
 
-            </Grid>
         </Grid>
 
 
-        {overrideVisible === true && <>{children}</>
+
+        {overrideVisible === true && <Grid item xs={12} sm={12} md={12}>{children}</Grid>
         }
 
     </Grid >

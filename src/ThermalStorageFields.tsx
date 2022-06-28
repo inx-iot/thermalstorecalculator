@@ -15,8 +15,8 @@ const ThermalStorageFields = () => {
     >
         {({ values, dirtySinceLastSubmit, submitting }) => (<div>
 
-            <Typography variant="h5">Costs Comparisons
-                <Divider component="hr" />
+            <Typography variant="h5">    <Divider component="hr" />Costs Comparisons
+
             </Typography>
             <Grid
                 container
@@ -33,7 +33,7 @@ const ThermalStorageFields = () => {
 
                 <InfoThing sm={12} md={12} xs={12} textA="vs. HP (peak rate)" textB="%" value={values.thermalStorageVsHeatPumpPeakRate} description={`Cost comparison of on-demand heat pump heating @peak rate tarif`} />
 
-                <InfoThing sm={12} md={12} xs={12} textA="% store loss" textB="%" value={values.thermalStoragePotentialWastedExpense} description={`Percent of enerfy lost by time shifted heating`}/>
+                <InfoThing sm={12} md={12} xs={12} textA="% store loss" textB="%" value={values.thermalStoragePotentialWastedExpense} description={`Percent of enerfy lost by time shifted heating`} />
 
                 <InfoThing sm={12} md={12} xs={12} textA="Stored HP vs HP" textB="%" value={values.thermalStorageVsHeatPumpFlatRate} description={`Comparison of theoretical time shifted high temperature heat pump vs low temperatue heat pump`} />
             </Grid>

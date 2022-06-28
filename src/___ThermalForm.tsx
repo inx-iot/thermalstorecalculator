@@ -11,7 +11,6 @@ import TariffFormFields from "./TarifFormFields";
 import ThermalFormFields from "./ThermalFormFields";
 import ThermalStorageFields from "./ThermalStorageFields";
 import TimeFormFields from "./TimeFormFields";
-import DebugButton from "./util/DebugButton";
 
 
 
@@ -125,20 +124,20 @@ const ThermalForm = () => {
                                     //for (let index = 0; index < 50; index++) {
                                     //heatEnergyDwellingYear
                                     values.heatDailyEnergyRequired = values.heatEnergyDwellingYear / values.heatUsedDaysPerYear
-                                    var heatDailyEnergyRequired = ((values.heatDailyEnergyRequiredOverride ) ? values.heatDailyEnergyRequiredOverride : values.heatDailyEnergyRequired)
+                                    var heatDailyEnergyRequired = ((values.heatDailyEnergyRequiredOverride) ? values.heatDailyEnergyRequiredOverride : values.heatDailyEnergyRequired)
                                     // final temperature after N hours cooling
                                     values.timeTemperatureAfterNCoolingNoHeatAndDraw = values.tankEnergyLossCoeficient + (values.tankMaxTemperature - values.tankEnergyLossCoeficient) *
                                         Math.exp(-1 * values.tankEnergyLossCoeficient / (values.tankSpecificHeatCapacity * values.tankMass) * 3600 * values.timeShiftHoursN)
-                                    
-                                    
-                                        
+
+
+
                                     var tankMass = (values.tankMassOverride !== null && values.tankMassOverride ? values.tankMassOverride : 300)
 
                                     values.timeEnergyLostFinalfterN = (values.timeTemperatureAfterNCoolingNoHeatAndDraw * values.tankSpecificHeatCapacity * tankMass / 1000) / 3600
-                                    values.heatProportionOfCentralHeating =  values.timeEnergyLostFinalfterN / (heatDailyEnergyRequired + 0.0001) 
+                                    values.heatProportionOfCentralHeating = values.timeEnergyLostFinalfterN / (heatDailyEnergyRequired + 0.0001)
                                     ///=if(D5>0,D5,(B5+0.001)/(B17+0.001))           
 
-                                    
+
                                     values.tankMass = tankMass;
                                     values.tankEnergyJoules = tankMass * values.tankSpecificHeatCapacity * (values.tankMaxTemperature - values.tankMinTemperature) / 1000000
                                     values.tankEnergyAmbient = tankMass * values.tankSpecificHeatCapacity * (values.tankMaxTemperature - values.tankEnergyLossCoeficient) / 1000000
@@ -155,15 +154,15 @@ const ThermalForm = () => {
                                     //Energy lost over N hours cooling during time-shift=(B22*B4*B5/1000)/3600
                                     values.tankAfterNHoursCooling = values.tankEnergyJoules * 1000 / 3600 - values.timeTempDropOverHours
 
-                                    if (values.heatPumpHeatEfficiency == undefined)  values.heatPumpHeatEfficiency = 201
+                                    if (values.heatPumpHeatEfficiency === undefined) values.heatPumpHeatEfficiency = 201
                                     values.instantaneousHeatingCostFlatRate = Math.round(heatDailyEnergyRequired * values.standardRateEnergyCost) / 100
                                     values.instantaneousHeatingCostPeakRate = Math.round(heatDailyEnergyRequired * values.highRateEnergyCost) / 100
-                                    values.heatPumpCostFlatRate = Math.round(values.instantaneousHeatingCostFlatRate * values.heatPumpHeatEfficiency)/100;
-                                    values.heatPumpCostPeakRate = Math.round(values.instantaneousHeatingCostPeakRate * values.heatPumpHeatEfficiency)/100;
+                                    values.heatPumpCostFlatRate = Math.round(values.instantaneousHeatingCostFlatRate * values.heatPumpHeatEfficiency) / 100;
+                                    values.heatPumpCostPeakRate = Math.round(values.instantaneousHeatingCostPeakRate * values.heatPumpHeatEfficiency) / 100;
                                     values.thermalStorageDailyCost = Math.round(values.tankEnergy * values.standardRateEnergyCost) / 100; // convert to £
-                                    values.thermalStorageVsGridPercent = Math.round(values.thermalStorageDailyCost * values.instantaneousHeatingCostFlatRate)/100;
-                                    values.thermalStorageVsHeatPumpFlatRate = Math.round(values.thermalStorageDailyCost * values.heatPumpCostFlatRate)/100;
-                                    values.thermalStorageVsHeatPumpPeakRate = Math.round(values.thermalStorageDailyCost * values.heatPumpCostPeakRate)/100;
+                                    values.thermalStorageVsGridPercent = Math.round(values.thermalStorageDailyCost * values.instantaneousHeatingCostFlatRate) / 100;
+                                    values.thermalStorageVsHeatPumpFlatRate = Math.round(values.thermalStorageDailyCost * values.heatPumpCostFlatRate) / 100;
+                                    values.thermalStorageVsHeatPumpPeakRate = Math.round(values.thermalStorageDailyCost * values.heatPumpCostPeakRate) / 100;
                                     values.thermalStoragePotentialWastedExpense = Math.round(values.timeShiftEnergyLost * values.lowRateEnergyCost) / 100;
                                     values.thermalStorageHighTempRateCost = Math.round(values.lowRateEnergyCost * values.tankAfterNHoursCooling / 100 + values.thermalStoragePotentialWastedExpense) / values.heatPumpHeatEfficiency
                                     //}
@@ -177,7 +176,7 @@ const ThermalForm = () => {
                                         "heatProportionOfCentralHeating": values.heatProportionOfCentralHeating * 100,
                                         "timeTempDropOverHours": values.timeTempDropOverHours,
                                         "timeShiftEnergyLost": values.timeShiftEnergyLost,
-                                      //  "tankEnergyWattsTotal": values.tankEnergyWattsTotal,
+                                        //  "tankEnergyWattsTotal": values.tankEnergyWattsTotal,
                                         "timeEnergyLostFinalfterN": values.timeEnergyLostFinalfterN,
                                         "timeEnergyLossMaxTemp": values.timeEnergyLossMaxTemp,
                                         "timeEnergyLostInNMaxTemp": values.timeEnergyLossMaxTemp,
@@ -187,11 +186,11 @@ const ThermalForm = () => {
                                         "heatPumpCostPeakRate": values.heatPumpCostPeakRate,
                                         "heatPumpHeatEfficiency": values.heatPumpHeatEfficiency,
                                         "thermalStorageDailyCost": values.thermalStorageDailyCost,
-                                        "thermalStorageVsGridPercent": values.thermalStorageVsGridPercent*100,
-                                        "thermalStorageVsHeatPumpFlatRate": values.thermalStorageVsHeatPumpFlatRate*100,
-                                        "thermalStorageVsHeatPumpPeakRate": values.thermalStorageVsHeatPumpPeakRate*100,
-                                        "thermalStoragePotentialWastedExpense": values.thermalStoragePotentialWastedExpense*100,
-                                        "thermalStorageHighTempRateCost": values.thermalStorageHighTempRateCost*100,
+                                        "thermalStorageVsGridPercent": values.thermalStorageVsGridPercent * 100,
+                                        "thermalStorageVsHeatPumpFlatRate": values.thermalStorageVsHeatPumpFlatRate * 100,
+                                        "thermalStorageVsHeatPumpPeakRate": values.thermalStorageVsHeatPumpPeakRate * 100,
+                                        "thermalStoragePotentialWastedExpense": values.thermalStoragePotentialWastedExpense * 100,
+                                        "thermalStorageHighTempRateCost": values.thermalStorageHighTempRateCost * 100,
                                         "tankMass": values.tankMass,
                                     };
                                 } else {
@@ -208,7 +207,7 @@ const ThermalForm = () => {
                     values,
                 }) => (
                     <form onSubmit={handleSubmit} autoComplete="off" noValidate>
-                        <DebugButton data={values} />
+                        {/* <DebugButton data={values} /> */}
 
                         <Grid container spacing={2}>
                             <Grid item xs={8} sm={8} md={8}>
@@ -227,7 +226,7 @@ const ThermalForm = () => {
 
                             </Grid>
                             <Grid item xs={12} sm={4} md={3}>
-                                {values.timeEnergyLostFinalfterN !== undefined && <Chart labels={[`Useful Tank Energy after ${values.timeShiftHoursN}  hours cooling`, `Energy lost over  ${values.timeShiftHoursN}  hours cooling during time-shift`]} data={[values.timeEnergyLostFinalfterN, (100 - values.timeEnergyLostFinalfterN)]} />}
+                                {values.timeEnergyLostFinalfterN !== undefined && <Chart labels={[`Useful Tank Energy after ${values.timeShiftHoursN} hours cooling`, `Energy lost over  ${values.timeShiftHoursN} hours cooling during time-shift`]} data={[values.timeEnergyLostFinalfterN, (100 - values.timeEnergyLostFinalfterN)]} />}
 
                                 {values.thermalStorageVsHeatPumpFlatRate !== undefined && values.heatPumpCostFlatRate && <Chart labels={['Heat Pump cost/day @ flat rate)', 'Daily cost @ ToU Low Rate (inc. loss)']} data={[values.heatPumpCostFlatRate, values.thermalStorageVsHeatPumpFlatRate]} />}
                                 <ThermalStorageFields />

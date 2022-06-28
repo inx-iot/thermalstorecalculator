@@ -16,8 +16,8 @@ const TariffFormFields = () => {
         }}
     >
         {({ values, dirtySinceLastSubmit, submitting }) => (<div>
-            <Typography variant="h5">Tariff Costs
-                <Divider component="hr" />
+            <Typography variant="h5"> <Divider component="hr" />Tariff Costs
+
             </Typography>
             <Grid
                 container
