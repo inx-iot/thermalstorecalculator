@@ -31,3 +31,18 @@ code {
   margin-left: 0px !important;
   margin-right: 0px !important;
 }
+
+.textFieldOverride>input {
+  padding-left: 0px !important;
+  padding-right: 0px !important;
+  margin-left: 0px !important;
+  margin-right: 0px !important;
+}
+
+.textFieldHolderOverride>label {
+  padding-left: 0px !important;
+  padding-right: 0px !important;
+  margin-left: 0px !important;
+  margin-right: 0px !important;
+  left: -10px !important
+}

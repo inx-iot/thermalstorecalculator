@@ -84,7 +84,7 @@ const NumberField = ({ name, label, helpText, children, unitChar, type, longText
                     required
                     size='small'
                     variant="filled"
-
+                    className="textFieldHolderOverride"
                     InputProps={{
                         className: 'textFieldOverride',
                         inputProps, endAdornment: <InputAdornment className="InputAdornment" position="end">
