@@ -84,19 +84,21 @@ const NumberField = ({ name, label, helpText, children, unitChar, type, longText
                     required
                     size='small'
                     variant="filled"
+
                     InputProps={{
-                        inputProps, endAdornment: <>
+                        className: 'textFieldOverride',
+                        inputProps, endAdornment: <InputAdornment className="InputAdornment" position="end">
 
-                            {unitChar && <InputAdornment position="end">{unitChar}</InputAdornment>}
+                            {unitChar && unitChar}
 
-                            {children && <InputAdornment position="end"><Button sx={{ minHeight: 0, minWidth: 0, padding: 0 }} aria-describedby={id} onClick={handleOverrideClick}>
+                            {children && <Button sx={{ minHeight: 0, minWidth: 0, padding: 0 }} aria-describedby={id} onClick={handleOverrideClick}>
                                 <BuildIcon />
-                            </Button></InputAdornment>}
+                            </Button>}
 
-                            {longText !== undefined && <InputAdornment position="end"><Button sx={{ minHeight: 0, minWidth: 0, padding: 0 }} aria-describedby={id} onClick={handleClick}>
+                            {longText !== undefined && <Button sx={{ minHeight: 0, minWidth: 0, padding: 0 }} aria-describedby={id} onClick={handleClick}>
                                 <InfoIcon />
-                            </Button></InputAdornment>}
-                        </>,
+                            </Button>}
+                        </InputAdornment>,
                     }}
                     error={meta.error && meta.touched}
                     helperText={meta.error && meta.touched ? meta.error : helpText}

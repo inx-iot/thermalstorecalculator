@@ -19,3 +19,15 @@ code {
   padding-top: 0px !important;
   padding-bottom: 0px !important;
 }
+
+.InputAdornment {
+  margin-left: 2px !important;
+  margin-right: 0px !important;
+}
+
+.textFieldOverride {
+  padding-left: 0px !important;
+  padding-right: 0px !important;
+  margin-left: 0px !important;
+  margin-right: 0px !important;
+}
