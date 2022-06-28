@@ -1,9 +1,8 @@
 import BuildIcon from '@mui/icons-material/Build';
 import InfoIcon from '@mui/icons-material/Info';
-import { Grid, InputAdornment, TextField, Typography, Button,Popover } from "@mui/material";
-import { Box } from "@mui/system";
-import { Field } from "react-final-form";
+import { Button, Grid, InputAdornment, Popover, TextField, Typography } from "@mui/material";
 import { useState } from "react";
+import { Field } from "react-final-form";
 
 
 
@@ -59,9 +58,8 @@ const NumberField = ({ name, label, helpText, children, unitChar, type, longText
     if (max) {
         inputProps.max = max;
     }
-    return <Grid item xs={xs} sm={sm} md={md}> 
-         <Grid item xs={8} sm={8} md={8}>
-         
+    return <Grid item xs={xs} sm={sm} md={md} data-testid="input_container" className='killPadding'>
+
         <Field name={`${name}`}
             parse={(value, name) => {
                 //console.log("parse", value, name)
@@ -77,16 +75,31 @@ const NumberField = ({ name, label, helpText, children, unitChar, type, longText
             }}>
 
             {({ input, meta }) => (
-          
+
                 <TextField
                     {...input}
                     type="number"
                     label={label}
                     fullWidth
                     required
-                   
+                    size='small'
                     variant="filled"
-                    InputProps={{ inputProps, endAdornment: (unitChar && <InputAdornment position="end">{unitChar}</InputAdornment>), }}
+                    className="textFieldHolderOverride"
+                    InputProps={{
+                        className: 'textFieldOverride',
+                        inputProps, endAdornment: <InputAdornment className="InputAdornment" position="end">
+
+                            {unitChar && unitChar}
+
+                            {children && <Button sx={{ minHeight: 0, minWidth: 0, padding: 0 }} aria-describedby={id} onClick={handleOverrideClick}>
+                                <BuildIcon />
+                            </Button>}
+
+                            {longText !== undefined && <Button sx={{ minHeight: 0, minWidth: 0, padding: 0 }} aria-describedby={id} onClick={handleClick}>
+                                <InfoIcon />
+                            </Button>}
+                        </InputAdornment>,
+                    }}
                     error={meta.error && meta.touched}
                     helperText={meta.error && meta.touched ? meta.error : helpText}
                 >
@@ -94,37 +107,26 @@ const NumberField = ({ name, label, helpText, children, unitChar, type, longText
             )
             }
         </Field>
-
-        
-                <Typography textAlign="right">
-                    {children && <Button sx={{ minHeight: 0, minWidth: 0, padding: 0 }} aria-describedby={id} onClick={handleOverrideClick}>
-                        <BuildIcon />
-                    </Button>}
-                    {longText !== undefined && <><Button sx={{ minHeight: 0, minWidth: 0, padding: 0 }} aria-describedby={id} onClick={handleClick}>
-                        <InfoIcon />
-                    </Button>
-
-
-                        <Popover
-                            id={id}
-                            open={open}
-                            anchorEl={anchorEl}
-                            onClose={handleClose}
-                            anchorOrigin={{
-                                vertical: 'center',
-                                horizontal: 'left',
-                            }}
-                            transformOrigin={{
-                                vertical: 'top',
-                                horizontal: 'right',
-                            }}
-                        >
-                            <Typography sx={{ p: 2 }}>{longText}</Typography>
-                        </Popover></>}
-                </Typography>
+        <Popover
+            id={id}
+            open={open}
+            anchorEl={anchorEl}
+            onClose={handleClose}
+            anchorOrigin={{
+                vertical: 'center',
+                horizontal: 'left',
+            }}
+            transformOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+            }}
+        >
+            <Typography sx={{ p: 2 }}>{longText}</Typography>
+        </Popover>
 
 
-            </Grid>
+
+
     </Grid>
 
 }

@@ -1,6 +1,6 @@
-import { Divider, Grid, Typography } from "@mui/material";
 import { FormSpy } from "react-final-form";
 import { IThermalForm } from "./interfaces/thermal";
+import ContainerThing from "./util/container";
 import NumberField from "./util/numberField";
 
 
@@ -15,25 +15,14 @@ const TariffFormFields = () => {
             submitting: true,
         }}
     >
-        {({ values, dirtySinceLastSubmit, submitting }) => (<div>
-            <Typography variant="h5">Tariff Costs
-                <Divider component="hr" />
-            </Typography>
-            <Grid
-                container
-                spacing={3}
-                justifyContent="left"
-                style={{ marginTop: "0px" }}
-            >
-                
-                <NumberField xs={4} sm={4} md={4} name="lowRateEnergyCost" label="ToU low rate unit cost" longText="" unitChar='(p/kWh)' type="int" />
+        {({ values, dirtySinceLastSubmit, submitting }) => (<ContainerThing title="Tariff Costs">
+            <NumberField xs={4} sm={4} md={4} name="standardRateEnergyCost" label="Standard rate unit cost" longText="" unitChar='(p/kWh)' type="int" />
 
-                <NumberField xs={4} sm={4} md={4} name="highRateEnergyCost" label="ToU High rate unit cost" longText="" unitChar='(p/kWh)' type="int" />
+            <NumberField xs={4} sm={4} md={4} name="lowRateEnergyCost" label="ToU low rate unit cost" longText="" unitChar='(p/kWh)' type="int" />
 
-                <NumberField xs={4} sm={4} md={4} name="standardRateEnergyCost" label="Standard rate unit cost" longText="Standard rate costs for comparison with on-deman heating" unitChar='(p/kWh)' type="int" />
+            <NumberField xs={4} sm={4} md={4} name="highRateEnergyCost" label="ToU High rate unit cost" longText="" unitChar='(p/kWh)' type="int" />
 
-            </Grid>
-        </div>)
+        </ContainerThing>)
         }
     </FormSpy >
 }

@@ -11,3 +11,38 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+
+
+.killPadding {
+
+  padding-top: 0px !important;
+  padding-bottom: 0px !important;
+}
+
+.InputAdornment {
+  margin-left: 2px !important;
+  margin-right: 0px !important;
+}
+
+.textFieldOverride {
+  padding-left: 0px !important;
+  padding-right: 0px !important;
+  margin-left: 0px !important;
+  margin-right: 0px !important;
+}
+
+.textFieldOverride>input {
+  padding-left: 0px !important;
+  padding-right: 0px !important;
+  margin-left: 0px !important;
+  margin-right: 0px !important;
+}
+
+.textFieldHolderOverride>label {
+  padding-left: 0px !important;
+  padding-right: 0px !important;
+  margin-left: 0px !important;
+  margin-right: 0px !important;
+  left: -10px !important
+}

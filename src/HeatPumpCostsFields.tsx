@@ -1,6 +1,6 @@
-import { Divider, Grid, Typography } from "@mui/material";
 import { FormSpy } from "react-final-form";
 import { IThermalForm } from "./interfaces/thermal";
+import ContainerThing from "./util/container";
 import InfoThing from "./util/infoThing";
 import NumberField from "./util/numberField";
 
@@ -14,24 +14,16 @@ const HeatPumpCostsFields = () => {
             submitting: true,
         }}
     >
-        {({ values, dirtySinceLastSubmit, submitting }) => (<div>
-            <Typography variant="h5">Heat Pump (HP) Cost Calculator
-                <Divider component="hr" />
-            </Typography>
-            <Grid
-                container
-                spacing={3}
-                justifyContent="left"
-                style={{ marginTop: "15px" }} 
-            >
-                <NumberField name="heatPumpHeatEfficiency" label="COP/SCOP" unitChar="%" longText="SCOP or winter COP can be used for high winter heating duties" type="int" />
+        {({ values, dirtySinceLastSubmit, submitting }) => (<ContainerThing title="Heat Pump (HP) Cost Calculator">
 
-                <InfoThing textA="HP cost @ flat rate" preValue="£" value={values.heatPumpCostFlatRate} description="For those using falt rate tariff"/>
 
-                <InfoThing textA="HP cost @ peak rate" preValue="£" value={values.heatPumpCostPeakRate} description="For those with ToU tariff (e.g. EV charging)"/>
+            <NumberField md={4} xs={4} sm={4} name="heatPumpHeatEfficiency" label="COP/SCOP" unitChar="%" longText="SCOP or winter COP can be used for high winter heating duties" type="int" />
 
-            </Grid>
-        </div>)
+            <InfoThing md={4} xs={4} sm={4} textA="HP cost @ flat rate" preValue="£" value={values.heatPumpCostFlatRate} description="For those using falt rate tariff" />
+
+            <InfoThing md={4} xs={4} sm={4} textA="HP cost @ peak rate" preValue="£" value={values.heatPumpCostPeakRate} description="For those with ToU tariff (e.g. EV charging)" />
+
+        </ContainerThing>)
         }
     </FormSpy >
 }
