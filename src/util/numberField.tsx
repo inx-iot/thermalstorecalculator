@@ -52,31 +52,33 @@ const NumberField = ({ name, label, helpText, children, unitChar, type, longText
     const inputProps: any = {
         min: 0
     }
+
     if (min) {
         inputProps.min = min;
     }
     if (max) {
         inputProps.max = max;
     }
+
     return <Grid item xs={xs} sm={sm} md={md} data-testid="input_container" className='killPadding'>
 
         <Field name={`${name}`}
             parse={(value, name) => {
 
                 console.log("parse", value, name)
-                if (value === '') {
-                    return 0;
+                if (value === '' || value === undefined) {
+                    return '';
                 } else if (!isNaN(value) && value !== null)
                     return parseInt(value);
-                else return 0
+
             }}
             format={(value, name) => {
                 console.log("format", value, name)
-                if (value === '') {
-                    return 0;
+                if (value === '' || value === undefined) {
+                    return '';
                 } else if (!isNaN(value) && value !== null)
                     return parseInt(value);
-                else return 0
+                //  else return ''
             }}>
 
             {({ input, meta }) => (

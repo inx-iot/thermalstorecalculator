@@ -112,115 +112,159 @@ const ThermalForm = () => {
 
                 initialValues={initValues}
                 decorators={[
-
                     createDecorator(
                         {
                             field: /(.*?)/, // when the value of foo changes...
 
                             updates: (value, name, allValues: any) => {
-                                console.log("update")
+
+
+
+
                                 if (allValues) {
-                                    
-                                    const values: IThermalForm = allValues;
+
+
+                                    const unbind = { ...allValues }
+                                    //detect not entered fields and replace with 0
+                                    unbind.timeShiftHoursN = (unbind.timeShiftHoursN !== '' && unbind.timeShiftHoursN !== undefined ? allValues.timeShiftHoursN : 0)
+                                    unbind.heatEnergyDwellingYear = (unbind.heatEnergyDwellingYear !== '' ? unbind.heatEnergyDwellingYear : 0)
+                                    unbind.heatUsedDaysPerYear = (unbind.heatUsedDaysPerYear !== '' ? unbind.heatUsedDaysPerYear : 0)
+                                    unbind.standardRateEnergyCost = (unbind.standardRateEnergyCost !== '' ? unbind.standardRateEnergyCost : 0)
+                                    unbind.lowRateEnergyCost = (unbind.lowRateEnergyCost !== '' ? unbind.lowRateEnergyCost : 0)
+                                    unbind.highRateEnergyCost = (unbind.highRateEnergyCost !== '' ? unbind.highRateEnergyCost : 0)
+                                    unbind.tankSpecificHeatCapacity = (unbind.tankSpecificHeatCapacity !== '' ? unbind.tankSpecificHeatCapacity : 0)
+                                    unbind.tankMaxTemperature = (unbind.tankMaxTemperature !== '' ? unbind.tankMaxTemperature : 0)
+                                    unbind.tankMinUsefulTemperature = (unbind.tankMinUsefulTemperature !== '' ? unbind.tankMinUsefulTemperature : 0)
+                                    unbind.tankAmbientTemperature = (unbind.tankAmbientTemperature !== '' ? unbind.tankAmbientTemperature : 0)
+                                    unbind.tankEnergyLossCoeficient = (unbind.tankEnergyLossCoeficient !== '' ? unbind.tankEnergyLossCoeficient : 0)
+                                    unbind.heatPumpHeatEfficiency = (unbind.heatPumpHeatEfficiency !== '' ? unbind.heatPumpHeatEfficiency : 0)
+
+
+
+
+
+                                    console.log("update", unbind.heatEnergyDwellingYear)
+
+
+
+
+                                    //     tankMaxTemperature
+                                    //     tankMinUsefulTemperature
+                                    //    tankAmbientTemperature
+                                    //     tankEnergyLossCoeficient
+                                    //     heatPumpHeatEfficiency
+
+
+                                    const values: IThermalForm = unbind;
                                     //for (let index = 0; index < 50; index++) { 
                                     //heatEnergyDwellingYear
-                                    if ( values.heatDailyEnergyRequired === undefined) values.heatDailyEnergyRequired = values.heatDailyEnergyRequiredOverride
-                                    if ( values.heatDailyEnergyRequired === undefined || values.heatDailyEnergyRequired === null ) values.heatDailyEnergyRequired = 38
-                                    
+                                    if (values.heatDailyEnergyRequired === undefined) values.heatDailyEnergyRequired = values.heatDailyEnergyRequiredOverride
+                                    if (values.heatDailyEnergyRequired === undefined || values.heatDailyEnergyRequired === null) values.heatDailyEnergyRequired = 38
+
                                     values.heatDailyEnergyRequired = values.heatEnergyDwellingYear / values.heatUsedDaysPerYear
                                     var heatDailyEnergyRequired = ((values.heatDailyEnergyRequiredOverride) ? values.heatDailyEnergyRequiredOverride : values.heatDailyEnergyRequired)
- 
-                                    if (  Math.sqrt(5) === 1  ) { // WTF type script!
-
-                                    // final temperature after N hours cooling
-                                    values.timeTemperatureAfterNCoolingNoHeatAndDraw = values.tankEnergyLossCoeficient + (values.tankMaxTemperature - values.tankEnergyLossCoeficient) *
-                                        Math.exp(-1 * values.tankEnergyLossCoeficient / (values.tankSpecificHeatCapacity * values.tankMass) * 3600 * values.timeShiftHoursN)
- 
-                                    var tankMass = (values.tankMassOverride !== null && values.tankMassOverride ? values.tankMassOverride : 300)
-
-                                    values.timeEnergyLostFinalfterN = (values.timeTemperatureAfterNCoolingNoHeatAndDraw * values.tankSpecificHeatCapacity * tankMass / 1000) / 3600
-                                    values.heatProportionOfCentralHeating = values.timeEnergyLostFinalfterN / (heatDailyEnergyRequired + 0.0001)
-                                    ///=if(D5>0,D5,(B5+0.001)/(B17+0.001))           
 
 
-                                    values.tankMass = tankMass;
-                                    values.tankEnergyJoules = tankMass * values.tankSpecificHeatCapacity * (values.tankMaxTemperature - values.tankMinUsefulTemperature) / 1000000
-                                    values.tankEnergyAmbient = tankMass * values.tankSpecificHeatCapacity * (values.tankMaxTemperature - values.tankEnergyLossCoeficient) / 1000000
-                                    // tank energy in kwh assuming minimum useful enrgy temperature temperature difference
-                                    values.tankEnergy = values.tankEnergyJoules * 1000 / 3600
-                                    // Temperature Drop after N hours=B6-B21 =  Tank max. temperature - Temperature after N hours of no heat and no draw
-                                    values.timeTempDropOverHours = values.tankMaxTemperature - values.timeTemperatureAfterNCoolingNoHeatAndDraw
-                                    // Energy lost over N hours cooling during time-shift =(B22*B4*B5/1000)/3600  = (Temperature_Drop_after_N_hours * Store_specific_heat_capacity * Tank_Store_Mass/1000)/3600
-                                    values.timeShiftEnergyLost = (values.timeTempDropOverHours * values.tankSpecificHeatCapacity * tankMass / 1000) / 3600
-
-                                    values.timeEnergyLossMaxTemp = values.tankEnergyLossCoeficient * (values.tankMaxTemperature - values.tankAmbientTemperature) * values.timeShiftHoursN / 1000
-                                    values.timeEnergyLostNMaxTempFraction = values.timeEnergyLossMaxTemp / values.tankEnergy
-
-                                    //Energy lost over N hours cooling during time-shift=(B22*B4*B5/1000)/3600
-                                    values.tankAfterNHoursCooling = values.tankEnergyJoules * 1000 / 3600 - values.timeTempDropOverHours
-
-                                    values.instantaneousHeatingCostFlatRate = Math.round(heatDailyEnergyRequired * values.standardRateEnergyCost) / 100
-                                    values.instantaneousHeatingCostPeakRate = Math.round(heatDailyEnergyRequired * values.highRateEnergyCost) / 100
-
-                                    // these are wrong:
-                                    values.heatPumpCostFlatRate = Math.round(values.instantaneousHeatingCostFlatRate * values.heatPumpHeatEfficiency) / 100;
-                                    values.heatPumpCostPeakRate = Math.round(values.instantaneousHeatingCostPeakRate * values.heatPumpHeatEfficiency) / 100;
-                                    
-                                    values.thermalStorageDailyCost = Math.round(values.tankEnergy * values.standardRateEnergyCost) / 100; // convert to £
-                                    values.thermalStorageVsGridPercent = Math.round(values.thermalStorageDailyCost * values.instantaneousHeatingCostFlatRate) / 100;
-                                    values.thermalStorageVsHeatPumpFlatRate = Math.round(values.thermalStorageDailyCost * values.heatPumpCostFlatRate) / 100;
-                                    values.thermalStorageVsHeatPumpPeakRate = Math.round(values.thermalStorageDailyCost * values.heatPumpCostPeakRate) / 100;
-                                    values.thermalStoragePotentialWastedExpense = Math.round(values.timeShiftEnergyLost * values.lowRateEnergyCost) / 100;
-                                    values.thermalStorageHighTempRateCost = Math.round(values.lowRateEnergyCost * values.tankAfterNHoursCooling / 100 + values.thermalStoragePotentialWastedExpense) / values.heatPumpHeatEfficiency
-                                    values.tankEnergyLossWatts = values.tankEnergyLossCoeficient *(values.tankMaxTemperature-values.tankMinUsefulTemperature)
-                                    //}
-}
-else {
-    // This next line is just to show the problem that we can't enter numbers as usual. 
-    // If we delete all the entries so we can change th firs digit generates a NaN when it is blank. 
-    // This causes some kinf of unrecoverable error even after it is corrected.
-    // (A) we don't want this to fall over for ever if it doesn't like the numbers 
-    // (B) we want to be able to enter numbers without a zero at the beginning after we've delete the current value.
-    // (C) This happens for all number inputs and needs resolving & testing for all of them too. 
-    values.timeTemperatureAfterNCoolingNoHeatAndDraw = values.timeShiftHoursN
-    var tankMass = 999
-
-    values.timeEnergyLostFinalfterN = 999
-    values.heatProportionOfCentralHeating = 999
-    ///=if(D5>0,D5,(B5+0.001)/(B17+0.001))           
+                                    //if not number use 0 for inputs
 
 
-    values.tankMass = tankMass;
-    values.tankEnergyJoules = 999
-    values.tankEnergyAmbient = 999
-    // tank energy in kwh assuming minimum useful enrgy temperature temperature difference
-    values.tankEnergy = 999
-    // Temperature Drop after N hours=B6-B21 =  Tank max. temperature - Temperature after N hours of no heat and no draw
-    values.timeTempDropOverHours = 999
-    // Energy lost over N hours cooling during time-shift =(B22*B4*B5/1000)/3600  = (Temperature_Drop_after_N_hours * Store_specific_heat_capacity * Tank_Store_Mass/1000)/3600
-    values.timeShiftEnergyLost = 999
 
-    values.timeEnergyLossMaxTemp = 999
-    values.timeEnergyLostNMaxTempFraction = 999
 
-    //Energy lost over N hours cooling during time-shift=(B22*B4*B5/1000)/3600
-    values.tankAfterNHoursCooling = 999
 
-    values.instantaneousHeatingCostFlatRate = 999
-    values.instantaneousHeatingCostPeakRate = 999
 
-    // these are wrong:
-    values.heatPumpCostFlatRate = 999;
-    values.heatPumpCostPeakRate = 999;
-    
-    values.thermalStorageDailyCost = 999
-    values.thermalStorageVsGridPercent = 999
-    values.thermalStorageVsHeatPumpFlatRate = 999
-    values.thermalStorageVsHeatPumpPeakRate = 999
-    values.thermalStoragePotentialWastedExpense = 999;
-    values.thermalStorageHighTempRateCost = 999
-    values.tankEnergyLossWatts = 999
-}
+
+
+                                    if (Math.sqrt(5) === 1) { // WTF type script!
+
+                                        // final temperature after N hours cooling
+                                        values.timeTemperatureAfterNCoolingNoHeatAndDraw = values.tankEnergyLossCoeficient + (values.tankMaxTemperature - values.tankEnergyLossCoeficient) *
+                                            Math.exp(-1 * values.tankEnergyLossCoeficient / (values.tankSpecificHeatCapacity * values.tankMass) * 3600 * values.timeShiftHoursN)
+
+                                        var tankMass = (values.tankMassOverride !== null && values.tankMassOverride ? values.tankMassOverride : 300)
+
+                                        values.timeEnergyLostFinalfterN = (values.timeTemperatureAfterNCoolingNoHeatAndDraw * values.tankSpecificHeatCapacity * tankMass / 1000) / 3600
+                                        values.heatProportionOfCentralHeating = values.timeEnergyLostFinalfterN / (heatDailyEnergyRequired + 0.0001)
+                                        ///=if(D5>0,D5,(B5+0.001)/(B17+0.001))           
+
+
+                                        values.tankMass = tankMass;
+                                        values.tankEnergyJoules = tankMass * values.tankSpecificHeatCapacity * (values.tankMaxTemperature - values.tankMinUsefulTemperature) / 1000000
+                                        values.tankEnergyAmbient = tankMass * values.tankSpecificHeatCapacity * (values.tankMaxTemperature - values.tankEnergyLossCoeficient) / 1000000
+                                        // tank energy in kwh assuming minimum useful enrgy temperature temperature difference
+                                        values.tankEnergy = values.tankEnergyJoules * 1000 / 3600
+                                        // Temperature Drop after N hours=B6-B21 =  Tank max. temperature - Temperature after N hours of no heat and no draw
+                                        values.timeTempDropOverHours = values.tankMaxTemperature - values.timeTemperatureAfterNCoolingNoHeatAndDraw
+                                        // Energy lost over N hours cooling during time-shift =(B22*B4*B5/1000)/3600  = (Temperature_Drop_after_N_hours * Store_specific_heat_capacity * Tank_Store_Mass/1000)/3600
+                                        values.timeShiftEnergyLost = (values.timeTempDropOverHours * values.tankSpecificHeatCapacity * tankMass / 1000) / 3600
+
+                                        values.timeEnergyLossMaxTemp = values.tankEnergyLossCoeficient * (values.tankMaxTemperature - values.tankAmbientTemperature) * values.timeShiftHoursN / 1000
+                                        values.timeEnergyLostNMaxTempFraction = values.timeEnergyLossMaxTemp / values.tankEnergy
+
+                                        //Energy lost over N hours cooling during time-shift=(B22*B4*B5/1000)/3600
+                                        values.tankAfterNHoursCooling = values.tankEnergyJoules * 1000 / 3600 - values.timeTempDropOverHours
+
+                                        values.instantaneousHeatingCostFlatRate = Math.round(heatDailyEnergyRequired * values.standardRateEnergyCost) / 100
+                                        values.instantaneousHeatingCostPeakRate = Math.round(heatDailyEnergyRequired * values.highRateEnergyCost) / 100
+
+                                        // these are wrong:
+                                        values.heatPumpCostFlatRate = Math.round(values.instantaneousHeatingCostFlatRate * values.heatPumpHeatEfficiency) / 100;
+                                        values.heatPumpCostPeakRate = Math.round(values.instantaneousHeatingCostPeakRate * values.heatPumpHeatEfficiency) / 100;
+
+                                        values.thermalStorageDailyCost = Math.round(values.tankEnergy * values.standardRateEnergyCost) / 100; // convert to £
+                                        values.thermalStorageVsGridPercent = Math.round(values.thermalStorageDailyCost * values.instantaneousHeatingCostFlatRate) / 100;
+                                        values.thermalStorageVsHeatPumpFlatRate = Math.round(values.thermalStorageDailyCost * values.heatPumpCostFlatRate) / 100;
+                                        values.thermalStorageVsHeatPumpPeakRate = Math.round(values.thermalStorageDailyCost * values.heatPumpCostPeakRate) / 100;
+                                        values.thermalStoragePotentialWastedExpense = Math.round(values.timeShiftEnergyLost * values.lowRateEnergyCost) / 100;
+                                        values.thermalStorageHighTempRateCost = Math.round(values.lowRateEnergyCost * values.tankAfterNHoursCooling / 100 + values.thermalStoragePotentialWastedExpense) / values.heatPumpHeatEfficiency
+                                        values.tankEnergyLossWatts = values.tankEnergyLossCoeficient * (values.tankMaxTemperature - values.tankMinUsefulTemperature)
+                                        //}
+                                    }
+                                    else {
+                                        // This next line is just to show the problem that we can't enter numbers as usual. 
+                                        // If we delete all the entries so we can change th firs digit generates a NaN when it is blank. 
+                                        // This causes some kinf of unrecoverable error even after it is corrected.
+                                        // (A) we don't want this to fall over for ever if it doesn't like the numbers 
+                                        // (B) we want to be able to enter numbers without a zero at the beginning after we've delete the current value.
+                                        // (C) This happens for all number inputs and needs resolving & testing for all of them too. 
+                                        values.timeTemperatureAfterNCoolingNoHeatAndDraw = values.timeShiftHoursN
+                                        var tankMass = 999
+
+                                        values.timeEnergyLostFinalfterN = 999
+                                        values.heatProportionOfCentralHeating = 999
+                                        ///=if(D5>0,D5,(B5+0.001)/(B17+0.001))           
+
+
+                                        values.tankMass = tankMass;
+                                        values.tankEnergyJoules = 999
+                                        values.tankEnergyAmbient = 999
+                                        // tank energy in kwh assuming minimum useful enrgy temperature temperature difference
+                                        values.tankEnergy = 999
+                                        // Temperature Drop after N hours=B6-B21 =  Tank max. temperature - Temperature after N hours of no heat and no draw
+                                        values.timeTempDropOverHours = 999
+                                        // Energy lost over N hours cooling during time-shift =(B22*B4*B5/1000)/3600  = (Temperature_Drop_after_N_hours * Store_specific_heat_capacity * Tank_Store_Mass/1000)/3600
+                                        values.timeShiftEnergyLost = 999
+
+                                        values.timeEnergyLossMaxTemp = 999
+                                        values.timeEnergyLostNMaxTempFraction = 999
+
+                                        //Energy lost over N hours cooling during time-shift=(B22*B4*B5/1000)/3600
+                                        values.tankAfterNHoursCooling = 999
+
+                                        values.instantaneousHeatingCostFlatRate = 999
+                                        values.instantaneousHeatingCostPeakRate = 999
+
+                                        // these are wrong:
+                                        values.heatPumpCostFlatRate = 999;
+                                        values.heatPumpCostPeakRate = 999;
+
+                                        values.thermalStorageDailyCost = 999
+                                        values.thermalStorageVsGridPercent = 999
+                                        values.thermalStorageVsHeatPumpFlatRate = 999
+                                        values.thermalStorageVsHeatPumpPeakRate = 999
+                                        values.thermalStoragePotentialWastedExpense = 999;
+                                        values.thermalStorageHighTempRateCost = 999
+                                        values.tankEnergyLossWatts = 999
+                                    }
                                     return {
                                         "tankEnergyJoules": values.tankEnergyJoules,
                                         "tankEnergyAmbient": values.tankEnergyAmbient,
