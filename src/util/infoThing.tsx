@@ -4,7 +4,7 @@ import { Button, Grid, Popover, Typography } from "@mui/material";
 import { useState } from "react";
 interface IThing {
     textA: string;
-    value: number | undefined;
+    value: number | null | undefined;
     textB?: string;
     valueDecimalPlace?: number
     preValue?: string;

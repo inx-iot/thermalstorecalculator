@@ -14,8 +14,9 @@ const InstantaneousCostsFields = () => {
         }}
     >
         {({ values, dirtySinceLastSubmit, submitting }) => (<ContainerThing title="Instantaneous Heating Cost Calculator">
-            <InfoThing md={6} xs={6} sm={6} textA="Direct heating @ flat rate" description="Daily cost of instantaneous direct heating @ flat rate)" value={values.instantaneousHeatingCostFlatRate} preValue="£" />
-            <InfoThing md={6} xs={6} sm={6} textA="Direct heating @ peak rate" description="Daily cost of instantaneous direct heating @ peak rate" value={values.instantaneousHeatingCostPeakRate} preValue="£" />
+            <InfoThing md={3} xs={4} sm={4} textA="Efficiency" description="Efficiency of direct immersion heating" value={100} preValue="%" />
+            <InfoThing md={5} xs={4} sm={4} textA="Direct @ flat rate" description="Daily cost of instantaneous direct heating @ flat rate)" value={values.instantaneousHeatingCostFlatRate} preValue="£" />
+            <InfoThing md={4} xs={4} sm={4} textA="Direct @ peak rate" description="Daily cost of instantaneous direct heating @ peak rate" value={values.instantaneousHeatingCostPeakRate} preValue="£" />
         </ContainerThing>)
         }
     </FormSpy >

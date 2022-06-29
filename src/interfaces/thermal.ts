@@ -8,25 +8,25 @@ export interface IThermalForm {
     tankMass: number;
     tankMassOverride?: number | null;
     tankMaxTemperature: number;
-    tankMinTemperature: number;
+    tankMinUsefulTemperature: number;
     tankAmbientTemperature: number;
     tankEnergyLossCoeficient: number;
     tankEnergyAmbient?: number;
     tankEnergyJoules?: number;
     tankEnergy?: number;
     tankAfterNHoursCooling?: number;
-    tankEnergyWattsTotal?: number;
+    tankEnergyLossWatts?: number;
 
     heatEnergyDwellingYear: number;
     heatUsedDaysPerYear: number;
-    heatDailyEnergyRequired: number;
-    heatDailyEnergyRequiredOverride?: number | null;
+    heatDailyEnergyRequired?: number | null; // needs to include because override can be applied apparently
+    heatDailyEnergyRequiredOverride?: number | undefined | null;
     heatProportionOfCentralHeating?: number;
 
     timeShiftHoursN: number;
     timeShiftEnergyLost?: number;
     timeEnergyLossMaxTemp?: number;
-    timeTemperatureAfterNCoolingNoHeatAndDraw?: number;
+    timeTemperatureAfterNCoolingNoHeatAndDraw: number;
     timeTempDropOverHours?: number;
     timeEnergyLostFinalfterN?: number;
     timeEnergyLostNMaxTempFraction?: number;
@@ -36,7 +36,8 @@ export interface IThermalForm {
     instantaneousHeatingCostFlatRate?: number;
     instantaneousHeatingCostPeakRate?: number;
 
-    heatPumpHeatEfficiency?: number;
+    heatPumpHeatEfficiency: number;
+
     heatPumpCostFlatRate?: number;
     heatPumpCostPeakRate?: number;
 
