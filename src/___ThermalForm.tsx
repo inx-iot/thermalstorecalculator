@@ -143,7 +143,7 @@ const ThermalForm = () => {
 
 
 
-                                    console.log("update", unbind.heatEnergyDwellingYear)
+                                    //console.log("update", unbind.heatEnergyDwellingYear)
 
 
 
