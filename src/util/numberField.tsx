@@ -62,14 +62,19 @@ const NumberField = ({ name, label, helpText, children, unitChar, type, longText
 
         <Field name={`${name}`}
             parse={(value, name) => {
-                //console.log("parse", value, name)
-                if (!isNaN(value) && value !== null)
+
+                console.log("parse", value, name)
+                if (value === '') {
+                    return 0;
+                } else if (!isNaN(value) && value !== null)
                     return parseInt(value);
                 else return 0
             }}
             format={(value, name) => {
-                // console.log("format", value, name)
-                if (!isNaN(value) && value !== null)
+                console.log("format", value, name)
+                if (value === '') {
+                    return 0;
+                } else if (!isNaN(value) && value !== null)
                     return parseInt(value);
                 else return 0
             }}>
