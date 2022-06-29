@@ -14,14 +14,14 @@ export interface IThermalForm {
     tankEnergyAmbient?: number;
     tankEnergyJoules?: number;
     tankEnergy?: number;
-    tankAfterNHoursCooling?: number;
+    tankEnergyAfterNHoursCooling?: number;
     tankEnergyLossWatts?: number;
 
     heatEnergyDwellingYear: number;
     heatUsedDaysPerYear: number;
-    heatDailyEnergyRequired?: number | null; // needs to include because override can be applied apparently
+    heatDailyEnergyRequired: number; // needs to include because override can be applied apparently
     heatDailyEnergyRequiredOverride?: number | undefined | null;
-    heatProportionOfCentralHeating?: number;
+    heatProportionOfCentralHeating: number;
 
     timeShiftHoursN: number;
     timeShiftEnergyLost?: number;

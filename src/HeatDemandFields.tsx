@@ -18,7 +18,7 @@ const HeatDemandFields = () => {
             <NumberField md={3} xs={4} sm={4} name="heatEnergyDwellingYear" label="Annual Energy" unitChar="kWh/dw" type="int" longText="THe heating energy requirement per dwelling per year. (UK average is 12000kwh/dw/year)" />
             <NumberField  md={3} xs={4} sm={4} name="heatUsedDaysPerYear" label="Days/year" longText="The total number of days per year that the heating is needed (e.g. just winter heating months for costing CH)" type="int" />
 
-            <InfoThing md={3} xs={4} sm={4} textA="Daily need" textB="kWh" value={(values.heatDailyEnergyRequiredOverride ? values.heatDailyEnergyRequiredOverride : values.heatDailyEnergyRequired)}>
+            <InfoThing md={3} xs={4} sm={4} textA="Daily need" textB="kWh" value={ values.heatDailyEnergyRequired}>
                 <NumberField sm={12} md={12} name="heatDailyEnergyRequiredOverride" label="Set Daily Energy" longText="If you know the daily rather than annual energy requirement enter this here to overrides the annual calculation" unitChar="kWh" type="int">
                     <Button sx={{ minHeight: 0, minWidth: 0, padding: 0 }} onClick={() => {
                         form.change('heatDailyEnergyRequiredOverride', null)
