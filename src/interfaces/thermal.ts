@@ -42,10 +42,10 @@ export interface IThermalForm {
     heatPumpCostPeakRate?: number;
 
     thermalStorageDailyCost?: number;
-    thermalStorageVsGridPercent?: number;
-    thermalStorageVsHeatPumpFlatRate?: number;
-    thermalStorageVsHeatPumpPeakRate?: number;
-    thermalStoragePotentialWastedExpense?: number;
-    thermalStorageHighTempRateCost?: number;
+    thermalStorageVsGridPercent: number;
+    thermalStorageVsHeatPumpFlatRate: number;
+    thermalStorageVsHeatPumpPeakRate: number;
+    thermalStoragePotentialWastedExpense: number;
+    thermalStorageHighTempRateCost: number;
 }
 
