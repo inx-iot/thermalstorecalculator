@@ -1,9 +1,9 @@
 import { Grid } from '@mui/material';
 import { ArcElement, Chart as ChartJS, Legend, Tooltip } from 'chart.js';
+import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { Pie } from 'react-chartjs-2';
-
+ChartJS.register(ChartDataLabels)
 ChartJS.register(ArcElement, Tooltip, Legend);
-
 
 
 
@@ -40,7 +40,15 @@ const Chart = ({ labels, data }: IChart) => {
 
 
     return <Grid item xs={12} sm={12} md={12} data-testid="graph_container" className='killPadding'>
-        <Pie data={chartData} />
+        <Pie data={chartData} options={{
+
+            plugins: {
+                // Change options for ALL labels of THIS CHART
+                datalabels: {
+                    color: '#000000'
+                }
+            }
+        }} />
     </Grid>;
 }
 
