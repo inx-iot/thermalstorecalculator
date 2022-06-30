@@ -1,9 +1,7 @@
-import BuildIcon from '@mui/icons-material/Build';
 import InfoIcon from '@mui/icons-material/Info';
 import { Button, Grid, InputAdornment, Popover, TextField, Typography } from "@mui/material";
 import { useState } from "react";
 import { Field } from "react-final-form";
-
 
 
 
@@ -19,12 +17,13 @@ interface IField {
     max?: number;
     min?: number;
     type: 'int' | 'float';
+
     children?: React.ReactNode
 }
 
 
 
-const NumberField = ({ name, label, helpText, children, unitChar, type, longText, max, min, xs = 6, sm = 4, md = 5 }: IField) => {
+const NumberField = ({ name, label, helpText, children, unitChar, longText, max, min, xs = 6, sm = 4, md = 5 }: IField) => {
     const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
 
     const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -98,11 +97,9 @@ const NumberField = ({ name, label, helpText, children, unitChar, type, longText
 
                             {unitChar && unitChar}
 
-                            {children && <Button sx={{ minHeight: 0, minWidth: 0, padding: 0 }} aria-describedby={id} onClick={handleOverrideClick}>
-                                <BuildIcon />
-                            </Button>}
+                            {children && <>{children}</>}
 
-                            {longText !== undefined && <Button sx={{ minHeight: 0, minWidth: 0, padding: 0 }} aria-describedby={id} onClick={handleClick}>
+                            {longText !== undefined && longText !== '' && <Button sx={{ minHeight: 0, minWidth: 0, padding: 0 }} aria-describedby={id} onClick={handleClick}>
                                 <InfoIcon />
                             </Button>}
                         </InputAdornment>,

@@ -9,14 +9,14 @@ interface IThing {
     valueDecimalPlace?: number
     preValue?: string;
     description?: string;
-
+    resetFunction?: (event: React.MouseEvent<HTMLButtonElement>) => void;
     children?: React.ReactNode
     xs?: number;
     sm?: number;
     md?: number;
 }
 
-const InfoThing = ({ textA, value, textB, preValue, description, children, valueDecimalPlace = 2, xs = 8, sm = 5, md = 5 }: IThing) => {
+const InfoThing = ({ textA, value, textB, preValue, description, children, resetFunction, valueDecimalPlace = 2, xs = 8, sm = 5, md = 5 }: IThing) => {
     const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
 
     const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -29,6 +29,7 @@ const InfoThing = ({ textA, value, textB, preValue, description, children, value
 
 
     const handleOverrideClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+        overrideVisible === true && resetFunction && resetFunction(event)
         setOverrideVisible(!overrideVisible);
     };
 
@@ -41,7 +42,7 @@ const InfoThing = ({ textA, value, textB, preValue, description, children, value
     const [overrideVisible, setOverrideVisible] = useState(false)
 
 
-    return <Grid item container xs={xs} sm={sm} md={md} pt={0} pb={0} mt={0} mb={0} data-testid="item_container" className='killPadding'>
+    return <><Grid item container xs={xs} sm={sm} md={md} pt={0} pb={0} mt={0} mb={0} data-testid="item_container" className='killPadding'>
 
 
 
@@ -98,10 +99,11 @@ const InfoThing = ({ textA, value, textB, preValue, description, children, value
 
 
 
-        {overrideVisible === true && <Grid item xs={12} sm={12} md={12}>{children}</Grid>
-        }
+        {overrideVisible === true && <>{children}</>}
 
-    </Grid >
+    </Grid>
+
+    </>
 }
 
 
