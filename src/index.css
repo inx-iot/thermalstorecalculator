@@ -46,3 +46,17 @@ code {
   margin-right: 0px !important;
   left: -10px !important
 } */
+
+
+.InputAdornment {
+  font-size: 0.6em;
+}
+
+.item_textB {
+  font-size: 0.8em;
+}
+
+
+.item_pre_value {
+  font-size: 0.8em;
+}

@@ -6,7 +6,7 @@ import ThermalForm from './___ThermalForm';
 function App() {
   return (
     <Container maxWidth="lg">
-      <Box sx={{ my: 4 }}>
+      <Box sx={{ my: 5 }}>
         <ThermalForm />
       </Box>
     </Container>
