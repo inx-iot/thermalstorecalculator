@@ -14,41 +14,7 @@ import TimeFormFields from "./TimeFormFields";
 
 
 
-// const Accordion = styled((props: AccordionProps) => (
-//     <MuiAccordion disableGutters elevation={0} square {...props} />
-// ))(({ theme }) => ({
-//     border: `1px solid ${theme.palette.divider}`,
-//     '&:not(:last-child)': {
-//         borderBottom: 0,
-//     },
-//     '&:before': {
-//         display: 'none',
-//     },
-// }));
 
-// const AccordionSummary = styled((props: AccordionSummaryProps) => (
-//     <MuiAccordionSummary
-//         expandIcon={<ArrowForwardIosSharpIcon sx={{ fontSize: '0.9rem' }} />}
-//         {...props}
-//     />
-// ))(({ theme }) => ({
-//     backgroundColor:
-//         theme.palette.mode === 'dark'
-//             ? 'rgba(255, 255, 255, .05)'
-//             : 'rgba(0, 0, 0, .03)',
-//     flexDirection: 'row-reverse',
-//     '& .MuiAccordionSummary-expandIconWrapper.Mui-expanded': {
-//         transform: 'rotate(90deg)',
-//     },
-//     '& .MuiAccordionSummary-content': {
-//         marginLeft: theme.spacing(1),
-//     },
-// }));
-
-// const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
-//     padding: theme.spacing(2),
-//     borderTop: '1px solid rgba(0, 0, 0, .125)',
-// }));
 
 
 
@@ -138,36 +104,36 @@ const ThermalForm = () => {
                                     unbind.heatPumpHeatEfficiency = (unbind.heatPumpHeatEfficiency !== '' ? unbind.heatPumpHeatEfficiency : 0)
 
                                     const values: IThermalForm = unbind;
-                                    
 
-                                        /* These values are conditional on overrides so must be calculated first */
 
-                                         //heatEnergyDwellingYear
-                                        if (values.heatDailyEnergyRequiredOverride !== undefined && values.heatDailyEnergyRequiredOverride !== null ) {
-                                            values.heatDailyEnergyRequired = values.heatDailyEnergyRequiredOverride
-                                        }
-                                        else {
-                                            //if (values.heatDailyEnergyRequired === undefined || values.heatDailyEnergyRequired === null) values.heatDailyEnergyRequired = -1// make it obvious something is broken
+                                    /* These values are conditional on overrides so must be calculated first */
 
-                                            values.heatDailyEnergyRequired = values.heatEnergyDwellingYear / values.heatUsedDaysPerYear
-                                            // overide with the override if one is set
-                                            // values.heatDailyEnergyRequired = ((values.heatDailyEnergyRequiredOverride) ? values.heatDailyEnergyRequiredOverride : values.heatDailyEnergyRequired)
-                                        }
+                                    //heatEnergyDwellingYear
+                                    if (values.heatDailyEnergyRequiredOverride !== undefined && values.heatDailyEnergyRequiredOverride !== null) {
+                                        values.heatDailyEnergyRequired = values.heatDailyEnergyRequiredOverride
+                                    }
+                                    else {
+                                        //if (values.heatDailyEnergyRequired === undefined || values.heatDailyEnergyRequired === null) values.heatDailyEnergyRequired = -1// make it obvious something is broken
 
-                                        var iterations
-                                        if (values.tankMassOverride !== undefined && values.tankMassOverride !== null) iterations = 1
-                                        else iterations = 100
+                                        values.heatDailyEnergyRequired = values.heatEnergyDwellingYear / values.heatUsedDaysPerYear
+                                        // overide with the override if one is set
+                                        // values.heatDailyEnergyRequired = ((values.heatDailyEnergyRequiredOverride) ? values.heatDailyEnergyRequiredOverride : values.heatDailyEnergyRequired)
+                                    }
+
+                                    var iterations
+                                    if (values.tankMassOverride !== undefined && values.tankMassOverride !== null) iterations = 1
+                                    else iterations = 100
 
                                     for (let i = 0; i < iterations; i++) {
-                                            
+
 
                                         /* This will be caluclated iteratively if there is no override */
-                                        if (values.tankMassOverride !== undefined && values.tankMassOverride !== null ) {
+                                        if (values.tankMassOverride !== undefined && values.tankMassOverride !== null) {
                                             values.tankMass = values.tankMassOverride
-                                        } 
+                                        }
                                         else {
-                                           // use the default
-                                           values.tankMass = (values.tankMass + 0.001)/(values.heatProportionOfCentralHeating+0.001)
+                                            // use the default
+                                            values.tankMass = (values.tankMass + 0.001) / (values.heatProportionOfCentralHeating + 0.001)
                                         }
 
                                         /* The energy loss calculation based on tank paramters and shift */
@@ -184,9 +150,9 @@ const ThermalForm = () => {
                                             Math.exp(-1 * values.tankEnergyLossCoeficient / (values.tankSpecificHeatCapacity * values.tankMass) * 3600 * values.timeShiftHoursN)
 
                                         values.timeTempDropOverHours = values.tankMaxTemperature - values.timeTemperatureAfterNCoolingNoHeatAndDraw
-                                        
+
                                         values.timeEnergyLostFinalfterN = (values.timeTempDropOverHours * values.tankSpecificHeatCapacity * values.tankMass / 1000) / 3600
-                                        
+
                                         //values.tankMass = tankMass;
                                         values.tankEnergyJoules = values.tankMass * values.tankSpecificHeatCapacity * (values.tankMaxTemperature - values.tankMinUsefulTemperature) / 1000000
                                         values.tankEnergyAmbient = values.tankMass * values.tankSpecificHeatCapacity * (values.tankMaxTemperature - values.tankEnergyLossCoeficient) / 1000000
@@ -194,7 +160,7 @@ const ThermalForm = () => {
                                         //Energy lost over N hours cooling during time-shift=(B22*B4*B5/1000)/3600
                                         values.tankEnergyAfterNHoursCooling = values.tankEnergyJoules * 1000 / 3600 - values.timeEnergyLostFinalfterN
 
-                                        
+
                                         values.heatProportionOfCentralHeating = values.tankEnergyAfterNHoursCooling / (values.heatDailyEnergyRequired + 0.0001)
                                         ///=if(D5>0,D5,(B5+0.001)/(B17+0.001))            
 
@@ -209,14 +175,14 @@ const ThermalForm = () => {
 
                                         values.instantaneousHeatingCostFlatRate = (values.heatDailyEnergyRequired * values.standardRateEnergyCost) / 100
                                         values.instantaneousHeatingCostPeakRate = (values.heatDailyEnergyRequired * values.highRateEnergyCost) / 100
-                                        values.heatPumpCostFlatRate = (values.instantaneousHeatingCostFlatRate / (values.heatPumpHeatEfficiency/100)) ;
-                                        values.heatPumpCostPeakRate = (values.instantaneousHeatingCostPeakRate / (values.heatPumpHeatEfficiency/100)) ;
+                                        values.heatPumpCostFlatRate = (values.instantaneousHeatingCostFlatRate / (values.heatPumpHeatEfficiency / 100));
+                                        values.heatPumpCostPeakRate = (values.instantaneousHeatingCostPeakRate / (values.heatPumpHeatEfficiency / 100));
                                         /* =B12*B2/100 */
                                         values.thermalStorageDailyCost = Math.round(values.tankEnergy * values.lowRateEnergyCost) / 100; // convert to £
-                                        values.thermalStorageVsGridPercent = (values.thermalStorageDailyCost / values.instantaneousHeatingCostFlatRate) ;
-                                        values.thermalStorageVsHeatPumpFlatRate = (values.thermalStorageDailyCost / values.heatPumpCostFlatRate) ;
-                                        values.thermalStorageVsHeatPumpPeakRate = (values.thermalStorageDailyCost / values.heatPumpCostPeakRate) ;
-                                        values.thermalStoragePotentialWastedExpense = (values.timeShiftEnergyLost / values.lowRateEnergyCost) ;
+                                        values.thermalStorageVsGridPercent = (values.thermalStorageDailyCost / values.instantaneousHeatingCostFlatRate);
+                                        values.thermalStorageVsHeatPumpFlatRate = (values.thermalStorageDailyCost / values.heatPumpCostFlatRate);
+                                        values.thermalStorageVsHeatPumpPeakRate = (values.thermalStorageDailyCost / values.heatPumpCostPeakRate);
+                                        values.thermalStoragePotentialWastedExpense = (values.timeShiftEnergyLost / values.lowRateEnergyCost);
                                         values.thermalStorageHighTempRateCost = Math.round(values.lowRateEnergyCost * values.tankEnergyAfterNHoursCooling / 100 + values.thermalStoragePotentialWastedExpense) / values.heatPumpHeatEfficiency
                                         /* =B9*(B6-B8) 
                                          B8 : Ambient temperature
@@ -227,13 +193,13 @@ const ThermalForm = () => {
                                         //}
                                     }
                                     return {
-                                        "heatEnergyDwellingYear": values.heatEnergyDwellingYear,
+
                                         "tankEnergyJoules": values.tankEnergyJoules,
                                         "tankEnergyAmbient": values.tankEnergyAmbient,
                                         "tankEnergy": values.tankEnergy,
                                         "tankEnergyAfterNHoursCooling": values.tankEnergyAfterNHoursCooling,
                                         "heatProportionOfCentralHeating": values.heatProportionOfCentralHeating * 100,
-                                        "timeTemperatureAfterNCoolingNoHeatAndDraw" : values.timeTemperatureAfterNCoolingNoHeatAndDraw,
+                                        "timeTemperatureAfterNCoolingNoHeatAndDraw": values.timeTemperatureAfterNCoolingNoHeatAndDraw,
                                         "timeTempDropOverHours": values.timeTempDropOverHours,
                                         "timeShiftEnergyLost": values.timeShiftEnergyLost,
                                         "tankEnergyLossWatts": values.tankEnergyLossWatts,
@@ -252,7 +218,7 @@ const ThermalForm = () => {
                                         "thermalStoragePotentialWastedExpense": values.thermalStoragePotentialWastedExpense * 100,
                                         "thermalStorageHighTempRateCost": values.thermalStorageHighTempRateCost * 100,
                                         "tankMass": values.tankMass,
-                                        "heatDailyEnergyRequired" : values.heatDailyEnergyRequired
+                                        "heatDailyEnergyRequired": values.heatDailyEnergyRequired
                                     };
                                 } else {
                                     return {}
@@ -281,7 +247,7 @@ const ThermalForm = () => {
                                 <HeatPumpCostsFields />
                             </Grid>
                             <Grid item xs={6} sm={3} md={3}>
-                                {values.timeEnergyLostFinalfterN !== undefined && <Chart labels={[`Stored Energy Available`, `Energy lost over ${values.timeShiftHoursN} hours cooling`]} data={[ values.tankEnergyAfterNHoursCooling ,values.timeEnergyLostFinalfterN]} />}
+                                {values.timeEnergyLostFinalfterN !== undefined && <Chart labels={[`Stored Energy Available`, `Energy lost over ${values.timeShiftHoursN} hours cooling`]} data={[values.tankEnergyAfterNHoursCooling, values.timeEnergyLostFinalfterN]} />}
 
                                 {values.thermalStorageVsHeatPumpFlatRate !== undefined && values.heatPumpCostFlatRate && <Chart labels={['Heat Pump cost/day @ flat rate)', 'Time-shifted direct @ Low Rate']} data={[values.heatPumpCostFlatRate, values.thermalStorageDailyCost]} />}
                                 <ThermalStorageFields />
