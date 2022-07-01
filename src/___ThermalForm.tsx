@@ -237,7 +237,7 @@ const ThermalForm = () => {
                         {/* <DebugButton data={values} /> */}
 
                         <Grid container spacing={2}>
-                            <Grid item xs={8} sm={8} md={8}>
+                            <Grid item xs={8} sm={9} md={9}>
 
                                 <TimeFormFields />
                                 <HeatDemandFields />
