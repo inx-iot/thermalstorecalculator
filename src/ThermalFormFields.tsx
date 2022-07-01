@@ -16,7 +16,7 @@ const ThermalFormFields = () => {
 
             <NumberField xs={4} sm={4} md={4} name="tankSpecificHeatCapacity" label="Store specific heat capacity" longText="" helpText="(J/kg/Celsius)" type="int" />
 
-            <InfoThing xs={4} sm={4} md={4} textA={`Store Mass`} textB="kg" value={(values.tankMassOverride ? values.tankMassOverride : values.tankMass)} resetFunction={e => {
+            <InfoThing xs={4} sm={4} md={4} textA={`Store Mass`} textB="kg" value={(values.tankMassOverride ? values.tankMassOverride : values.tankMass)} valueDecimalPlace={0} resetFunction={e => {
                 form.change('tankMassOverride', undefined)
             }}>
                 <NumberField name="tankMassOverride" xs={12} sm={12} md={12} label="Store Mass Override" longText="" helpText="(J/kg/Celsius)" type="int" />
