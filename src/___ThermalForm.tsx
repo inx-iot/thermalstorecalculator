@@ -103,13 +103,19 @@ const ThermalForm = () => {
                                     unbind.tankEnergyLossCoeficient = (unbind.tankEnergyLossCoeficient !== '' ? unbind.tankEnergyLossCoeficient : 0)
                                     unbind.heatPumpHeatEfficiency = (unbind.heatPumpHeatEfficiency !== '' ? unbind.heatPumpHeatEfficiency : 0)
 
+                                    unbind.heatDailyEnergyRequiredOverride = (unbind.heatDailyEnergyRequiredOverride !== '' ? unbind.heatDailyEnergyRequiredOverride : 0)
+                                    unbind.tankMassOverride = (unbind.tankMassOverride !== '' ? unbind.tankMassOverride : 0)
+
+                                    //overrides
+                                    unbind.heatPumpHeatEfficiency = (unbind.heatPumpHeatEfficiency !== '' ? unbind.heatPumpHeatEfficiency : 0)
+
                                     const values: IThermalForm = unbind;
 
 
                                     /* These values are conditional on overrides so must be calculated first */
 
                                     //heatEnergyDwellingYear
-                                    if (values.heatDailyEnergyRequiredOverride !== undefined && values.heatDailyEnergyRequiredOverride !== null) {
+                                    if (values.heatDailyEnergyRequiredOverride !== undefined && values.heatDailyEnergyRequiredOverride !== null && values.heatDailyEnergyRequiredOverride !== 0) {
                                         values.heatDailyEnergyRequired = values.heatDailyEnergyRequiredOverride
                                     }
                                     else {
@@ -121,14 +127,14 @@ const ThermalForm = () => {
                                     }
 
                                     var iterations
-                                    if (values.tankMassOverride !== undefined && values.tankMassOverride !== null) iterations = 1
+                                    if (values.tankMassOverride !== undefined && values.tankMassOverride !== null && values.tankMassOverride !== 0) iterations = 1
                                     else iterations = 100
 
                                     for (let i = 0; i < iterations; i++) {
 
 
                                         /* This will be caluclated iteratively if there is no override */
-                                        if (values.tankMassOverride !== undefined && values.tankMassOverride !== null) {
+                                        if (values.tankMassOverride !== undefined && values.tankMassOverride !== null && values.tankMassOverride !== 0) {
                                             values.tankMass = values.tankMassOverride
                                         }
                                         else {
