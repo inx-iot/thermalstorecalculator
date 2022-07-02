@@ -16,11 +16,11 @@ const TariffFormFields = () => {
         }}
     >
         {({ values, dirtySinceLastSubmit, submitting }) => (<ContainerThing title="Tariff Costs">
-            <NumberField xs={4} sm={4} md={4} name="standardRateEnergyCost" label="Standard rate unit cost" longText="" unitChar='(p/kWh)' type="int" />
+            <NumberField xs={4} sm={4} md={4} name="standardRateEnergyCost" label="Standard rate unit cost" longText="" unitChar='(p/kWh)' type="float" />
 
-            <NumberField xs={4} sm={4} md={4} name="lowRateEnergyCost" label="ToU low rate unit cost" longText="" unitChar='(p/kWh)' type="int" />
+            <NumberField xs={4} sm={4} md={4} name="lowRateEnergyCost" label="ToU low rate unit cost" longText="" unitChar='(p/kWh)' type="float" />
 
-            <NumberField xs={4} sm={4} md={4} name="highRateEnergyCost" label="ToU High rate unit cost" longText="" unitChar='(p/kWh)' type="int" />
+            <NumberField xs={4} sm={4} md={4} name="highRateEnergyCost" label="ToU High rate unit cost" longText="" unitChar='(p/kWh)' type="float" />
 
         </ContainerThing>)
         }
