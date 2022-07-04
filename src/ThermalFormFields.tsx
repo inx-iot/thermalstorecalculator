@@ -26,9 +26,9 @@ const ThermalFormFields = () => {
             <NumberField name="tankMinUsefulTemperature" xs={4} sm={4} md={4} label="Min. useful temp." longText="" helpText="Celsius" type="int" />
             <NumberField name="tankAmbientTemperature" xs={4} sm={4} md={4} label="Ambient temperature" longText="" helpText="Celsius" type="int" />
             <NumberField name="tankEnergyLossCoeficient" xs={4} sm={4} md={4} label="Storage Energy Loss Coeficient" longText="" helpText="W/Celsius" type="int" />
-            <InfoThing textA="Useful Energy" textB="kWh" xs={4} sm={4} md={4} value={values.tankEnergy} description="Energy available at max temperature before the minimum useful temperature is reached" />
-            <InfoThing textA="Energy Stored" textB="kWh" xs={4} sm={4} md={4} value={values.tankEnergyAfterNHoursCooling} description={`Energy remaining after ${values.timeShiftHoursN} hours cooling`} />
-            <InfoThing textA="Insulation loss" xs={4} sm={4} md={4} textB="Watts" value={values.tankEnergyLossWatts} description="Power loss at maximum store temperture" />
+            <InfoThing textA="Useful Energy" textB="kWh" xs={4} sm={4} md={4} valueDecimalPlace={1} value={values.tankEnergy} description="Energy available at max temperature before the minimum useful temperature is reached" />
+            <InfoThing textA="Energy Stored" textB="kWh" xs={4} sm={4} md={4} valueDecimalPlace={1} value={values.tankEnergyAfterNHoursCooling} description={`Energy remaining after ${values.timeShiftHoursN} hours cooling`} />
+            <InfoThing textA="Insulation loss" xs={4} sm={4} md={4} textB="Watts" valueDecimalPlace={0} value={values.tankEnergyLossWatts} description="Power loss at maximum store temperture" />
         </ContainerThing>)
         }
     </FormSpy >

@@ -21,9 +21,9 @@ import TimeFormFields from "./TimeFormFields";
 const ThermalForm = () => {
 
     const initValues: IThermalForm = {
-        standardRateEnergyCost: 15,
+        standardRateEnergyCost: 25,
         lowRateEnergyCost: 8,
-        highRateEnergyCost: 20,
+        highRateEnergyCost: 34,
 
         tankSpecificHeatCapacity: 4200, // asssume water 
         tankMass: 400, // this is one of the larger tanks
@@ -43,7 +43,7 @@ const ThermalForm = () => {
         heatDailyEnergyRequiredOverride: null,
         heatProportionOfCentralHeating: 0,
 
-        timeShiftHoursN: 12,
+        timeShiftHoursN: 10,
         timeShiftEnergyLost: 0,
         timeEnergyLossMaxTemp: 0,
         timeTemperatureAfterNCoolingNoHeatAndDraw: 0.0,
@@ -55,7 +55,7 @@ const ThermalForm = () => {
         instantaneousHeatingCostFlatRate: 0.0,
         instantaneousHeatingCostPeakRate: 0.0,
 
-        heatPumpHeatEfficiency: 200,
+        heatPumpHeatEfficiency: 250,
         heatPumpCostFlatRate: 0.0,
         heatPumpCostPeakRate: 0.0,
 
