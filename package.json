@@ -31,6 +31,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "static-build": "BUILD_PATH=./static PUBLIC_URL=/ react-scripts build",
+    "wordpress-build": "BUILD_PATH=./inxTime/widget/build PUBLIC_URL=/wp-content/plugins/inxTime/widget/build react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

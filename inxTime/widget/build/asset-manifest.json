@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/wp-content/plugins/inxTime/widget/build/static/css/main.93f2b643.css",
+    "main.js": "/wp-content/plugins/inxTime/widget/build/static/js/main.382091fb.js",
+    "static/js/787.aaef60e4.chunk.js": "/wp-content/plugins/inxTime/widget/build/static/js/787.aaef60e4.chunk.js",
+    "index.html": "/wp-content/plugins/inxTime/widget/build/index.html",
+    "main.93f2b643.css.map": "/wp-content/plugins/inxTime/widget/build/static/css/main.93f2b643.css.map",
+    "main.382091fb.js.map": "/wp-content/plugins/inxTime/widget/build/static/js/main.382091fb.js.map",
+    "787.aaef60e4.chunk.js.map": "/wp-content/plugins/inxTime/widget/build/static/js/787.aaef60e4.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.93f2b643.css",
+    "static/js/main.382091fb.js"
+  ]
+}
