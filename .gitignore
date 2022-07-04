@@ -10,7 +10,7 @@
 
 # production
 /build
-
+/inxTime/widget/build
 # static build
 /static
 # misc
