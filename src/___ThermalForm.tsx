@@ -144,7 +144,7 @@ const ThermalForm = () => {
 
                                         /* This will be caluclated iteratively if there is no override */
                                         if (values.tankMassOverride !== undefined && values.tankMassOverride !== null && values.tankMassOverride !== 0) {
-                                            values.tankMass = values.tankMassOverride //todo: needlessly repeateds
+                                            values.tankMass = values.tankMassOverride //todo: needlessly repeated
                                         }
                                         else {
                                             // use the default
