@@ -1,6 +1,5 @@
 import { Card, CardContent, Grid } from "@mui/material";
 import createDecorator from 'final-form-calculate';
-import * as React from 'react';
 import { Form } from "react-final-form";
 import Chart from "./Chart";
 import HeatDemandFields from "./HeatDemandFields";
@@ -91,8 +90,8 @@ const ThermalForm = () => {
                                     const unbind = { ...allValues }
                                     //detect not entered fields and replace with 0
                                     unbind.timeShiftHoursN = (unbind.timeShiftHoursN !== '' && unbind.timeShiftHoursN !== undefined ? allValues.timeShiftHoursN : 0)
-                                    unbind.heatEnergyDwellingYear = (unbind.heatEnergyDwellingYear !== '' ? unbind.heatEnergyDwellingYear : 0)
-                                    unbind.heatUsedDaysPerYear = (unbind.heatUsedDaysPerYear !== '' ? unbind.heatUsedDaysPerYear : 0)
+                                    unbind.heatEnergyDwellingYear = (unbind.heatEnergyDwellingYear !== '' ? unbind.heatEnergyDwellingYear : 1)
+                                    unbind.heatUsedDaysPerYear = (unbind.heatUsedDaysPerYear !== '' ? unbind.heatUsedDaysPerYear : 1)
                                     unbind.standardRateEnergyCost = (unbind.standardRateEnergyCost !== '' ? unbind.standardRateEnergyCost : 0)
                                     unbind.lowRateEnergyCost = (unbind.lowRateEnergyCost !== '' ? unbind.lowRateEnergyCost : 0)
                                     unbind.highRateEnergyCost = (unbind.highRateEnergyCost !== '' ? unbind.highRateEnergyCost : 0)
