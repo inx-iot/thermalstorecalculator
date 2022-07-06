@@ -91,8 +91,8 @@ const ThermalForm = () => {
                                     const unbind = { ...allValues }
                                     //detect not entered fields and replace with 0
                                     unbind.timeShiftHoursN = (unbind.timeShiftHoursN !== '' && unbind.timeShiftHoursN !== undefined ? allValues.timeShiftHoursN : 0)
-                                    unbind.heatEnergyDwellingYear = (unbind.heatEnergyDwellingYear !== '' ? unbind.heatEnergyDwellingYear : 0)
-                                    unbind.heatUsedDaysPerYear = (unbind.heatUsedDaysPerYear !== '' ? unbind.heatUsedDaysPerYear : 0)
+                                    unbind.heatEnergyDwellingYear = (unbind.heatEnergyDwellingYear !== '' ? unbind.heatEnergyDwellingYear : 100)
+                                    unbind.heatUsedDaysPerYear = (unbind.heatUsedDaysPerYear !== '' ? unbind.heatUsedDaysPerYear : 1)
                                     unbind.standardRateEnergyCost = (unbind.standardRateEnergyCost !== '' ? unbind.standardRateEnergyCost : 0)
                                     unbind.lowRateEnergyCost = (unbind.lowRateEnergyCost !== '' ? unbind.lowRateEnergyCost : 0)
                                     unbind.highRateEnergyCost = (unbind.highRateEnergyCost !== '' ? unbind.highRateEnergyCost : 0)
@@ -128,14 +128,23 @@ const ThermalForm = () => {
 
                                     var iterations
                                     if (values.tankMassOverride !== undefined && values.tankMassOverride !== null && values.tankMassOverride !== 0) iterations = 1
-                                    else iterations = 100
+                                    else iterations = 200
+                                    /* To get a better startig popint for the tank size */
+
+                                    if (values.tankMassOverride !== undefined && values.tankMassOverride !== null && values.tankMassOverride !== 0) {
+                                        values.tankMass = values.tankMassOverride
+                                    }
+                                    else {
+                                        // use the default
+                                        values.tankMass = values.heatDailyEnergyRequired *4200/values.tankSpecificHeatCapacity;
+                                    }
 
                                     for (let i = 0; i < iterations; i++) {
 
 
                                         /* This will be caluclated iteratively if there is no override */
                                         if (values.tankMassOverride !== undefined && values.tankMassOverride !== null && values.tankMassOverride !== 0) {
-                                            values.tankMass = values.tankMassOverride
+                                            values.tankMass = values.tankMassOverride //todo: needlessly repeateds
                                         }
                                         else {
                                             // use the default
