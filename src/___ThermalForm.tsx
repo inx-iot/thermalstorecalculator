@@ -39,7 +39,7 @@ const ThermalForm = () => {
 
         heatEnergyDwellingYear: 8000,
         heatUsedDaysPerYear: 230,
-        heatDailyEnergyRequired: 0,
+        heatDailyEnergyRequired: 1,
         heatDailyEnergyRequiredOverride: null,
         heatProportionOfCentralHeating: 0,
 
@@ -120,23 +120,26 @@ const ThermalForm = () => {
                                     }
                                     else {
                                         //if (values.heatDailyEnergyRequired === undefined || values.heatDailyEnergyRequired === null) values.heatDailyEnergyRequired = -1// make it obvious something is broken
-
+                                        if (values.heatUsedDaysPerYear < 1 ) values.heatUsedDaysPerYear = 1
                                         values.heatDailyEnergyRequired = values.heatEnergyDwellingYear / values.heatUsedDaysPerYear
                                         // overide with the override if one is set
                                         // values.heatDailyEnergyRequired = ((values.heatDailyEnergyRequiredOverride) ? values.heatDailyEnergyRequiredOverride : values.heatDailyEnergyRequired)
                                     }
-
                                     var iterations
                                     if (values.tankMassOverride !== undefined && values.tankMassOverride !== null && values.tankMassOverride !== 0) iterations = 1
-                                    else iterations = 200
+                                    else {
+                                        if ( values.heatDailyEnergyRequired < 2 ) {iterations = 300}
+                                        else {iterations = 100}
+                                    }
+                            
+                                    if (values.heatDailyEnergyRequired < 0.499) values.heatDailyEnergyRequired = 0.49 // avoids NaNs
                                     /* To get a better startig popint for the tank size */
-
                                     if (values.tankMassOverride !== undefined && values.tankMassOverride !== null && values.tankMassOverride !== 0) {
                                         values.tankMass = values.tankMassOverride
                                     }
                                     else {
                                         // use the default
-                                        values.tankMass = values.heatDailyEnergyRequired *4200/values.tankSpecificHeatCapacity;
+                                        values.tankMass = values.heatDailyEnergyRequired *40000/values.tankSpecificHeatCapacity;
                                     }
 
                                     for (let i = 0; i < iterations; i++) {
@@ -148,7 +151,9 @@ const ThermalForm = () => {
                                         }
                                         else {
                                             // use the default
-                                            values.tankMass = (values.tankMass + 0.001) / (values.heatProportionOfCentralHeating + 0.001)
+                                            values.tankMass = (values.tankMass + 0.0003) / (values.heatProportionOfCentralHeating + 0.0001)
+
+                                            if (values.tankMass < -200 ) values.tankMass = -200 // avoids instability for low power requirement
                                         }
 
                                         /* The energy loss calculation based on tank paramters and shift */
@@ -165,6 +170,7 @@ const ThermalForm = () => {
                                             Math.exp(-1 * values.tankEnergyLossCoeficient / (values.tankSpecificHeatCapacity * values.tankMass) * 3600 * values.timeShiftHoursN)
 
                                         values.timeTempDropOverHours = values.tankMaxTemperature - values.timeTemperatureAfterNCoolingNoHeatAndDraw
+                                        
 
                                         values.timeEnergyLostFinalfterN = (values.timeTempDropOverHours * values.tankSpecificHeatCapacity * values.tankMass / 1000) / 3600
 
@@ -176,16 +182,18 @@ const ThermalForm = () => {
                                         values.tankEnergyAfterNHoursCooling = values.tankEnergyJoules * 1000 / 3600 - values.timeEnergyLostFinalfterN
 
 
-                                        values.heatProportionOfCentralHeating = values.tankEnergyAfterNHoursCooling / (values.heatDailyEnergyRequired + 0.0001)
+                                        values.heatProportionOfCentralHeating = values.tankEnergyAfterNHoursCooling / (values.heatDailyEnergyRequired + 0.00001)
                                         ///=if(D5>0,D5,(B5+0.001)/(B17+0.001))            
 
                                         // tank energy in kwh assuming minimum useful enrgy temperature temperature difference
                                         values.tankEnergy = (values.tankEnergyJoules * 1000) / 3600 // MJ -> kWh
+                                        if (values.tankEnergy < 0) values.tankEnergy = 0
                                         // Temperature Drop after N hours=B6-B21 =  Tank max. temperature - Temperature after N hours of no heat and no draw
                                         // Energy lost over N hours cooling during time-shift =(B22*B4*B5/1000)/3600  = (Temperature_Drop_after_N_hours * Store_specific_heat_capacity * Tank_Store_Mass/1000)/3600
                                         values.timeShiftEnergyLost = (values.timeTempDropOverHours * values.tankSpecificHeatCapacity * values.tankMass / 1000) / 3600
-
+                
                                         values.timeEnergyLossMaxTemp = values.tankEnergyLossCoeficient * (values.tankMaxTemperature - values.tankAmbientTemperature) * values.timeShiftHoursN / 1000
+                                        if (values.timeEnergyLossMaxTemp < 0 ) values.timeEnergyLossMaxTemp = 0
                                         values.timeEnergyLostNMaxTempFraction = values.timeEnergyLossMaxTemp / values.tankEnergy
 
                                         values.instantaneousHeatingCostFlatRate = (values.heatDailyEnergyRequired * values.standardRateEnergyCost) / 100
