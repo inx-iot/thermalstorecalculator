@@ -25,7 +25,7 @@ const ThermalForm = () => {
         lowRateEnergyCost: 8,
         highRateEnergyCost: 34,
 
-        tankSpecificHeatCapacity: 4200, // asssume water 
+        tankSpecificHeatCapacity: 4181, // asssume water 
         tankMass: 400, // this is one of the larger tanks
         tankMassOverride: null,
         tankMaxTemperature: 90,
@@ -128,7 +128,7 @@ const ThermalForm = () => {
                                     var iterations
                                     if (values.tankMassOverride !== undefined && values.tankMassOverride !== null && values.tankMassOverride !== 0) iterations = 1
                                     else {
-                                        if ( values.heatDailyEnergyRequired < 2 ) {iterations = 300}
+                                        if ( values.heatDailyEnergyRequired < 2 ) {iterations = 100}
                                         else {iterations = 100}
                                     }
                             
@@ -150,10 +150,15 @@ const ThermalForm = () => {
                                             values.tankMass = values.tankMassOverride //todo: needlessly repeated
                                         }
                                         else {
-                                            // use the default
-                                            values.tankMass = (values.tankMass + 0.0003) / (values.heatProportionOfCentralHeating + 0.0001)
+                                            //if ( values.heatDailyEnergyRequired < 2 ) { // don't try to account for temperature drop as it will likely be random
+                                            //if (i < 1) {
+                                            //    values.tankMass = values.heatDailyEnergyRequired * 3600*1000 /(values.tankSpecificHeatCapacity*(values.tankMaxTemperature-values.tankMinUsefulTemperature))
+                                            //}
+                                            //else {
+                                                values.tankMass = (values.tankMass + 0.0003) / (values.heatProportionOfCentralHeating + 0.0001)
+                                            //}
 
-                                            if (values.tankMass < -200 ) values.tankMass = -200 // avoids instability for low power requirement
+                                           // if (values.tankMass < -200 ) values.tankMass = -200 // avoids instability for low power requirement
                                         }
 
                                         /* The energy loss calculation based on tank paramters and shift */
@@ -239,7 +244,7 @@ const ThermalForm = () => {
                                         "thermalStorageVsHeatPumpFlatRate": values.thermalStorageVsHeatPumpFlatRate * 100,
                                         "thermalStorageVsHeatPumpPeakRate": values.thermalStorageVsHeatPumpPeakRate * 100,
                                         "thermalStoragePotentialWastedExpense": values.thermalStoragePotentialWastedExpense * 100,
-                                        "thermalStorageHighTempRateCost": values.thermalStorageHighTempRateCost * 100,
+                                        "thermalStorageHighTempRateCost": values.thermalStorageHighTempRateCost,
                                         "tankMass": values.tankMass,
                                         "heatDailyEnergyRequired": values.heatDailyEnergyRequired
                                     };
@@ -258,10 +263,8 @@ const ThermalForm = () => {
                 }) => (
                     <form onSubmit={handleSubmit} autoComplete="off" noValidate>
                         {/* <DebugButton data={values} /> */}
-
                         <Grid container spacing={2}>
                             <Grid item xs={8} sm={9} md={9}>
-
                                 <TimeFormFields />
                                 <HeatDemandFields />
                                 <TariffFormFields />
@@ -270,13 +273,11 @@ const ThermalForm = () => {
                                 <HeatPumpCostsFields />
                             </Grid>
                             <Grid item xs={6} sm={3} md={3}>
-                                {values.timeEnergyLostFinalfterN !== undefined && <Chart labels={[`Stored Energy Available`, `Energy lost over ${values.timeShiftHoursN} hours cooling`]} data={[values.tankEnergyAfterNHoursCooling.toFixed(2), values.timeEnergyLostFinalfterN.toFixed(2)]} />}
-
-                                {values.thermalStorageVsHeatPumpFlatRate !== undefined && values.heatPumpCostFlatRate && <Chart labels={['Heat Pump cost/day @ flat rate)', 'Time-shifted direct @ Low Rate']} data={[values.heatPumpCostFlatRate.toFixed(2), values.thermalStorageDailyCost.toFixed(2)]} />}
+                                {values.timeEnergyLostFinalfterN !== undefined && <Chart labels={[`Stored kWh Available`, `kWh lost over ${values.timeShiftHoursN} hours`]} data={[values.tankEnergyAfterNHoursCooling.toFixed(1), values.timeEnergyLostFinalfterN.toFixed(1)]} />}
+                                {values.thermalStorageVsHeatPumpFlatRate !== undefined && values.heatPumpCostFlatRate && <Chart labels={['Heat pump £/day@flat rate)', 'Time-shifted direct £/day@low Rate']} data={[values.heatPumpCostFlatRate.toFixed(2), values.thermalStorageDailyCost.toFixed(2)]} />}
                                 <ThermalStorageFields />
                             </Grid>
                         </Grid>
-
                     </form>
                 )}
             />
