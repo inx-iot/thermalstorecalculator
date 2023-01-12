@@ -272,14 +272,6 @@ const ThermalForm = () => {
                             <Grid item xs={8} sm={9} md={9}>
                                 <TimeFormFields />
                                 <HeatDemandFields />
-                                <HouseMenu />
-                                <HeatingTypeMenu />
-                                {/* {((heatingType === "Central Heating & Hot water" || "Central Heating Only") && (<AtHomeMenu />))} */}
-                                <AtHomeMenu />
-                                <HotWaterTimeMenu />
-                                <ThermalStoreMenu />
-                                <HeatPumpRegionMenu />
-                                <SeasonalWeightingMenu />
                                 <ThermalFormFields />
                                 <TariffFormFields />
                                 <InstantaneousCostsFields />
