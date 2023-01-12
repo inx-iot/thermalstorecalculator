@@ -20,6 +20,11 @@ code {
   padding-bottom: 0px !important;
 }
 
+.backColour {
+  background-color: #eeeee4;
+  margin-top: 10px;
+}
+
 .InputAdornment {
   margin-left: 2px !important;
   margin-right: 0px !important;

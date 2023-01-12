@@ -11,8 +11,13 @@ import TariffFormFields from "./TarifFormFields";
 import ThermalFormFields from "./ThermalFormFields";
 import ThermalStorageFields from "./ThermalStorageFields";
 import TimeFormFields from "./TimeFormFields";
-
-
+import HouseMenu from "./simplifiedParameters/HouseMenu";
+import HeatingTypeMenu from "./simplifiedParameters/HeatingTypeMenu";
+import AtHomeMenu from "./simplifiedParameters/AtHomeMenu";
+import HotWaterTimeMenu from "./simplifiedParameters/HotWaterTimeMenu";
+import ThermalStoreMenu from "./simplifiedParameters/ThermalStoreMenu";
+import HeatPumpRegionMenu from "./simplifiedParameters/HeatPumpRegionMenu";
+import SeasonalWeightingMenu from "./simplifiedParameters/SeasonalWeightingMenu";
 
 
 

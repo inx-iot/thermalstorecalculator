@@ -13,7 +13,7 @@ const HeatDemandFields = () => {
         }}
     >
         {({ values, form }) => (<ContainerThing title="Storage Capacity Calculator">
-            <NumberField md={3} xs={4} sm={4} name="heatEnergyDwellingYear" label="Annual Energy" unitChar="kWh/dw" type="int" longText="THe heating energy requirement per dwelling per year. (UK average is 12000kwh/dw/year)" />
+            <NumberField md={3} xs={4} sm={4} name="heatEnergyDwellingYear" label="Annual Energy" unitChar="kWh/dw" type="int" longText="The heating energy requirement per dwelling per year. (UK average is 12000kwh/dw/year)" />
             <NumberField md={3} xs={4} sm={4} name="heatUsedDaysPerYear" label="Days/year" longText="The total number of days per year that the heating is needed (e.g. just winter heating months for costing CH)" type="int" />
 
             <InfoThing md={3} xs={4} sm={4} textA="Daily need" textB="kWh" description="Calculated from the annual requirement. If you know the daily requirement override this with the tool icon" value={values.heatDailyEnergyRequired} valueDecimalPlace={0} resetFunction={e => {
