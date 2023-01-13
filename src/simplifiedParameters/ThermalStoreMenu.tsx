@@ -1,60 +1,97 @@
 import React, { useState } from "react";
-import DropDown from "./thermalStoreDropDown";
 
-const ThermalStoreMenu: React.FC = (): JSX.Element => {
-  const [showDropDown, setShowDropDown] = useState<boolean>(false);
-  const [selectThermalStore, setSelectThermalStore] = useState<string>("");
-  const thermalStore = () => {
-    return ["Water cylinder based high temperature Thermal Storage (size calculated for you)", 
-            "Water cylinder (Standard maximum temperature limiter) (size is calculated for you)", 
-            "Specific Water cylinder (user enters the size).", 
-            "Specific thermal storage (user enters the storage capacity in kWh - this isn't  over-ridable in the current UI, but you can leave this non-functional for now)"
-            ];
+const ThermalStorageMenu = () => {
+  const [selectThermalStorage, setSelectThermalStorage] = useState<String>();
+
+  const radioHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSelectThermalStorage(event.target.value);
   };
 
-  const toggleDropDown = () => {
-    setShowDropDown(!showDropDown);
+  const optionHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSelectThermalStorage(event.target.value);
   };
 
-  const dismissHandler = (event: React.FocusEvent<HTMLButtonElement>): void => {
-    if (event.currentTarget === event.target) {
-      setShowDropDown(false);
-    }
-  };
+  const userInputWaterOption =
+    selectThermalStorage === "Enter value here water" ||
+    document.getElementById("valueEnteredWater");
 
-  const thermalStoreSelection = (thermalStore: string): void => {
-    setSelectThermalStore(thermalStore);
-  };
+  const userInputThermalStorage =
+    selectThermalStorage === "Enter value here thermal" ||
+    document.getElementById("valueEnteredThermal");
 
   return (
-    <>
-      <div className="announcement">
-        <div>
-          {selectThermalStore
-            ? `You selected ${selectThermalStore}`
-            : "Select your thermal storage"}
-        </div>
-      </div>
-      <button
-        className={showDropDown ? "active" : undefined}
-        onClick={(): void => toggleDropDown()}
-        onBlur={(e: React.FocusEvent<HTMLButtonElement>): void =>
-          dismissHandler(e)
-        }
-      >
-        <div>{selectThermalStore ? selectThermalStore : "Select ..."} </div>
-        {showDropDown && (
-          <DropDown
-            thermalStore={thermalStore()}
-            showDropDown={false}
-            toggleDropDown={(): void => toggleDropDown()}
-            thermalStoreSelection={thermalStoreSelection}
+    <div className="container">
+      <p>Thermal store parameters </p>
+      <p>
+        <input
+          type="radio"
+          name="thermalStoreCapacity"
+          value="waterCylinderHigh"
+          id="waterCylinderHigh"
+          onChange={radioHandler}
+        />
+        <label htmlFor="waterCylinderHigh">
+          Water cylinder based high temperature Thermal Storage (size calculated
+          for you)
+        </label>
+      </p>
+
+      <p>
+        <input
+          type="radio"
+          name="thermalStoreCapacity"
+          value="waterCylinderStandard"
+          id="waterCylinderStandard"
+          onChange={radioHandler}
+        />
+        <label htmlFor="waterCylinderStandard">
+          Water cylinder (Standard maximum temperature limiter) (size is
+          calculated for you)
+        </label>
+      </p>
+
+      <p>
+        <input
+          type="radio"
+          name="thermalStoreCapacity"
+          value="Enter value here water"
+          id="specificWaterCylinder"
+          onChange={radioHandler}
+        />
+        <label htmlFor="specificWaterCylinder">
+          Please enter the size of your water cylinder (litres) {" "}
+        </label>
+        {userInputWaterOption&& (
+        <input
+          type="number"
+          name="thermalStoreCapacity"
+          id="valueEnteredWater"
+          onChange={optionHandler}
+        />)}
+      </p>
+
+      <p>
+        <input
+          type="radio"
+          name="thermalStoreCapacity"
+          value="Enter value here thermal"
+          id="userDefined"
+          onChange={radioHandler}
+        />
+        <label htmlFor="userDefined">
+          Please enter your thermal storage capacity (kWh){" "}
+        </label>
+        {userInputThermalStorage && (
+          <input
+            type="number"
+            name="thermalStoreCapacity"
+            id="valueEnteredThermal"
+            onChange={optionHandler}
           />
         )}
-      </button>
-    </>
+      </p>
+    </div>
   );
 };
 
-export default ThermalStoreMenu;
-
+export default ThermalStorageMenu;

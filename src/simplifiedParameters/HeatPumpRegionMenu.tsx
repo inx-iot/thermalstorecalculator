@@ -27,9 +27,7 @@ const HeatPumpRegionMenu: React.FC = (): JSX.Element => {
     <>
       <div className="announcement">
         <div>
-          {selectHeatPumpRegionMenu
-            ? `You selected ${selectHeatPumpRegionMenu}`
-            : "Select your region"}
+          {"Select your region"}
         </div>
       </div>
       <button
