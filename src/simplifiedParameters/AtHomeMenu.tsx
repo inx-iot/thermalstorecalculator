@@ -1,10 +1,5 @@
 import React, { useState } from "react";
 import DropDown from "./atHomeDropDown";
-
-// interface AtHomeMenu {
-//   selectAtHome: string,
-//   setSelectAtHome: any 
-// }
  
 const AtHomeMenu: React.FC = ({ }): JSX.Element => {
   const [showDropDown, setShowDropDown] = useState<boolean>(false);
@@ -16,10 +11,6 @@ const AtHomeMenu: React.FC = ({ }): JSX.Element => {
   const toggleDropDown = () => {
     setShowDropDown(!showDropDown);
   };
-
-  // const showAtHomeMenu = (heatingType === "Central Heating & Hot water" || "Central Heating Only");
-
-  // console.log(showAtHomeMenu);
 
   const dismissHandler = (event: React.FocusEvent<HTMLButtonElement>): void => {
     if (event.currentTarget === event.target) {
