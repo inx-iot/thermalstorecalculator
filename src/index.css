@@ -21,8 +21,11 @@ code {
 }
 
 .backColour {
-  background-color: #eeeee4;
+  background-color: #bee0ec;
   margin-top: 10px;
+  border-radius: 10px;
+  padding: 10px;
+  color: #134b5f;
 }
 
 .InputAdornment {

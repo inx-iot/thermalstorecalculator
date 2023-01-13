@@ -14,12 +14,12 @@ type TabsType = {
 // Tabs Array
 const tabs: TabsType = [
   {
-    label: "Basic form",
+    label: "Simple parameters",
     index: 1,
     Component: BasicForm
   },
   {
-    label: "Complicated form",
+    label: "Additional parameters",
     index: 2,
     Component: ThermalForm
   }

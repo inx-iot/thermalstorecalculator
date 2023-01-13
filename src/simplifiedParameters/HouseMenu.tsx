@@ -27,9 +27,7 @@ const HouseMenu: React.FC = (): JSX.Element => {
     <>
       <div className="announcement">
         <div>
-          {selectHouse
-            ? `You selected ${selectHouse}`
-            : "Select your house type"}
+          {"Select your house type"}
         </div>
       </div>
       <button

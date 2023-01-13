@@ -1,7 +1,12 @@
 import React, { useState } from "react";
 import DropDown from "./atHomeDropDown";
 
-const AtHomeMenu: React.FC = (): JSX.Element => {
+// interface AtHomeMenu {
+//   selectAtHome: string,
+//   setSelectAtHome: any 
+// }
+ 
+const AtHomeMenu: React.FC = ({ }): JSX.Element => {
   const [showDropDown, setShowDropDown] = useState<boolean>(false);
   const [selectAtHome, setSelectAtHome] = useState<string>("");
   const atHome = () => {
@@ -12,6 +17,9 @@ const AtHomeMenu: React.FC = (): JSX.Element => {
     setShowDropDown(!showDropDown);
   };
 
+  // const showAtHomeMenu = (heatingType === "Central Heating & Hot water" || "Central Heating Only");
+
+  // console.log(showAtHomeMenu);
 
   const dismissHandler = (event: React.FocusEvent<HTMLButtonElement>): void => {
     if (event.currentTarget === event.target) {
@@ -25,32 +33,27 @@ const AtHomeMenu: React.FC = (): JSX.Element => {
 
   return (
     <>
-      <div className="announcement">
+     <div className="announcement">
         <div>
-          {selectAtHome
-            ? `You are ${selectAtHome}`
-            : "Select when you are home"}
+          {"Select when you are home"}
         </div>
-      </div>
-      <button
+      </div><button
         className={showDropDown ? "active" : undefined}
         onClick={(): void => toggleDropDown()}
-        onBlur={(e: React.FocusEvent<HTMLButtonElement>): void =>
-          dismissHandler(e)
-        }
+        onBlur={(e: React.FocusEvent<HTMLButtonElement>): void => dismissHandler(e)}
       >
-        <div>{selectAtHome ? selectAtHome : "Select ..."} </div>
-        {showDropDown && (
-          <DropDown
-            atHome={atHome()}
-            showDropDown={false}
-            toggleDropDown={(): void => toggleDropDown()}
-            atHomeSelection={atHomeSelection}
-          />
-        )}
-      </button>
-    </>
-  );
-};
+          <div>{selectAtHome ? selectAtHome : "Select ..."} </div>
+          {showDropDown && (
+            <DropDown
+              atHome={atHome()}
+              showDropDown={false}
+              toggleDropDown={(): void => toggleDropDown()}
+              atHomeSelection={atHomeSelection} />
+          )}
+        </button>
+      </>
+    )
+}
+
 
 export default AtHomeMenu;

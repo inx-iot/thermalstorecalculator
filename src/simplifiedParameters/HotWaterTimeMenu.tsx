@@ -1,7 +1,12 @@
 import React, { useState } from "react";
 import DropDown from "./hotWaterTimeDropDown";
 
-const HotWaterTimeMenu: React.FC = (): JSX.Element => {
+// interface HotWaterTimeMenu {
+//   selectHotWaterTime: any,
+//   setSelectHotWaterTime: any
+// }
+
+const HotWaterTimeMenu: React.FC = ({ }): JSX.Element => {
   const [showDropDown, setShowDropDown] = useState<boolean>(false);
   const [selectHotWaterTime, setSelectHotWaterTime] = useState<string>("");
   const hotWaterTime = () => {
@@ -27,9 +32,7 @@ const HotWaterTimeMenu: React.FC = (): JSX.Element => {
     <>
       <div className="announcement">
         <div>
-          {selectHotWaterTime
-            ? `You use hot water in the ${selectHotWaterTime}.`
-            : "Select when you need hot water"}
+          {"Select when you need hot water"}
         </div>
       </div>
       <button

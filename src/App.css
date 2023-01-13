@@ -74,6 +74,7 @@ button.active {
   color: #0062cc;
   text-align: left;
   border-radius: 0.25rem;
+  z-index: 10;
 }
 .dropdown > p {
   margin: 0;
