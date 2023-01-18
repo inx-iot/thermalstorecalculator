@@ -10,7 +10,7 @@ interface HeatingTypeMenu {
 const HeatingTypeMenu: React.FC<HeatingTypeMenu> = ( {selectHeatingType, setSelectHeatingType}): JSX.Element => {
   const [showDropDown, setShowDropDown] = useState<boolean>(false);
   const heatingType = () => {
-    return ["Central Heating & Hot water", "Hot Water only", "Central Heating Only"];
+    return ["Central heating & hot water", "Hot water only", "Central heating only"];
   };
 
   const toggleDropDown = () => {
@@ -31,9 +31,9 @@ const HeatingTypeMenu: React.FC<HeatingTypeMenu> = ( {selectHeatingType, setSele
   return (
     <>
       <div className="announcement">
-        <div>
-          {"Select your heating type"}
-        </div>
+        <h3>
+          {"Select your heating type:"}
+        </h3>
       </div>
       <button
         className={showDropDown ? "active" : undefined}

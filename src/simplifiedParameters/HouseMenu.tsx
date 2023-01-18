@@ -26,9 +26,9 @@ const HouseMenu: React.FC = (): JSX.Element => {
   return (
     <>
       <div className="announcement">
-        <div>
-          {"Select your house type"}
-        </div>
+        <h3>
+          {"Select your house type:"}
+        </h3>
       </div>
       <button
         className={showDropDown ? "active" : undefined}

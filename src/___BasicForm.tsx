@@ -9,18 +9,19 @@ import HotWaterTimeMenu from "./simplifiedParameters/HotWaterTimeMenu";
 import ThermalStoreMenu from "./simplifiedParameters/ThermalStoreMenu";
 import HeatPumpRegionMenu from "./simplifiedParameters/HeatPumpRegionMenu";
 import SeasonalWeightingMenu from "./simplifiedParameters/SeasonalWeightingMenu";
+import Chart from "./Chart";
+import ThermalStorageFields from "./ThermalStorageFields";
 
 const BasicForm = () => {
 
     const [selectHeatingType, setSelectHeatingType] = useState<string>("");
-    const renderAtHomeMenu = (selectHeatingType !== "Hot Water only");
+
     const prevSelectHeating = selectHeatingType;
 
-    // "Central Heating & Hot water", "Hot Water only", "Central Heating Only"
+    const renderAtHomeMenu = ((prevSelectHeating !== "Hot water only") && prevSelectHeating !== "");
+    const renderHotWaterTimeMenu = ((prevSelectHeating !== "Central heating only") && prevSelectHeating !== "")
 
-    const renderHotWaterTimeMenu = (prevSelectHeating !== "Central Heating Only")
-
-    return <Card>
+    return <Card className="cardSimple">
         <CardContent>
 
             <Form <any>
@@ -30,15 +31,11 @@ const BasicForm = () => {
                 }}
                 render={({
                     handleSubmit,
-                    pristine,
-                    invalid,
-                    dirtySinceLastSubmit,
-                    values,
                 }) => (
                     <form onSubmit={handleSubmit} autoComplete="off" noValidate>
                         {/* <DebugButton data={values} /> */}
                         <Grid container spacing={2}>
-                            <Grid item xs={8} sm={9} md={9}>
+                            <Grid item xs={8} sm={9} md={9} >
                                 <HouseMenu />
                                 <HeatingTypeMenu 
                                   selectHeatingType={selectHeatingType}

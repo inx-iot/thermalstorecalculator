@@ -5,7 +5,7 @@ const HeatPumpRegionMenu: React.FC = (): JSX.Element => {
   const [showDropDown, setShowDropDown] = useState<boolean>(false);
   const [selectHeatPumpRegionMenu, setSelectHeatPumpRegionMenu] = useState<string>("");
   const heatPumpRegion = () => {
-    return ["South of England", "Midland", "North England", "Scotland"];
+    return ["South of England", "Midlands", "North England", "Scotland"];
   };
 
   const toggleDropDown = () => {
@@ -26,9 +26,9 @@ const HeatPumpRegionMenu: React.FC = (): JSX.Element => {
   return (
     <>
       <div className="announcement">
-        <div>
-          {"Select your region"}
-        </div>
+        <h3>
+          {"Select your region:"}
+        </h3>
       </div>
       <button
         className={showDropDown ? "active" : undefined}

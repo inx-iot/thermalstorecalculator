@@ -25,9 +25,9 @@ const AtHomeMenu: React.FC = ({ }): JSX.Element => {
   return (
     <>
      <div className="announcement">
-        <div>
-          {"Select when you are home"}
-        </div>
+        <h3>
+          {"Select when you are home:"}
+        </h3>
       </div><button
         className={showDropDown ? "active" : undefined}
         onClick={(): void => toggleDropDown()}

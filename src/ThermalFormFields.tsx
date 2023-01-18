@@ -22,13 +22,13 @@ const ThermalFormFields = () => {
                 <NumberField name="tankMassOverride" xs={12} sm={12} md={12} label="Store Mass Override" longText="If you have a fixed storage size then enter it here." helpText="(J/kg/&#8451;)" type="int" />
 
             </InfoThing>
-            <NumberField name="tankMaxTemperature" xs={4} sm={4} md={4} label="Maximum temp." longText="The temperature the store will be heated to during the low cost period" helpText="&#8451;" type="int" />
+            <NumberField name="tankMaxTemperature" xs={4} sm={4} md={4} label="Maximum temp." longText="The temperature the store will be heated to during the low cost period." helpText="&#8451;" type="int" />
             <NumberField name="tankMinUsefulTemperature" xs={4} sm={4} md={4} label="Min. useful temp." longText="The lowest temperature of the store that provides useful heat to the" helpText="&#8451;" type="int" />
-            <NumberField name="tankAmbientTemperature" xs={4} sm={4} md={4} label="Ambient temperature" longText="temperature surrounding the storage" helpText="&#8451;" type="int" />
-            <NumberField name="tankEnergyLossCoeficient" xs={4} sm={4} md={4} label="Storage Energy Loss Coefficient" longText=" e.g (daily loss in kWh/24)/(operating temperature - ambient temperature) " helpText="W/&#8451;" type="int"/>
-            <InfoThing textA="Useful Energy" textB="kWh" xs={4} sm={4} md={4} valueDecimalPlace={1} value={values.tankEnergy} description="Energy available at max temperature before the minimum useful temperature is reached" />
-            <InfoThing textA="Energy Stored" textB="kWh" xs={4} sm={4} md={4} valueDecimalPlace={1} value={values.tankEnergyAfterNHoursCooling} description={`Energy remaining after ${values.timeShiftHoursN} hours cooling`} />
-            <InfoThing textA="Insulation loss" xs={4} sm={4} md={4} textB="Watts" valueDecimalPlace={0} value={values.tankEnergyLossWatts} description="Power loss at maximum store temperature" />
+            <NumberField name="tankAmbientTemperature" xs={4} sm={4} md={4} label="Ambient temperature" longText="Temperature surrounding the storage." helpText="&#8451;" type="int" />
+            <NumberField name="tankEnergyLossCoeficient" xs={4} sm={4} md={4} label="Storage Energy Loss Coefficient" longText=" e.g. (daily loss in kWh/24)/(operating temperature - ambient temperature) " helpText="W/&#8451;" type="int"/>
+            <InfoThing textA="Useful Energy" textB="kWh" xs={4} sm={4} md={4} valueDecimalPlace={1} value={values.tankEnergy} description="Energy available at max temperature before the minimum useful temperature is reached." />
+            <InfoThing textA="Energy Stored" textB="kWh" xs={4} sm={4} md={4} valueDecimalPlace={1} value={values.tankEnergyAfterNHoursCooling} description={`Energy remaining after ${values.timeShiftHoursN} hours cooling.`} />
+            <InfoThing textA="Insulation loss" xs={4} sm={4} md={4} textB="Watts" valueDecimalPlace={0} value={values.tankEnergyLossWatts} description="Power loss at maximum store temperature." />
         </ContainerThing>)
         }
     </FormSpy >
