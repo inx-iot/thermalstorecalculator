@@ -31,9 +31,9 @@ const HotWaterTimeMenu: React.FC = ({ }): JSX.Element => {
   return (
     <>
       <div className="announcement">
-        <div>
-          {"Select when you need hot water"}
-        </div>
+        <h3>
+          {"Select when you need hot water:"}
+        </h3>
       </div>
       <button
         className={showDropDown ? "active" : undefined}

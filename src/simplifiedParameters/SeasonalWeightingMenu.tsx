@@ -16,7 +16,7 @@ const SeasonalWeightingMenu = () => {
 
   return (
     <div className="container">
-      <p>Please select from the following seasonal weightings </p>
+      <h3>Please select from the following seasonal weightings: </h3>
       <p>
         <input
           type="radio"

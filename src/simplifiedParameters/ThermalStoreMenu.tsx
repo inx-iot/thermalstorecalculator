@@ -21,7 +21,7 @@ const ThermalStorageMenu = () => {
 
   return (
     <div className="container">
-      <p>Thermal store parameters </p>
+      <h3>Thermal store parameters: </h3>
       <p>
         <input
           type="radio"
