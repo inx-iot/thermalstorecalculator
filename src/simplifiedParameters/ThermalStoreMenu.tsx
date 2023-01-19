@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import BasicContainerThing from "../util/basicContainer";
 
 const ThermalStorageMenu = () => {
   const [selectThermalStorage, setSelectThermalStorage] = useState<String>();
@@ -20,9 +21,8 @@ const ThermalStorageMenu = () => {
     document.getElementById("valueEnteredThermal");
 
   return (
-    <div className="container">
-      <h3>Thermal store parameters: </h3>
-      <p>
+    <BasicContainerThing title="Thermal store parameters:">
+      <div className="radioButtons">
         <input
           type="radio"
           name="thermalStoreCapacity"
@@ -34,9 +34,9 @@ const ThermalStorageMenu = () => {
           Water cylinder based high temperature Thermal Storage (size calculated
           for you)
         </label>
-      </p>
+      </div>
 
-      <p>
+      <div className="radioButtons">
         <input
           type="radio"
           name="thermalStoreCapacity"
@@ -48,9 +48,9 @@ const ThermalStorageMenu = () => {
           Water cylinder (Standard maximum temperature limiter) (size is
           calculated for you)
         </label>
-      </p>
+      </div>
 
-      <p>
+      <div className="radioButtonsColumn">
         <input
           type="radio"
           name="thermalStoreCapacity"
@@ -68,9 +68,9 @@ const ThermalStorageMenu = () => {
           id="valueEnteredWater"
           onChange={optionHandler}
         />)}
-      </p>
+      </div>
 
-      <p>
+      <div className="radioButtons">
         <input
           type="radio"
           name="thermalStoreCapacity"
@@ -89,8 +89,8 @@ const ThermalStorageMenu = () => {
             onChange={optionHandler}
           />
         )}
-      </p>
-    </div>
+      </div>
+    </BasicContainerThing>
   );
 };
 

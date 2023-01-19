@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import BasicContainerThing from "../util/basicContainer";
 import DropDown from "./heatPumpRegionDropDown";
 
 const HeatPumpRegionMenu: React.FC = (): JSX.Element => {
@@ -25,11 +26,7 @@ const HeatPumpRegionMenu: React.FC = (): JSX.Element => {
 
   return (
     <>
-      <div className="announcement">
-        <h3>
-          {"Select your region:"}
-        </h3>
-      </div>
+      <BasicContainerThing title="Select your region:">
       <button
         className={showDropDown ? "active" : undefined}
         onClick={(): void => toggleDropDown()}
@@ -47,6 +44,7 @@ const HeatPumpRegionMenu: React.FC = (): JSX.Element => {
           />
         )}
       </button>
+      </BasicContainerThing>
     </>
   );
 };

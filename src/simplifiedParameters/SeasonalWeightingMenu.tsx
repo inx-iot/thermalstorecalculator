@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import BasicContainerThing from "../util/basicContainer";
 
 const SeasonalWeightingMenu = () => {
   const [selectedSeasonalWeighting, setSelectedSeasonalWeighting] =
@@ -15,9 +16,8 @@ const SeasonalWeightingMenu = () => {
   const userInputOption = (selectedSeasonalWeighting === "Enter value here" || document.getElementById('valueEntered')) 
 
   return (
-    <div className="container">
-      <h3>Please select from the following seasonal weightings: </h3>
-      <p>
+    <BasicContainerThing title="Please select from the following seasonal weightings:">
+      <div className="radioButtons">
         <input
           type="radio"
           name="seasonalWeighting"
@@ -29,9 +29,9 @@ const SeasonalWeightingMenu = () => {
           SCOP values (averaged over year of space heating - add an explainer
           that this weighted towards higher heating usage in winter)
         </label>
-      </p>
+     </div><br></br>
 
-      <p>
+      <div className="radioButtonsColumn">
         <input
           type="radio"
           name="seasonalWeighting"
@@ -42,9 +42,9 @@ const SeasonalWeightingMenu = () => {
         <label htmlFor="COPwinter">
           COP-Winter (winter months December-February)
         </label>
-      </p>
+      </div>
 
-      <p>
+      <div className="radioButtonsColumn">
         <input
           type="radio"
           name="seasonalWeighting"
@@ -55,9 +55,9 @@ const SeasonalWeightingMenu = () => {
         <label htmlFor="COPaverage">
           COP-Average (Average of OEM quoted values)
         </label>
-      </p>
+      </div>
 
-      <p>
+      <div className="radioButtons">
         <input
           type="radio"
           name="seasonalWeighting"
@@ -72,8 +72,8 @@ const SeasonalWeightingMenu = () => {
           id="valueEntered"
           onChange={optionHandler}
         />}
-      </p>
-    </div>
+      </div>
+    </BasicContainerThing>
   );
 };
 

@@ -1,12 +1,8 @@
 import React, { useState } from "react";
+import BasicContainerThing from "../util/basicContainer";
 import DropDown from "./hotWaterTimeDropDown";
 
-// interface HotWaterTimeMenu {
-//   selectHotWaterTime: any,
-//   setSelectHotWaterTime: any
-// }
-
-const HotWaterTimeMenu: React.FC = ({ }): JSX.Element => {
+const HotWaterTimeMenu: React.FC = ({}): JSX.Element => {
   const [showDropDown, setShowDropDown] = useState<boolean>(false);
   const [selectHotWaterTime, setSelectHotWaterTime] = useState<string>("");
   const hotWaterTime = () => {
@@ -16,7 +12,6 @@ const HotWaterTimeMenu: React.FC = ({ }): JSX.Element => {
   const toggleDropDown = () => {
     setShowDropDown(!showDropDown);
   };
-
 
   const dismissHandler = (event: React.FocusEvent<HTMLButtonElement>): void => {
     if (event.currentTarget === event.target) {
@@ -30,28 +25,25 @@ const HotWaterTimeMenu: React.FC = ({ }): JSX.Element => {
 
   return (
     <>
-      <div className="announcement">
-        <h3>
-          {"Select when you need hot water:"}
-        </h3>
-      </div>
-      <button
-        className={showDropDown ? "active" : undefined}
-        onClick={(): void => toggleDropDown()}
-        onBlur={(e: React.FocusEvent<HTMLButtonElement>): void =>
-          dismissHandler(e)
-        }
-      >
-        <div>{selectHotWaterTime ? selectHotWaterTime : "Select ..."} </div>
-        {showDropDown && (
-          <DropDown
-            hotWaterTime={hotWaterTime()}
-            showDropDown={false}
-            toggleDropDown={(): void => toggleDropDown()}
-            hotWaterTimeSelection={hotWaterTimeSelection}
-          />
-        )}
-      </button>
+      <BasicContainerThing title="Select when you need hot water:">
+        <button
+          className={showDropDown ? "active" : undefined}
+          onClick={(): void => toggleDropDown()}
+          onBlur={(e: React.FocusEvent<HTMLButtonElement>): void =>
+            dismissHandler(e)
+          }
+        >
+          <div>{selectHotWaterTime ? selectHotWaterTime : "Select ..."} </div>
+          {showDropDown && (
+            <DropDown
+              hotWaterTime={hotWaterTime()}
+              showDropDown={false}
+              toggleDropDown={(): void => toggleDropDown()}
+              hotWaterTimeSelection={hotWaterTimeSelection}
+            />
+          )}
+        </button>
+      </BasicContainerThing>
     </>
   );
 };

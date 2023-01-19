@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import BasicContainerThing from "../util/basicContainer";
 import DropDown from "./atHomeDropDown";
  
 const AtHomeMenu: React.FC = ({ }): JSX.Element => {
@@ -24,11 +25,8 @@ const AtHomeMenu: React.FC = ({ }): JSX.Element => {
 
   return (
     <>
-     <div className="announcement">
-        <h3>
-          {"Select when you are home:"}
-        </h3>
-      </div><button
+     <BasicContainerThing title="Select when you are home:">
+        <button
         className={showDropDown ? "active" : undefined}
         onClick={(): void => toggleDropDown()}
         onBlur={(e: React.FocusEvent<HTMLButtonElement>): void => dismissHandler(e)}
@@ -42,6 +40,7 @@ const AtHomeMenu: React.FC = ({ }): JSX.Element => {
               atHomeSelection={atHomeSelection} />
           )}
         </button>
+      </BasicContainerThing>
       </>
     )
 }

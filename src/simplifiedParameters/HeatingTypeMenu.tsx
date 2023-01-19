@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import BasicContainerThing from "../util/basicContainer";
 import DropDown from "./heatingTypeDropDown";
 
 interface HeatingTypeMenu {
@@ -30,11 +31,7 @@ const HeatingTypeMenu: React.FC<HeatingTypeMenu> = ( {selectHeatingType, setSele
 
   return (
     <>
-      <div className="announcement">
-        <h3>
-          {"Select your heating type:"}
-        </h3>
-      </div>
+      <BasicContainerThing title="Select your heating type:">
       <button
         className={showDropDown ? "active" : undefined}
         onClick={(): void => toggleDropDown()}
@@ -52,6 +49,7 @@ const HeatingTypeMenu: React.FC<HeatingTypeMenu> = ( {selectHeatingType, setSele
           />
         )}
       </button>
+      </BasicContainerThing>
     </>
   );
 };
