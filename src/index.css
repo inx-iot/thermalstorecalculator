@@ -72,3 +72,12 @@ code {
 .item_pre_value {
   font-size: 0.8em;
 }
+
+.radioButtons {
+  margin-top: 10px;
+}
+
+.radioButtonsColumn {
+  margin-top: 10px;
+  margin-right: 400px;
+}
