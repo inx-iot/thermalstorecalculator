@@ -2,9 +2,14 @@ import React, { useState } from "react";
 import BasicContainerThing from "../util/basicContainer";
 import DropDown from "./hotWaterTimeDropDown";
 
-const HotWaterTimeMenu: React.FC = ({}): JSX.Element => {
+interface HotWaterTimeMenu {
+  selectHotWaterTime: any,
+  setSelectHotWaterTime: any
+}
+
+const HotWaterTimeMenu: React.FC<HotWaterTimeMenu> = ( {selectHotWaterTime, setSelectHotWaterTime} ): JSX.Element => {
   const [showDropDown, setShowDropDown] = useState<boolean>(false);
-  const [selectHotWaterTime, setSelectHotWaterTime] = useState<string>("");
+
   const hotWaterTime = () => {
     return ["morning", "early evening", "late evening", "random"];
   };

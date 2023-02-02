@@ -1,8 +1,12 @@
 import React, { useState } from "react";
 import BasicContainerThing from "../util/basicContainer";
 
-const ThermalStorageMenu = () => {
-  const [selectThermalStorage, setSelectThermalStorage] = useState<String>();
+interface ThermalStorageMenu {
+  selectThermalStorage: any,
+  setSelectThermalStorage: any
+}
+
+const ThermalStorageMenu: React.FC<ThermalStorageMenu> = ( {selectThermalStorage, setSelectThermalStorage}) => {
 
   const radioHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSelectThermalStorage(event.target.value);
@@ -45,7 +49,7 @@ const ThermalStorageMenu = () => {
           onChange={radioHandler}
         />
         <label htmlFor="waterCylinderStandard">
-          Water cylinder (Standard maximum temperature limiter) (size is
+          Water cylinder - standard maximum temperature limiter (size is
           calculated for you)
         </label>
       </div>

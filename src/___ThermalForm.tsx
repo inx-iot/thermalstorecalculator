@@ -11,56 +11,10 @@ import TariffFormFields from "./TarifFormFields";
 import ThermalFormFields from "./ThermalFormFields";
 import ThermalStorageFields from "./ThermalStorageFields";
 import TimeFormFields from "./TimeFormFields";
+import InitValues from "./util/initValues";
 
 
 const ThermalForm = () => {
-
-    const initValues: IThermalForm = {
-        standardRateEnergyCost: 25,
-        lowRateEnergyCost: 8,
-        highRateEnergyCost: 34,
-
-        tankSpecificHeatCapacity: 4181, // asssume water 
-        tankMass: 400, // this is one of the larger tanks
-        tankMassOverride: null,
-        tankMaxTemperature: 90,
-        tankMinUsefulTemperature: 35,
-        tankAmbientTemperature: 20,
-        tankEnergyLossCoeficient: 3,
-        tankEnergyJoules: 0,
-        tankEnergy: 0,
-        tankEnergyAfterNHoursCooling: 0,
-        tankEnergyAmbient: 0,
-
-        heatEnergyDwellingYear: 8000,
-        heatUsedDaysPerYear: 230,
-        heatDailyEnergyRequired: 1,
-        heatDailyEnergyRequiredOverride: null,
-        heatProportionOfCentralHeating: 0,
-
-        timeShiftHoursN: 10,
-        timeShiftEnergyLost: 0,
-        timeEnergyLossMaxTemp: 0,
-        timeTemperatureAfterNCoolingNoHeatAndDraw: 0.0,
-        timeTempDropOverHours: 0.0,
-        timeEnergyLostFinalfterN: 0,
-        timeEnergyLostNMaxTempFraction: 0,
-
-
-        instantaneousHeatingCostFlatRate: 0.0,
-        instantaneousHeatingCostPeakRate: 0.0,
-
-        heatPumpHeatEfficiency: 250,
-        heatPumpCostFlatRate: 0.0,
-        heatPumpCostPeakRate: 0.0,
-
-        thermalStorageDailyCost: undefined,
-        thermalStorageVsGridPercent: 0,
-        thermalStorageVsHeatPumpFlatRate: 0,
-        thermalStorageVsHeatPumpPeakRate: 0,
-        thermalStoragePotentialWastedExpense: 0,
-        thermalStorageHighTempRateCost: 0,
-    }
 
     return <Card style={{backgroundColor: "#d3d3d3"}}>
         <CardContent>
@@ -71,7 +25,7 @@ const ThermalForm = () => {
                     //   if (!response.data) return response;
                 }}
 
-                initialValues={initValues}
+                initialValues={InitValues}
                 decorators={[
                     createDecorator(
                         {
@@ -201,6 +155,9 @@ const ThermalForm = () => {
                                         values.heatPumpCostFlatRate = (values.instantaneousHeatingCostFlatRate / (values.heatPumpHeatEfficiency / 100));
                                         values.heatPumpCostPeakRate = (values.instantaneousHeatingCostPeakRate / (values.heatPumpHeatEfficiency / 100));
                                         /* =B12*B2/100 */
+
+                                        //COST COMPARISONS values
+
                                         values.thermalStorageDailyCost = Math.round(values.tankEnergy * values.lowRateEnergyCost) / 100; // convert to £
                                         values.thermalStorageVsGridPercent = (values.thermalStorageDailyCost / values.instantaneousHeatingCostFlatRate);
                                         values.thermalStorageVsHeatPumpFlatRate = (values.thermalStorageDailyCost / values.heatPumpCostFlatRate);
