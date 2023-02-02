@@ -2,9 +2,14 @@ import React, { useState } from "react";
 import BasicContainerThing from "../util/basicContainer";
 import DropDown from "./houseTypeDropDown";
 
-const HouseMenu: React.FC = (): JSX.Element => {
+interface HouseMenu {
+  selectHouse: any,
+  setSelectHouse: any 
+}
+
+const HouseMenu: React.FC<HouseMenu> = ( {selectHouse, setSelectHouse} ): JSX.Element => {
   const [showDropDown, setShowDropDown] = useState<boolean>(false);
-  const [selectHouse, setSelectHouse] = useState<string>("");
+
   const houses = () => {
     return [
       "1 bedroom flat",

@@ -8,9 +8,10 @@ type AtHomeDropDownProps = {
 };
 
 const AtHomeDropDown: React.FC<AtHomeDropDownProps> = ({
-    atHome,
+  atHome,
   atHomeSelection,
 }: AtHomeDropDownProps): JSX.Element => {
+  
   const [showDropDown, setShowDropDown] = useState<boolean>(false);
 
   const onClickHandler = (atHome: string): void => {

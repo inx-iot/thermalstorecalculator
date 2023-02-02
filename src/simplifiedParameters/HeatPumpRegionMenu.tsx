@@ -2,9 +2,14 @@ import React, { useState } from "react";
 import BasicContainerThing from "../util/basicContainer";
 import DropDown from "./heatPumpRegionDropDown";
 
-const HeatPumpRegionMenu: React.FC = (): JSX.Element => {
+interface HeatPumpRegionMenu {
+  selectHeatPumpRegionMenu: any,
+  setSelectHeatPumpRegionMenu: any
+}
+
+const HeatPumpRegionMenu: React.FC<HeatPumpRegionMenu> = ( {selectHeatPumpRegionMenu, setSelectHeatPumpRegionMenu} ): JSX.Element => {
   const [showDropDown, setShowDropDown] = useState<boolean>(false);
-  const [selectHeatPumpRegionMenu, setSelectHeatPumpRegionMenu] = useState<string>("");
+  
   const heatPumpRegion = () => {
     return ["South of England", "Midlands", "North England", "Scotland"];
   };

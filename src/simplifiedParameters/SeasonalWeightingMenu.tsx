@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import BasicContainerThing from "../util/basicContainer";
 
-const SeasonalWeightingMenu = () => {
-  const [selectedSeasonalWeighting, setSelectedSeasonalWeighting] =
-    useState<String>();
+interface SeasonalWeightingMenu {
+  selectedSeasonalWeighting: any,
+  setSelectedSeasonalWeighting: any
+}
+
+const SeasonalWeightingMenu: React.FC<SeasonalWeightingMenu> = ( {selectedSeasonalWeighting, setSelectedSeasonalWeighting} ) => {
 
   const radioHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSelectedSeasonalWeighting(event.target.value);
