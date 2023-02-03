@@ -1,5 +1,4 @@
 import { Card, CardContent, Grid } from "@mui/material";
-import * as React from 'react';
 import { useState } from "react";
 import { Form } from "react-final-form";
 import HouseMenu from "./simplifiedParameters/HouseMenu";
@@ -16,33 +15,33 @@ import initValues from "./util/initValues";
 
 const BasicForm = () => {
 
-    const [selectHeatingType, setSelectHeatingType] = useState<string>("");
     const [selectHouse, setSelectHouse] = useState<string>("");
     const [selectHotWaterTime, setSelectHotWaterTime] = useState<string>("");
     const [selectAtHome, setSelectAtHome] = useState<string>("");
     const [selectThermalStorage, setSelectThermalStorage] = useState<String>();
     const [selectHeatPumpRegionMenu, setSelectHeatPumpRegionMenu] = useState<string>("");
     const [selectedSeasonalWeighting, setSelectedSeasonalWeighting] = useState<String>();
+    const [selectHeatingType, setSelectHeatingType] = useState<string>("");
 
     const prevSelectHeating = selectHeatingType;
 
     const renderAtHomeMenu = ((prevSelectHeating !== "Hot water only") && prevSelectHeating !== "");
     const renderHotWaterTimeMenu = ((prevSelectHeating !== "Central heating only") && prevSelectHeating !== "")
+    
+    
 
     return <Card style={{backgroundColor: "#d3d3d3"}}>
         <CardContent>
-
             <Form <any>
                 onSubmit={(values: any) => {
                     console.log("onSubmit", values)
                     //   if (!response.data) return response;
                 }}
-
                 initialValues={initValues}
                 
                 render={({
                     handleSubmit,
-                    values,
+                    values
                 }) => (
                     <form onSubmit={handleSubmit} autoComplete="off" noValidate>
                         {/* <DebugButton data={values} /> */}
@@ -79,7 +78,7 @@ const BasicForm = () => {
                                   />
                             </Grid>
                             <Grid item xs={6} sm={3} md={3}>
-                                {values.timeEnergyLostFinalfterN !== undefined && <Chart labels={[`Stored kWh Available`, `kWh lost over ${values.timeShiftHoursN} hours`]} data={[values.tankEnergyAfterNHoursCooling.toFixed(1), values.timeEnergyLostFinalfterN.toFixed(1)]} />}
+                            {values.timeEnergyLostFinalfterN !== undefined && <Chart labels={[`Stored kWh Available`, `kWh lost over ${values.timeShiftHoursN} hours`]} data={[values.tankEnergyAfterNHoursCooling.toFixed(1), values.timeEnergyLostFinalfterN.toFixed(1)]} />}
                                 {values.thermalStorageVsHeatPumpFlatRate !== undefined && values.heatPumpCostFlatRate && <Chart labels={['Heat pump £/day@flat rate)', 'Time-shifted direct £/day@low Rate']} data={[values.heatPumpCostFlatRate.toFixed(2), values.thermalStorageDailyCost.toFixed(2)]} />}
                                 <ThermalStorageFields />
                             </Grid>
@@ -92,4 +91,4 @@ const BasicForm = () => {
 }
 
 
-export default BasicForm;
+export default BasicForm; 

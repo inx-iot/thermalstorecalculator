@@ -13,7 +13,6 @@ import ThermalStorageFields from "./ThermalStorageFields";
 import TimeFormFields from "./TimeFormFields";
 import InitValues from "./util/initValues";
 
-
 const ThermalForm = () => {
 
     return <Card style={{backgroundColor: "#d3d3d3"}}>
@@ -32,9 +31,6 @@ const ThermalForm = () => {
                             field: /(.*?)/, // when the value of foo changes...
 
                             updates: (value, name, allValues: any) => {
-
-
-
 
                                 if (allValues) {
                                     const unbind = { ...allValues }
