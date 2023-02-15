@@ -65,7 +65,7 @@ const ThermalStorageMenu: React.FC<ThermalStorageMenu> = ( {selectThermalStorage
         <label htmlFor="specificWaterCylinder">
           Please enter the size of your water cylinder (litres) {" "}
         </label>
-        {userInputWaterOption&& (
+        {userInputWaterOption && (
         <input
           type="number"
           name="thermalStoreCapacity"

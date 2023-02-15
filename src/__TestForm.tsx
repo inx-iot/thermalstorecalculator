@@ -1,18 +1,18 @@
 import { Card, CardContent, Grid } from "@mui/material";
-import { useState } from "react";
 import { Form } from "react-final-form";
-import ThermalStoreMenu from "./simplifiedParameters/ThermalStoreMenu";
 import Chart from "./Chart";
 import initValues from "./util/initValues";
 import TestHouseMenu from "../src/Test/TestHouseMenu";
-import TestThermalStorageMenu from "./Test/TestThermalStoreMenu";
 import TestAtHomeMenu from "./Test/TestAtHomeMenu";
 import TestRegionMenu from "./Test/TestRegionMenu";
 import TestSeasonalWeightings from "./Test/TestSeasonalWeightings";
+import ThermalStorageFields from "./ThermalStorageFields";
+import TestThermalStorageMenu from "./Test/TestThermalStorageMenu";
+
 
 const TestForm = () => {
 
-    return <Card style={{backgroundColor: "#d3d3d3"}}>
+    return <Card style={{ backgroundColor: "#d3d3d3" }}>
         <CardContent>
             <Form <any>
                 onSubmit={(values: any) => {
@@ -20,7 +20,7 @@ const TestForm = () => {
                     //   if (!response.data) return response;
                 }}
                 initialValues={initValues}
-                
+
 
 
                 render={({
@@ -31,14 +31,16 @@ const TestForm = () => {
                         <Grid container spacing={2}>
                             <Grid item xs={8} sm={9} md={9} >
                                 <TestHouseMenu />
-                                <TestThermalStorageMenu/>
+                                <TestThermalStorageMenu />
                                 <TestAtHomeMenu />
                                 <TestRegionMenu />
                                 <TestSeasonalWeightings />
+
                             </Grid>
                             <Grid item xs={6} sm={3} md={3}>
-                            {values.houseType !== undefined && <Chart labels={[`Thermal storage`, `Heat energy needed per year`]} data={[values.thermalStoreCapacity, values.houseType]} />}
-                            {values.seasonalWeighting !== undefined && <Chart labels={[`Region`, `Seasonal weightings`]} data={[values.regionMenu, values.seasonalWeighting]} />}
+                                {values.houseType !== undefined && <Chart labels={[`Thermal storage`, `Heat energy needed per year`]} data={[values.radioBtn, values.houseType]} />}
+                                {values.seasonalWeighting !== undefined && <Chart labels={[`Region`, `Seasonal weightings`]} data={[values.regionMenu, values.seasonalWeighting]} />}
+                                <ThermalStorageFields />
                             </Grid>
                         </Grid>
                     </form>
@@ -49,4 +51,6 @@ const TestForm = () => {
 }
 
 
-export default TestForm; 
+export default TestForm;
+
+

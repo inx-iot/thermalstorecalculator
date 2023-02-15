@@ -16,7 +16,7 @@ const TestSeasonalWeightings = () => {
                   value="1000"
                 />{" "}
                 SCOP values (averaged over year of space heating - add an explainer
-          that this weighted towards higher heating usage in winter)
+                that this weighted towards higher heating usage in winter)
               </label><br/>
 
               <label>
