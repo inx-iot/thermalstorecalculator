@@ -39,8 +39,8 @@ function App() {
   return (
     <Container maxWidth="lg">
       <Box sx={{ my: 5 }}>
-        <Tabs selectedTab={selectedTab} 
-          onClick={setSelectedTab} 
+        <Tabs selectedTab={selectedTab}
+          onClick={setSelectedTab}
           tabs={tabs}
         ></Tabs>
       </Box>
