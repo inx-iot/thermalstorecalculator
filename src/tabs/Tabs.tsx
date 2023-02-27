@@ -4,7 +4,6 @@ type TabsProps = {
   tabs: {
     label: string;
     index: number;
-    Component: FC<{ index: number }>;
   }[];
   selectedTab: number;
   onClick: (index: number) => void;
@@ -19,7 +18,7 @@ const Tabs: FC<TabsProps> = ({
   onClick,
   orientation = "horizontal"
 }) => {
-  const Panel = tabs && tabs.find((tab) => tab.index === selectedTab);
+  //const Panel = tabs && tabs.find((tab) => tab.index === selectedTab);
 
   return (
     <div
@@ -44,13 +43,7 @@ const Tabs: FC<TabsProps> = ({
           </button>
         ))}
       </div>
-      <div
-        role="tabpanel"
-        aria-labelledby={`btn-${selectedTab}`}
-        id={`tabpanel-${selectedTab}`}
-      >
-        {Panel && <Panel.Component index={selectedTab} />}
-      </div>
+      
     </div>
   );
 };

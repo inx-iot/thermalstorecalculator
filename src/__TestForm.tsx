@@ -8,11 +8,18 @@ import TestRegionMenu from "./Test/TestRegionMenu";
 import TestSeasonalWeightings from "./Test/TestSeasonalWeightings";
 import ThermalStorageFields from "./ThermalStorageFields";
 import TestThermalStorageMenu from "./Test/TestThermalStorageMenu";
+import createDecorator from 'final-form-calculate';
+import { ISharedState } from "./App";
 
+export interface ITestFormProps {
+    visible:boolean,
+    setSomeSharedState(some:number):void
+    sharedState:ISharedState
+}
 
-const TestForm = () => {
+const TestForm:React.FC<ITestFormProps> = (props) => {
 
-    return <Card style={{ backgroundColor: "#d3d3d3" }}>
+    return <Card style={{ backgroundColor: "#d3d3d3",display:props.visible ? 'block':'none' }}>
         <CardContent>
             <Form <any>
                 onSubmit={(values: any) => {
@@ -21,13 +28,14 @@ const TestForm = () => {
                 }}
                 initialValues={initValues}
 
-
-
                 render={({
                     handleSubmit,
                     values
-                }) => (
-                    <form onSubmit={handleSubmit} autoComplete="off" noValidate>
+                }) => {
+                    if(values.houseType!=props.sharedState.someState){
+                        props.setSomeSharedState(values.houseType)
+                    }
+                    return <form onSubmit={handleSubmit} autoComplete="off" noValidate>
                         <Grid container spacing={2}>
                             <Grid item xs={8} sm={9} md={9} >
                                 <TestHouseMenu />
@@ -44,7 +52,7 @@ const TestForm = () => {
                             </Grid>
                         </Grid>
                     </form>
-                )}
+                }}
             />
         </CardContent>
     </Card>

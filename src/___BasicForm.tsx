@@ -13,7 +13,11 @@ import ThermalStorageFields from "./ThermalStorageFields";
 import { IThermalForm } from "./interfaces/thermal";
 import initValues from "./util/initValues";
 
-const BasicForm = () => {
+export interface IBasicFormProps {
+  visible:boolean
+}
+
+const BasicForm:React.FC<IBasicFormProps> = (props) => {
 
     const [selectHouse, setSelectHouse] = useState<string>("");
     const [selectHotWaterTime, setSelectHotWaterTime] = useState<string>("");
@@ -30,7 +34,10 @@ const BasicForm = () => {
     
     
 
-    return <Card style={{backgroundColor: "#d3d3d3"}}>
+    return <Card style={{
+      backgroundColor: "#d3d3d3",
+      display: props.visible ? 'block' : 'none'
+    }}>
         <CardContent>
             <Form <any>
                 onSubmit={(values: any) => {
