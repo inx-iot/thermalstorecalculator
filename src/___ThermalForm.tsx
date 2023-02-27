@@ -2,6 +2,7 @@ import { Card, CardContent, Grid } from "@mui/material";
 import createDecorator from 'final-form-calculate';
 import * as React from 'react';
 import { Form } from "react-final-form";
+import { ISharedState } from "./App";
 import Chart from "./Chart";
 import HeatDemandFields from "./HeatDemandFields";
 import HeatPumpCostsFields from "./HeatPumpCostsFields";
@@ -13,11 +14,15 @@ import ThermalStorageFields from "./ThermalStorageFields";
 import TimeFormFields from "./TimeFormFields";
 import InitValues from "./util/initValues";
 
-const ThermalForm = () => {
+export interface IThermalFormProps {
+    visible:boolean,
+    sharedState:ISharedState
+}
+const ThermalForm:React.FC<IThermalFormProps> = (props) => {
 
-    return <Card style={{backgroundColor: "#d3d3d3"}}>
+    return <Card style={{backgroundColor: "#d3d3d3", display: props.visible ? 'block':'none'}}>
         <CardContent>
-
+            
             <Form <any>
                 onSubmit={values => {
                     console.log("onSubmit", values)
@@ -30,7 +35,7 @@ const ThermalForm = () => {
                         {
                             field: /(.*?)/, // when the value of foo changes...
 
-                            updates: (value, name, allValues: any) => {
+                        updates: (value, name, allValues: any) => {
 
                                 if (allValues) {
                                     const unbind = { ...allValues }
@@ -213,6 +218,7 @@ const ThermalForm = () => {
                         {/* <DebugButton data={values} /> */}
                         <Grid container spacing={2}>
                             <Grid item xs={8} sm={9} md={9}>
+                                {props.sharedState.someState}
                                 <TimeFormFields />
                                 <HeatDemandFields />
                                 <ThermalFormFields />
