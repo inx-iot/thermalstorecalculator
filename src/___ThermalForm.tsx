@@ -277,7 +277,8 @@ const ThermalForm:React.FC<IThermalFormProps> = ({ visible, sharedState, setSome
                         return {}
                     }
                 }
-            },), [/(.*?)/])                          
+            },), [/(.*?)/]) //this param means the decorator's called on every change, causing the "decorators shouldn't change from one render to the next" error. 
+                            //will take restructuring the decorator to fix properly. see https://github.com/final-form/react-final-form/issues/785
 
     const initStandardTariffCostsLookup = StandardTariffCostsLookup[sharedState.regionMenuState][sharedState.tariffMenuState];
     const initLowTariffCostsLookup = LowTariffCostsLookup[sharedState.regionMenuState][sharedState.tariffMenuState];
