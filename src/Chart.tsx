@@ -39,7 +39,7 @@ const Chart = ({ labels, data }: IChart) => {
 
 
 
-    return <Grid item xs={12} sm={12} md={12} data-testid="graph_container" className='killPadding'>
+    return <Grid item xs={12} sm={12} md={12} data-testid="graph_container" className='charts' style={{ margin: "10px" }}>
         <Pie data={chartData} options={{
 
             plugins: {

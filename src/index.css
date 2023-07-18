@@ -15,9 +15,21 @@ code {
 
 
 .killPadding {
-
   padding-top: 0px !important;
   padding-bottom: 0px !important;
+}
+
+.charts {
+  padding-top: 0px !important;
+  padding-bottom: 30px !important;
+}
+
+.backColour {
+  background-color: #f9f9f9;
+  margin-top: 10px;
+  border-radius: 10px;
+  padding: 10px;
+  color: #000000;
 }
 
 .InputAdornment {
@@ -27,7 +39,7 @@ code {
 
 .textFieldOverride {
   padding-left: 0px !important;
-  padding-right: 0px !important;
+  padding-right: 2px !important;
   margin-left: 0px !important;
   margin-right: 0px !important;
 }
@@ -59,4 +71,13 @@ code {
 
 .item_pre_value {
   font-size: 0.8em;
+}
+
+.radioButtons {
+  margin-top: 10px;
+}
+
+.radioButtonsColumn {
+  margin-top: 10px;
+  margin-right: 400px;
 }
