@@ -30,8 +30,8 @@ const ThermalFormFields: React.FC<ITestFormProps> = ({ sharedState }:ITestFormPr
 
             <NumberField name="tankMass" xs={4} sm={4} md={4} label="Store mass" longText="Store mass" helpText="kg" type="int" />
 
-            <NumberField name="tankMaxTemperature" xs={4} sm={4} md={4} label="Maximum temp." longText="The temperature the store will be heated to during the low cost period." helpText="&#8451;" type="int" />
-            <NumberField name="tankMinUsefulTemperature" xs={4} sm={4} md={4} label="Min. useful temp." longText="The lowest temperature of the store that provides useful heat to the" helpText="&#8451;" type="int" />
+            <NumberField name="tankMaxTemperature" xs={4} sm={4} md={4} min={values.tankMinUsefulTemperature + 1} label="Maximum temp." longText="The temperature the store will be heated to during the low cost period." helpText="&#8451;" type="int" />
+            <NumberField name="tankMinUsefulTemperature" xs={4} sm={4} max={values.tankMaxTemperature - 1} md={4} label="Min. useful temp." longText="The lowest temperature of the store that provides useful heat to the" helpText="&#8451;" type="int" />
             <NumberField name="tankAmbientTemperature" xs={4} sm={4} md={4} label="Ambient temperature" longText="Temperature surrounding the storage." helpText="&#8451;" type="int" />
             <NumberField name="tankEnergyLossCoeficient" xs={4} sm={4} md={4} label="Storage Energy Loss Coefficient" longText=" e.g. (daily loss in kWh/24)/(operating temperature - ambient temperature) " helpText="W/&#8451;" type="int"/>
             <InfoThing textA="Useful Energy" textB="kWh" xs={4} sm={4} md={4} valueDecimalPlace={1} value={values.tankEnergy} description="Energy available at max temperature before the minimum useful temperature is reached." />

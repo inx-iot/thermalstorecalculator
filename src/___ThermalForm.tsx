@@ -180,9 +180,8 @@ const ThermalForm:React.FC<IThermalFormProps> = ({ visible, sharedState, setSome
                             values.timeTemperatureAfterNCoolingNoHeatAndDraw = values.tankAmbientTemperature + (values.tankMaxTemperature - values.tankAmbientTemperature) *
                                 Math.exp(-1 * values.tankEnergyLossCoeficient / (values.tankSpecificHeatCapacity * values.tankMass) * 3600 * values.timeShiftHoursN)
         
-                            values.timeTempDropOverHours = values.tankMaxTemperature - values.timeTemperatureAfterNCoolingNoHeatAndDraw
+                            values.timeTempDropOverHours = (values.tankMaxTemperature - values.timeTemperatureAfterNCoolingNoHeatAndDraw);
                             
-        
                             values.timeEnergyLostFinalfterN = (values.timeTempDropOverHours * values.tankSpecificHeatCapacity * values.tankMass / 1000) / 3600
                             
         
@@ -206,6 +205,13 @@ const ThermalForm:React.FC<IThermalFormProps> = ({ visible, sharedState, setSome
                             values.timeShiftEnergyLost = (values.timeTempDropOverHours * values.tankSpecificHeatCapacity * values.tankMass / 1000) / 3600
         
                             values.timeEnergyLossMaxTemp = values.tankEnergyLossCoeficient * (values.tankMaxTemperature - values.tankAmbientTemperature) * values.timeShiftHoursN / 1000
+                            console.log("---------------------");
+                            console.log("values.tankMaxTemperature: ", values.tankMaxTemperature);
+                            console.log("values.timeShiftEnergyLost ", values.timeShiftEnergyLost);
+                            console.log("values.timeTemperatureAfterNCoolingNoHeatAndDraw ", values.timeTemperatureAfterNCoolingNoHeatAndDraw);
+                            console.log("values.timeEnergyLostFinalfterN ", values.timeEnergyLostFinalfterN);
+                            console.log("values.timeTempDropOverHours ", values.timeTempDropOverHours);
+                            console.log("---------------------");
                             if (values.timeEnergyLossMaxTemp < 0 ) values.timeEnergyLossMaxTemp = 0
                             values.timeEnergyLostNMaxTempFraction = values.timeEnergyLossMaxTemp / values.tankEnergy
         
@@ -277,7 +283,10 @@ const ThermalForm:React.FC<IThermalFormProps> = ({ visible, sharedState, setSome
                         return {}
                     }
                 }
-            },), [/(.*?)/])                          
+            },), [/(.*?)/])    
+            
+            //this param means the decorator's called on every change, causing the "decorators shouldn't change from one render to the next" error. 
+            //will take restructuring the decorator to fix properly. see https://github.com/final-form/react-final-form/issues/785
 
     const initStandardTariffCostsLookup = StandardTariffCostsLookup[sharedState.regionMenuState][sharedState.tariffMenuState];
     const initLowTariffCostsLookup = LowTariffCostsLookup[sharedState.regionMenuState][sharedState.tariffMenuState];
